@@ -3,7 +3,7 @@ import { Perks } from "./perks";
 
 // prettier-ignore
 export const PERK_ENTRIES: {[key: number] : PerkEntry} = {
-  0: {perk: Perks.TheArtOfTheSteal, coordinates: { x: 348, y: 432, z: 18 } },
+  0: {perk: Perks.TheArtOfTheSteal, coordinates: { x: 349, y: 432, z: 18 } },
   1: {perk: Perks.CombatMastery, coordinates: { x: 274, y: 358, z: 18 } },
   2: {perk: Perks.DemolitionsExpert, coordinates: { x: 348, y: 284, z: 18 } },
   3: {perk: Perks.Prodigy, coordinates: { x: 422, y: 358, z: 18 } },

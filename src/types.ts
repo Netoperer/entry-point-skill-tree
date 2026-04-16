@@ -20,3 +20,10 @@ export type Perk = {
   description: string;
   icon: string;
 };
+
+export enum StarterClass {
+  Prodigy = "0",
+  TheArtOfTheSteal = "1",
+  DemolitionsExpert = "2",
+  CombatMastery = "3",
+}
