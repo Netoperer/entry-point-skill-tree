@@ -1,17 +1,13 @@
 import { type Perk, PerkType } from "../../types";
 
-export const pistolMastery =
-  "/public/entry-point/weapon-masteries/PistolMastery.webp";
-export const smgMastery =
-  "/public/entry-point/weapon-masteries/SMGMastery.webp";
-export const rifleMastery =
-  "/public/entry-point/weapon-masteries/RifleMastery.webp";
+export const pistolMastery = "/entry-point/weapon-masteries/PistolMastery.webp";
+export const smgMastery = "/entry-point/weapon-masteries/SMGMastery.webp";
+export const rifleMastery = "/entry-point/weapon-masteries/RifleMastery.webp";
 export const shotgunMastery =
-  "/public/entry-point/weapon-masteries/ShotgunMastery.webp";
+  "/entry-point/weapon-masteries/ShotgunMastery.webp";
 export const heavyWeaponsMastery =
-  "/public/entry-point/weapon-masteries/HeavyWeaponsMastery.webp";
-export const sniperMastery =
-  "/public/entry-point/weapon-masteries/SniperMastery.webp";
+  "/entry-point/weapon-masteries/HeavyWeaponsMastery.webp";
+export const sniperMastery = "/entry-point/weapon-masteries/SniperMastery.webp";
 
 export const PistolMastery: Perk = {
   perkType: PerkType.WeaponMastery,

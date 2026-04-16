@@ -1,28 +1,28 @@
-export const fastHands = "/public/entry-point/minors/FastHands.webp";
-export const speedhack = "/public/entry-point/minors/SpeedHack.webp";
-export const overdrill = "/public/entry-point/minors/Overdrill.webp";
-export const outOfSight = "/public/entry-point/minors/OutOfSight.webp";
-export const masquerade = "/public/entry-point/minors/Masquerade.webp";
+export const fastHands = "/entry-point/minors/FastHands.webp";
+export const speedhack = "/entry-point/minors/SpeedHack.webp";
+export const overdrill = "/entry-point/minors/Overdrill.webp";
+export const outOfSight = "/entry-point/minors/OutOfSight.webp";
+export const masquerade = "/entry-point/minors/Masquerade.webp";
 export const equipmentSpecialist =
-  "/public/entry-point/minors/EquipmentSpecialist.webp";
-export const deepPockets = "/public/entry-point/minors/DeepPockets.webp";
+  "/entry-point/minors/EquipmentSpecialist.webp";
+export const deepPockets = "/entry-point/minors/DeepPockets.webp";
 export const investmentOpportunities =
-  "/public/entry-point/minors/InvestmentOpportunities.webp";
-export const vitalTargets = "/public/entry-point/minors/VitalTargets.webp";
-export const conditioning = "/public/entry-point/minors/Conditioning.webp";
-export const quickSwap = "/public/entry-point/minors/QuickSwap.webp";
-export const vitality = "/public/entry-point/minors/Vitality.webp";
-export const shockPlating = "/public/entry-point/minors/ShockPlating.webp";
+  "/entry-point/minors/InvestmentOpportunities.webp";
+export const vitalTargets = "/entry-point/minors/VitalTargets.webp";
+export const conditioning = "/entry-point/minors/Conditioning.webp";
+export const quickSwap = "/entry-point/minors/QuickSwap.webp";
+export const vitality = "/entry-point/minors/Vitality.webp";
+export const shockPlating = "/entry-point/minors/ShockPlating.webp";
 export const battlefieldMedicine =
-  "/public/entry-point/minors/BattlefieldMedicine.webp";
-export const intimidation = "/public/entry-point/minors/Intimidation.webp";
-export const pistolMastery = "/public/entry-point/minors/PistolMastery.webp";
-export const smgMastery = "/public/entry-point/minors/SMGMastery.webp";
-export const rifleMastery = "/public/entry-point/minors/RifleMastery.webp";
-export const shotgunMastery = "/public/entry-point/minors/ShotgunMastery.webp";
+  "/entry-point/minors/BattlefieldMedicine.webp";
+export const intimidation = "/entry-point/minors/Intimidation.webp";
+export const pistolMastery = "/entry-point/minors/PistolMastery.webp";
+export const smgMastery = "/entry-point/minors/SMGMastery.webp";
+export const rifleMastery = "/entry-point/minors/RifleMastery.webp";
+export const shotgunMastery = "/entry-point/minors/ShotgunMastery.webp";
 export const heavyWeaponsMastery =
-  "/public/entry-point/minors/HeavyWeaponsMastery.webp";
-export const sniperMastery = "/public/entry-point/minors/SniperMastery.webp";
+  "/entry-point/minors/HeavyWeaponsMastery.webp";
+export const sniperMastery = "/entry-point/minors/SniperMastery.webp";
 
 import { type Perk, PerkType } from "../../types";
 

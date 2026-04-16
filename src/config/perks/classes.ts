@@ -1,9 +1,9 @@
 import { type Perk, PerkType } from "../../types";
 
-const theArtOfTheSteal = "/public/entry-point/classes/TheArtOfTheSteal.webp";
-const prodigy = "/public/entry-point/classes/Prodigy.webp";
-const combatMastery = "/public/entry-point/classes/CombatMastery.webp";
-const demolitionsExpert = "/public/entry-point/classes/DemolitionsExpert.webp";
+const theArtOfTheSteal = "/entry-point/classes/TheArtOfTheSteal.webp";
+const prodigy = "/entry-point/classes/Prodigy.webp";
+const combatMastery = "/entry-point/classes/CombatMastery.webp";
+const demolitionsExpert = "/entry-point/classes/DemolitionsExpert.webp";
 
 export const Prodigy: Perk = {
   perkType: PerkType.Class,

@@ -1,17 +1,17 @@
 import { type Perk, PerkType } from "../../types";
 
-const interference = "/public/entry-point/uniques/Interference.webp";
-const surveillanceState = "/public/entry-point/uniques/SurveillanceState.webp";
-const precisionDrilling = "/public/entry-point/uniques/PrecisionDrilling.webp";
-const deception = "/public/entry-point/uniques/Deception.webp";
-const innerPockets = "/public/entry-point/uniques/InnerPockets.webp";
-const hiddenWeapons = "/public/entry-point/uniques/HiddenWeapons.webp";
-const hiddenReserves = "/public/entry-point/uniques/HiddenReserves.webp";
-const dexterity = "/public/entry-point/uniques/Dexterity.webp";
-const steadyAim = "/public/entry-point/uniques/SteadyAim.webp";
-const firebug = "/public/entry-point/uniques/Firebug.webp";
-const explosiveEntry = "/public/entry-point/uniques/ExplosiveEntry.webp";
-const advancedDeterrent = "/public/entry-point/uniques/AdvancedDeterrent.webp";
+const interference = "/entry-point/uniques/Interference.webp";
+const surveillanceState = "/entry-point/uniques/SurveillanceState.webp";
+const precisionDrilling = "/entry-point/uniques/PrecisionDrilling.webp";
+const deception = "/entry-point/uniques/Deception.webp";
+const innerPockets = "/entry-point/uniques/InnerPockets.webp";
+const hiddenWeapons = "/entry-point/uniques/HiddenWeapons.webp";
+const hiddenReserves = "/entry-point/uniques/HiddenReserves.webp";
+const dexterity = "/entry-point/uniques/Dexterity.webp";
+const steadyAim = "/entry-point/uniques/SteadyAim.webp";
+const firebug = "/entry-point/uniques/Firebug.webp";
+const explosiveEntry = "/entry-point/uniques/ExplosiveEntry.webp";
+const advancedDeterrent = "/entry-point/uniques/AdvancedDeterrent.webp";
 
 export const Interference: Perk = {
   perkType: PerkType.Unique,
