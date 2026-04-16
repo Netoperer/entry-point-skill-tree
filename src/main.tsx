@@ -1,8 +1,9 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import "./index.css";
-import App from "./App.tsx";
+import Home from "./pages/home";
 import { StrictMode } from "react";
+import EntryPoint from "./pages/entry-point";
 
 const root = document.getElementById("root")!;
 
@@ -13,3 +14,12 @@ ReactDOM.createRoot(root).render(
     </BrowserRouter>
   </StrictMode>,
 );
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="entry-point" element={<EntryPoint />} />
+    </Routes>
+  );
+}
