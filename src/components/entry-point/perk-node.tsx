@@ -1,4 +1,4 @@
-import { useStore } from "../../store";
+import { useEntryPointStore } from "../../store/entry-point";
 import type { PerkEntry } from "../../types";
 import { EntryPointGraph } from "../../utils/entry-point/graph";
 
@@ -10,7 +10,7 @@ interface Props {
 export default function PerkNode({ perkEntry, id }: Props) {
   const size = perkEntry.coordinates.z * 2;
 
-  const isLocked = useStore((state) => !state.unlockedNodes.has(id));
+  const isLocked = useEntryPointStore((state) => !state.unlockedNodes.has(id));
 
   const handleClick = () => {
     if (!isLocked) {
@@ -18,11 +18,11 @@ export default function PerkNode({ perkEntry, id }: Props) {
         return;
       }
 
-      if (useStore.getState().starterClass == id) {
+      if (useEntryPointStore.getState().starterClass == id) {
         return;
       }
 
-      useStore.getState().lockNode(id);
+      useEntryPointStore.getState().lockNode(id);
       return;
     }
 
@@ -30,7 +30,7 @@ export default function PerkNode({ perkEntry, id }: Props) {
       return;
     }
 
-    useStore.getState().unlockNode(id);
+    useEntryPointStore.getState().unlockNode(id);
   };
 
   // const handleHover = () => {}

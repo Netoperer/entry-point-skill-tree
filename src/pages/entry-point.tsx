@@ -7,14 +7,14 @@ import { PERK_ENTRIES } from "../config/entries";
 import { useEffect } from "react";
 import { decode, encode } from "../utils/entry-point/compress-url";
 import { areSetsEqual } from "../utils/are-sets-equal";
-import { useStore } from "../store";
+import { useEntryPointStore } from "../store/entry-point";
 
 // TODO: clean up this function
 function useUrl() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const unlockedNodes = useStore((state) => state.unlockedNodes);
+  const unlockedNodes = useEntryPointStore((state) => state.unlockedNodes);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -28,14 +28,12 @@ function useUrl() {
 
     if (areSetsEqual(unlockedNodes, set)) return;
 
-    useStore.getState().setUnlocked(set);
-    console.log(set);
+    useEntryPointStore.getState().setUnlocked(set);
   }, [location.search]);
 
   useEffect(() => {
     const encoded = encode(unlockedNodes);
 
-    console.log(encoded);
     const params = new URLSearchParams();
     params.set("unlocked", encoded);
     navigate(`?${params.toString()}`, { replace: true });
@@ -43,7 +41,7 @@ function useUrl() {
 }
 
 export default function EntryPoint() {
-  useUrl();
+  // useUrl();
 
   return (
     <div className="w-[90vw] rounded-sm p-2 lg:h-screen 2xl:w-full">

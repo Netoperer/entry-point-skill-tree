@@ -1,5 +1,5 @@
 import { PERK_ENTRIES } from "../../config/entries";
-import { useStore } from "../../store";
+import { useEntryPointStore } from "../../store/entry-point";
 
 interface Props {
   entries: [number, number];
@@ -9,7 +9,7 @@ interface Props {
 export default function ConnectionLine({ entries }: Props) {
   const [id1, id2] = entries;
 
-  const isPathUnlocked = useStore(
+  const isPathUnlocked = useEntryPointStore(
     (state) =>
       state.unlockedNodes.has(`${id1}`) && state.unlockedNodes.has(`${id2}`),
   );

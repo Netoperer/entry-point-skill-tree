@@ -20,6 +20,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^6.0.1
         version: 6.0.1(vite@8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(jiti@2.6.1))
+      immer:
+        specifier: ^11.1.4
+        version: 11.1.4
       isbot:
         specifier: ^5.1.36
         version: 5.1.38
@@ -34,7 +37,7 @@ importers:
         version: 7.14.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       zustand:
         specifier: ^5.0.12
-        version: 5.0.12(@types/react@19.2.14)(react@19.2.5)
+        version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.5)
     devDependencies:
       '@react-router/dev':
         specifier: 7.14.0
@@ -1043,6 +1046,9 @@ packages:
   iconv-lite@0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
+
+  immer@11.1.4:
+    resolution: {integrity: sha512-XREFCPo6ksxVzP4E0ekD5aMdf8WMwmdNaz6vuvxgI40UaEiu6q3p8X52aU6GdyvLY3XXX/8R7JOTXStz/nBbRw==}
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -2453,6 +2459,8 @@ snapshots:
     dependencies:
       safer-buffer: 2.1.2
 
+  immer@11.1.4: {}
+
   inherits@2.0.4: {}
 
   ipaddr.js@1.9.1: {}
@@ -2866,7 +2874,8 @@ snapshots:
 
   yallist@3.1.1: {}
 
-  zustand@5.0.12(@types/react@19.2.14)(react@19.2.5):
+  zustand@5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.5):
     optionalDependencies:
       '@types/react': 19.2.14
+      immer: 11.1.4
       react: 19.2.5
