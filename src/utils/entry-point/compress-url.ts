@@ -1,6 +1,6 @@
 import { base58 } from "@scure/base";
 
-const SIZE = 32; // 256 bits
+const SIZE = 32;
 
 export function encode(set: Set<string>): string {
   const bitmask = new Uint8Array(SIZE);
@@ -19,7 +19,6 @@ export function encode(set: Set<string>): string {
 export function decode(bitmaskStr: string): Set<string> {
   const bytes = base58.decode(bitmaskStr);
 
-  // Ensure we always work with exactly 32 bytes
   const bitmask = new Uint8Array(SIZE);
   bitmask.set(bytes.subarray(0, SIZE));
 
