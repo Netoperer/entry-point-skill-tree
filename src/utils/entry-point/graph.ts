@@ -1,6 +1,6 @@
 import { CONNECTIONS } from "../../config/connections";
 import * as graph from "../../lib/graph";
-import { useTreeStore } from "../../store/entry-point-store";
+import { useStore } from "../../store";
 
 export const ADJACENCY_LIST = graph.buildAdjacencyList(CONNECTIONS);
 
@@ -14,22 +14,22 @@ export namespace EntryPointGraph {
   export const wouldDisconnect = (nodeToRemove: string) =>
     graph.wouldDisconnect(
       ADJACENCY_LIST,
-      useTreeStore.getState().unlockedNodes,
+      useStore.getState().unlockedNodes,
       nodeToRemove,
-      useTreeStore.getState().starterClass,
+      useStore.getState().starterClass,
     );
 
   export const isAdjacentToUnlocked = (nodeId: string) =>
     graph.isAdjacentToUnlocked(
       ADJACENCY_LIST,
-      useTreeStore.getState().unlockedNodes,
+      useStore.getState().unlockedNodes,
       nodeId,
     );
 
   export const pathToClosestUnlocked = (nodeId: string) =>
     graph.pathToClosestUnlocked(
       ADJACENCY_LIST,
-      useTreeStore.getState().unlockedNodes,
+      useStore.getState().unlockedNodes,
       nodeId,
     );
 }

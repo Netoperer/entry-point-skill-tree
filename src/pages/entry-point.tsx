@@ -5,16 +5,16 @@ import PerkNode from "../components/entry-point/perk-node";
 import { CONNECTIONS } from "../config/connections";
 import { PERK_ENTRIES } from "../config/entries";
 import { useEffect } from "react";
-import { useTreeStore } from "../store/entry-point-store";
 import { decode, encode } from "../utils/entry-point/compress-url";
 import { areSetsEqual } from "../utils/are-sets-equal";
+import { useStore } from "../store";
 
 // TODO: clean up this function
 function useUrl() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const unlockedNodes = useTreeStore((state) => state.unlockedNodes);
+  const unlockedNodes = useStore((state) => state.unlockedNodes);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -28,7 +28,7 @@ function useUrl() {
 
     if (areSetsEqual(unlockedNodes, set)) return;
 
-    useTreeStore.getState().setUnlocked(set);
+    useStore.getState().setUnlocked(set);
     console.log(set);
   }, [location.search]);
 

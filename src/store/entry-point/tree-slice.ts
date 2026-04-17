@@ -1,40 +1,36 @@
-import { create } from "zustand";
-import { StarterClass } from "../types";
-import { areSetsEqual } from "../utils/are-sets-equal";
+import { StarterClass } from "../../types";
+import { areSetsEqual } from "../../utils/are-sets-equal";
 
-interface TreeState {
+export interface TreeSlice {
   unlockedNodes: Set<string>;
   starterClass: StarterClass;
-
   changeStarterClass: (id: StarterClass) => void;
   unlockNode: (id: string) => void;
   lockNode: (id: string) => void;
   setUnlocked: (unlockedSet: Set<string>) => void;
 }
 
-export const useTreeStore = create<TreeState>()((set) => ({
+export const createTreeSlice = (set: any): TreeSlice => ({
   unlockedNodes: new Set<string>([StarterClass.Prodigy]),
   starterClass: StarterClass.Prodigy,
-
   unlockNode: (id) =>
-    set((state) => ({ unlockedNodes: new Set([...state.unlockedNodes, id]) })),
+    set((state: TreeSlice) => ({
+      unlockedNodes: new Set([...state.unlockedNodes, id]),
+    })),
   lockNode: (id) =>
-    set((state) => ({
+    set((state: TreeSlice) => ({
       unlockedNodes: new Set(
-        [...state.unlockedNodes].filter((nodeId) => nodeId != id),
+        [...state.unlockedNodes].filter((nodeId) => nodeId !== id),
       ),
     })),
   setUnlocked: (unlockedSet) =>
-    set((state) => {
+    set((state: TreeSlice) => {
       if (areSetsEqual(state.unlockedNodes, unlockedSet)) return state;
-
-      return {
-        unlockedNodes: unlockedSet,
-      };
+      return { unlockedNodes: unlockedSet };
     }),
   changeStarterClass: (id) =>
-    set((state) => ({
+    set(() => ({
       starterClass: id,
       unlockedNodes: new Set([id]),
     })),
-}));
+});
