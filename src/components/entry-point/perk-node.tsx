@@ -1,5 +1,6 @@
 import { useTreeStore } from "../../store/entry-point-store";
 import type { PerkEntry } from "../../types";
+import { EntryPointGraph } from "../../utils/entry-point/graph";
 
 interface Props {
   perkEntry: PerkEntry;
@@ -13,11 +14,26 @@ export default function PerkNode({ perkEntry, id }: Props) {
 
   const handleClick = () => {
     if (!isLocked) {
+      if (EntryPointGraph.wouldDisconnect(id)) {
+        return;
+      }
+
+      if (useTreeStore.getState().starterClass == id) {
+        return;
+      }
+
       useTreeStore.getState().lockNode(id);
       return;
     }
+
+    if (!EntryPointGraph.isAdjacentToUnlocked(id)) {
+      return;
+    }
+
     useTreeStore.getState().unlockNode(id);
   };
+
+  // const handleHover = () => {}
 
   return (
     <>
