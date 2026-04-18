@@ -1,8 +1,6 @@
-import { useCallback } from "react";
 import { CONNECTIONS } from "../../config/connections";
 import * as graph from "../../lib/graph";
-import { useUnlockedNodes } from "./use-unlocked-nodes";
-import { useStarterClass } from "./use-starter-class";
+import { useEntryPointStore } from "../../store/entry-point";
 
 export const ADJACENCY_LIST = graph.buildAdjacencyList(CONNECTIONS);
 
@@ -12,43 +10,24 @@ export namespace EntryPointGraph {
 
   export const reachableNodes = (start: string): Set<string> =>
     graph.reachableNodes(ADJACENCY_LIST, start);
-}
 
-export function useWouldDisconnect() {
-  const { unlockedNodes } = useUnlockedNodes();
-  const starterClass = useStarterClass();
+  export function wouldDisconnect(nodeToRemove: string) {
+    const { unlockedNodes, starterClass } = useEntryPointStore.getState();
+    return graph.wouldDisconnect(
+      ADJACENCY_LIST,
+      unlockedNodes,
+      nodeToRemove,
+      starterClass,
+    );
+  }
 
-  return useCallback(
-    (nodeToRemove: string) => {
-      return graph.wouldDisconnect(
-        ADJACENCY_LIST,
-        unlockedNodes,
-        nodeToRemove,
-        starterClass,
-      );
-    },
-    [unlockedNodes, starterClass],
-  );
-}
+  export function isAdjacentToUnlocked(nodeId: string) {
+    const { unlockedNodes } = useEntryPointStore.getState();
+    return graph.isAdjacentToUnlocked(ADJACENCY_LIST, unlockedNodes, nodeId);
+  }
 
-export function useIsAdjacentToUnlocked() {
-  const { unlockedNodes } = useUnlockedNodes();
-
-  return useCallback(
-    (nodeId: string) => {
-      return graph.isAdjacentToUnlocked(ADJACENCY_LIST, unlockedNodes, nodeId);
-    },
-    [unlockedNodes],
-  );
-}
-
-export function usePathToClosestUnlocked() {
-  const { unlockedNodes } = useUnlockedNodes();
-
-  return useCallback(
-    (nodeId: string) => {
-      return graph.pathToClosestUnlocked(ADJACENCY_LIST, unlockedNodes, nodeId);
-    },
-    [unlockedNodes],
-  );
+  export function usePathToClosestUnlocked(nodeId: string) {
+    const { unlockedNodes } = useEntryPointStore.getState();
+    return graph.pathToClosestUnlocked(ADJACENCY_LIST, unlockedNodes, nodeId);
+  }
 }

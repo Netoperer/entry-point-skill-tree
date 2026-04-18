@@ -1,5 +1,5 @@
 import { PERK_ENTRIES } from "../../config/entries";
-import { useUnlockedNodes } from "../../hooks/entry-point/use-unlocked-nodes";
+import { useEntryPointStore } from "../../store/entry-point";
 
 interface Props {
   entries: [number, number];
@@ -9,10 +9,9 @@ interface Props {
 export default function ConnectionLine({ entries }: Props) {
   const [id1, id2] = entries;
 
-  const { unlockedNodes } = useUnlockedNodes();
-
-  const isPathUnlocked =
-    unlockedNodes.has(`${id1}`) && unlockedNodes.has(`${id2}`);
+  const isPathUnlocked = useEntryPointStore(
+    (s) => s.unlockedNodes.has(`${id1}`) && s.unlockedNodes.has(`${id2}`),
+  );
 
   const perk1 = PERK_ENTRIES[id1]!;
   const perk2 = PERK_ENTRIES[id2]!;

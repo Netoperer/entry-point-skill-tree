@@ -7,8 +7,8 @@ import { immer } from "zustand/middleware/immer";
 
 type StoreState = PersistentSlice;
 
-// export const useEntryPointStore = create<StoreState>()(
-//   immer((...args) => ({
-//     ...createPersistentSlice(...args),
-//   })),
-// );
+export const useEntryPointStore = create<StoreState>()(
+  immer((...args) => ({
+    ...createPersistentSlice(...args),
+  })),
+);

@@ -1,6 +1,6 @@
-import { useUnlockedNodes } from "../../hooks/entry-point/use-unlocked-nodes";
+import { useEntryPointStore } from "../../store/entry-point";
 import type { PerkEntry } from "../../types";
-import { useHandleClick } from "../../hooks/entry-point/use-handle-click";
+import { handleClick } from "../../hooks/entry-point/use-handle-click";
 
 interface Props {
   perkEntry: PerkEntry;
@@ -10,12 +10,8 @@ interface Props {
 export default function PerkNode({ perkEntry, id }: Props) {
   const size = perkEntry.coordinates.z * 2;
 
-  const { unlockedNodes } = useUnlockedNodes();
-  const isLocked = !unlockedNodes.has(id);
-
-  console.log("rerneder");
-
-  const handleClick = useHandleClick();
+  const isLocked = useEntryPointStore((s) => !s.unlockedNodes.has(id));
+  console.log(`rerender ${id}`);
 
   return (
     <>
@@ -26,7 +22,10 @@ export default function PerkNode({ perkEntry, id }: Props) {
         y={perkEntry.coordinates.y - size / 2}
         href={perkEntry.perk.icon}
         filter={isLocked ? "url(#default)" : ""}
-        onClick={() => handleClick(id)}
+        style={{ cursor: "pointer", pointerEvents: "auto" }}
+        onClick={() => {
+          handleClick(id);
+        }}
       >
         <title>{perkEntry.perk.description}</title>
       </image>

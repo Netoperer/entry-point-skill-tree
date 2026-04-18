@@ -1,10 +1,7 @@
-import { parseAsInteger, useQueryState } from "nuqs";
+import { useEntryPointStore } from "../../store/entry-point";
 
 export function useStarterClass() {
-  const [starterClass] = useQueryState(
-    "starterClass",
-    parseAsInteger.withDefault(0),
-  );
+  const starterClass = useEntryPointStore((s) => s.starterClass);
 
-  return `${starterClass}`;
+  return starterClass;
 }

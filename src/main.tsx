@@ -13,11 +13,11 @@ enableMapSet();
 
 ReactDOM.createRoot(root).render(
   <StrictMode>
-    <NuqsAdapter>
-      <BrowserRouter>
+    <BrowserRouter>
+      <NuqsAdapter>
         <App />
-      </BrowserRouter>
-    </NuqsAdapter>
+      </NuqsAdapter>
+    </BrowserRouter>
   </StrictMode>,
 );
 

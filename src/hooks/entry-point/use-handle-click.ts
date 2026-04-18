@@ -1,41 +1,36 @@
-import { useCallback } from "react";
-import { useIsAdjacentToUnlocked, useWouldDisconnect } from "./use-graph";
-import { useStarterClass } from "./use-starter-class";
-import { useUnlockedNodes } from "./use-unlocked-nodes";
+import { useEntryPointStore } from "../../store/entry-point";
+import { EntryPointGraph } from "./use-graph";
 
-export function useHandleClick() {
-  const { unlockedNodes, lockNode, unlockNode } = useUnlockedNodes();
-  const starterClass = useStarterClass();
-  const isAdjacentToUnlocked = useIsAdjacentToUnlocked();
-  const wouldDisconnect = useWouldDisconnect();
+export function handleClick(id: string) {
+  const { wouldDisconnect, isAdjacentToUnlocked } = EntryPointGraph;
 
-  return useCallback(
-    (id: string) => {
-      const isLocked = !unlockedNodes.has(id);
-      console.log("click");
+  const { unlockedNodes, starterClass, unlockNode, lockNode } =
+    useEntryPointStore.getState();
 
-      if (!isLocked) {
-        if (wouldDisconnect(id)) {
-          console.log("click2");
-          return;
-        }
+  const isLocked = !unlockedNodes.has(id);
+  console.log(`Handling click for ${id}. Locked: ${isLocked}`);
 
-        if (starterClass == id) {
-          console.log("click3");
-          return;
-        }
+  if (!isLocked) {
+    if (wouldDisconnect(id)) {
+      console.log("Cannot lock: would disconnect graph");
+      return;
+    }
 
-        lockNode(id);
-        return;
-      }
+    if (starterClass == id) {
+      console.log("Cannot lock: starter class");
+      return;
+    }
 
-      if (!isAdjacentToUnlocked(id)) {
-        console.log("click4");
-        return;
-      }
+    console.log(`Locking ${id}`);
+    lockNode(id);
+    return;
+  }
 
-      unlockNode(id);
-    },
-    [unlockedNodes, starterClass],
-  );
+  if (!isAdjacentToUnlocked(id)) {
+    console.log(`Cannot unlock ${id}: not adjacent to unlocked`);
+    return;
+  }
+
+  console.log(`Unlocking ${id}`);
+  unlockNode(id);
 }

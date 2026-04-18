@@ -23,12 +23,16 @@ export const createPersistentSlice: StateCreator<
 
   unlockNode: (id) =>
     set((state: PersistentSlice) => {
-      state.unlockedNodes.add(id);
+      const next = new Set(state.unlockedNodes);
+      next.add(id);
+      state.unlockedNodes = next;
     }),
 
   lockNode: (id) =>
     set((state: PersistentSlice) => {
-      state.unlockedNodes.delete(id);
+      const next = new Set(state.unlockedNodes);
+      next.delete(id);
+      state.unlockedNodes = next;
     }),
 
   setUnlocked: (unlockedSet) =>
