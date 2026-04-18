@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import { StrictMode } from "react";
 import EntryPoint from "./pages/entry-point";
 import { enableMapSet } from "immer";
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
 
 const root = document.getElementById("root")!;
 
@@ -12,9 +13,11 @@ enableMapSet();
 
 ReactDOM.createRoot(root).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <NuqsAdapter>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </NuqsAdapter>
   </StrictMode>,
 );
 

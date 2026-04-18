@@ -1,6 +1,6 @@
-import { useEntryPointStore } from "../../store/entry-point";
+import { useUnlockedNodes } from "../../hooks/entry-point/use-unlocked-nodes";
 import type { PerkEntry } from "../../types";
-import { EntryPointGraph } from "../../utils/entry-point/graph";
+import { useHandleClick } from "../../hooks/entry-point/use-handle-click";
 
 interface Props {
   perkEntry: PerkEntry;
@@ -10,30 +10,12 @@ interface Props {
 export default function PerkNode({ perkEntry, id }: Props) {
   const size = perkEntry.coordinates.z * 2;
 
-  const isLocked = useEntryPointStore((state) => !state.unlockedNodes.has(id));
+  const { unlockedNodes } = useUnlockedNodes();
+  const isLocked = !unlockedNodes.has(id);
 
-  const handleClick = () => {
-    if (!isLocked) {
-      if (EntryPointGraph.wouldDisconnect(id)) {
-        return;
-      }
+  console.log("rerneder");
 
-      if (useEntryPointStore.getState().starterClass == id) {
-        return;
-      }
-
-      useEntryPointStore.getState().lockNode(id);
-      return;
-    }
-
-    if (!EntryPointGraph.isAdjacentToUnlocked(id)) {
-      return;
-    }
-
-    useEntryPointStore.getState().unlockNode(id);
-  };
-
-  // const handleHover = () => {}
+  const handleClick = useHandleClick();
 
   return (
     <>
@@ -44,7 +26,7 @@ export default function PerkNode({ perkEntry, id }: Props) {
         y={perkEntry.coordinates.y - size / 2}
         href={perkEntry.perk.icon}
         filter={isLocked ? "url(#default)" : ""}
-        onClick={handleClick}
+        onClick={() => handleClick(id)}
       >
         <title>{perkEntry.perk.description}</title>
       </image>
