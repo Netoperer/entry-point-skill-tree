@@ -1,6 +1,6 @@
 import { useEntryPointStore } from "../../store/entry-point";
 import type { PerkEntry } from "../../types";
-import { handleClick } from "../../hooks/entry-point/use-handle-click";
+import { handleClick } from "../../utils/entry-point/handle-click";
 
 interface Props {
   perkEntry: PerkEntry;

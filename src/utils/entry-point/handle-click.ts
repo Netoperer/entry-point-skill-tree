@@ -1,5 +1,5 @@
 import { useEntryPointStore } from "../../store/entry-point";
-import { EntryPointGraph } from "./use-graph";
+import { EntryPointGraph } from "./graph";
 
 export function handleClick(id: string) {
   const { wouldDisconnect, isAdjacentToUnlocked } = EntryPointGraph;
