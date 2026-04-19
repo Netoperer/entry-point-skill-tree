@@ -78,7 +78,7 @@ export function URLSync() {
     }
     if (perkLimit !== lastSyncedLimit.current) {
       lastSyncedLimit.current = perkLimit;
-      setPerkLimitQuery(perkLimit);
+      setPerkLimitQuery(perkLimit, { shallow: true });
     }
   }, [
     unlockedNodes,

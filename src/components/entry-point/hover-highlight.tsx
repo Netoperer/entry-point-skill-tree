@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useEntryPointStore } from "store/entry-point";
 import { EntryPointGraph } from "core/entry-point/graph";
+import { getUnlockableNodes } from "core/entry-point/can-unlock-node";
 
 export function HoverHighlight() {
   const hoveredNode = useEntryPointStore((s) => s.hoveredNode);
   const unlockedNodes = useEntryPointStore((s) => s.unlockedNodes);
   const starterClass = useEntryPointStore((s) => s.starterClass);
+  const perkLimit = useEntryPointStore((s) => s.perkLimit);
   const setSelectedNodes = useEntryPointStore((s) => s.setSelectedNodes);
   const removeSelection = useEntryPointStore((s) => s.removeSelection);
 
@@ -26,7 +28,14 @@ export function HoverHighlight() {
         removeSelection();
         return;
       }
-      setSelectedNodes(new Set(path));
+
+      const unlockableNodes = getUnlockableNodes(
+        unlockedNodes,
+        perkLimit,
+        path.reverse(),
+      );
+
+      setSelectedNodes(new Set(unlockableNodes));
     } else {
       const nodesToDisconnect = EntryPointGraph.getDisconnectedNodes(
         hoveredNode,
