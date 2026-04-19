@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -24,7 +25,7 @@ body {
   --font-heading:
     var(--font-sans);
   --font-sans:
-    'Inter Variable', sans-serif;
+    'Geist Variable', sans-serif;
   --color-sidebar-ring:
     var(--sidebar-ring);
   --color-sidebar-border:
@@ -117,13 +118,13 @@ body {
   --popover-foreground:
     oklch(0.145 0 0);
   --primary:
-    oklch(0.488 0.243 264.376);
+    oklch(0.205 0 0);
   --primary-foreground:
-    oklch(0.97 0.014 254.604);
+    oklch(0.985 0 0);
   --secondary:
-    oklch(0.967 0.001 286.375);
+    oklch(0.97 0 0);
   --secondary-foreground:
-    oklch(0.21 0.006 285.885);
+    oklch(0.205 0 0);
   --muted:
     oklch(0.97 0 0);
   --muted-foreground:
@@ -157,9 +158,9 @@ body {
   --sidebar-foreground:
     oklch(0.145 0 0);
   --sidebar-primary:
-    oklch(0.546 0.245 262.881);
+    oklch(0.205 0 0);
   --sidebar-primary-foreground:
-    oklch(0.97 0.014 254.604);
+    oklch(0.985 0 0);
   --sidebar-accent:
     oklch(0.97 0 0);
   --sidebar-accent-foreground:
@@ -184,11 +185,11 @@ body {
   --popover-foreground:
     oklch(0.985 0 0);
   --primary:
-    oklch(0.424 0.199 265.638);
+    oklch(0.922 0 0);
   --primary-foreground:
-    oklch(0.97 0.014 254.604);
+    oklch(0.205 0 0);
   --secondary:
-    oklch(0.274 0.006 286.033);
+    oklch(0.269 0 0);
   --secondary-foreground:
     oklch(0.985 0 0);
   --muted:
@@ -222,9 +223,9 @@ body {
   --sidebar-foreground:
     oklch(0.985 0 0);
   --sidebar-primary:
-    oklch(0.623 0.214 259.815);
+    oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground:
-    oklch(0.97 0.014 254.604);
+    oklch(0.985 0 0);
   --sidebar-accent:
     oklch(0.269 0 0);
   --sidebar-accent-foreground:
