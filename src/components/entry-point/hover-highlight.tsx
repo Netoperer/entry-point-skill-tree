@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useEntryPointStore } from "store/entry-point";
 import { EntryPointGraph } from "core/entry-point/graph";
 import { getUnlockableNodes } from "core/entry-point/can-unlock-node";
+import { getNodesToRemove } from "core/entry-point/handle-click";
 
 export function HoverHighlight() {
   const hoveredNode = useEntryPointStore((s) => s.hoveredNode);
@@ -38,14 +39,12 @@ export function HoverHighlight() {
 
       setSelectedNodes(new Set(unlockableNodes));
     } else {
-      const nodesToDisconnect = EntryPointGraph.getDisconnectedNodes(
+      const nodesToLock = getNodesToRemove(
         hoveredNode,
         unlockedNodes,
         starterClass,
       );
-      const set = new Set(nodesToDisconnect);
-      set.add(hoveredNode);
-      setSelectedNodes(set);
+      setSelectedNodes(nodesToLock);
     }
   }, [
     hoveredNode,
@@ -53,6 +52,7 @@ export function HoverHighlight() {
     starterClass,
     setSelectedNodes,
     removeSelection,
+    perkLimit,
   ]);
 
   return null;
