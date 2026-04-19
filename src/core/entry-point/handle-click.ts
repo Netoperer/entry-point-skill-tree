@@ -4,11 +4,12 @@ import canUnlockNode, {
   getUnlockableNodes,
   getInvalidNodes,
 } from "./can-unlock-node";
+import type { StarterClass } from "types";
 
 export function getNodesToRemove(
   id: string,
   unlockedNodes: Set<string>,
-  starterClass: string,
+  starterClass: StarterClass,
 ): Set<string> {
   const { getDisconnectedNodes } = EntryPointGraph;
   const nodesToLock = new Set<string>();
