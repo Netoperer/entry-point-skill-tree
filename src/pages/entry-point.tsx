@@ -1,10 +1,10 @@
-import ConnectionLine from "components/entry-point/connection-line";
-import FilterDefs from "components/entry-point/filter-defs";
-import PerkNode from "components/entry-point/perk-node";
-import { CONNECTIONS } from "config/connections";
-import { PERK_ENTRIES } from "config/entries";
-import { URLSync } from "components/entry-point/url-sync";
-import { HoverHighlight } from "components/entry-point/hover-highlight";
+import ConnectionLine from "@/components/entry-point/connection-line";
+import FilterDefs from "@/components/entry-point/filter-defs";
+import PerkNode from "@/components/entry-point/perk-node";
+import { CONNECTIONS } from "@/config/connections";
+import { PERK_ENTRIES } from "@/config/entries";
+import { URLSync } from "@/components/entry-point/url-sync";
+import { HoverHighlight } from "@/components/entry-point/hover-highlight";
 
 export default function EntryPoint() {
   return (

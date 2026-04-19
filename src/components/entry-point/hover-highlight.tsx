@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useEntryPointStore } from "store/entry-point";
-import { EntryPointGraph } from "core/entry-point/graph";
-import { getUnlockableNodes } from "core/entry-point/can-unlock-node";
-import { getNodesToRemove } from "core/entry-point/handle-click";
+import { useEntryPointStore } from "@/store/entry-point";
+import { EntryPointGraph } from "@/core/entry-point/graph";
+import { getUnlockableNodes } from "@/core/entry-point/can-unlock-node";
+import { getNodesToRemove } from "@/core/entry-point/handle-click";
 
 export function HoverHighlight() {
   const hoveredNode = useEntryPointStore((s) => s.hoveredNode);

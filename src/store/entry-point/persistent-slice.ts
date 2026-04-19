@@ -1,6 +1,6 @@
 import type { StateCreator } from "zustand";
-import { StarterClass } from "types";
-import { areSetsEqual } from "utils/are-sets-equal";
+import { StarterClass } from "@/types";
+import { areSetsEqual } from "@/utils/are-sets-equal";
 import type { SelectionSlice } from "./selection-slice";
 
 export interface PersistentSlice {

@@ -1,4 +1,4 @@
-import { useEntryPointStore } from "store/entry-point";
+import { useEntryPointStore } from "@/store/entry-point";
 import { EntryPointGraph } from "./graph";
 import canUnlockNode, {
   getUnlockableNodes,
