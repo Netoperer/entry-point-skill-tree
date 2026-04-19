@@ -10,6 +10,7 @@
     "paths": {
       "~/*": ["./app/*"]
     },
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,

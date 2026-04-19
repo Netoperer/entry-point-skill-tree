@@ -1,5 +1,5 @@
-import { PERK_ENTRIES } from "../../config/entries";
-import { useEntryPointStore } from "../../store/entry-point";
+import { PERK_ENTRIES } from "config/entries";
+import { useEntryPointStore } from "store/entry-point";
 
 interface Props {
   entries: [number, number];

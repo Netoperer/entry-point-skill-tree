@@ -1,4 +1,4 @@
-import { type Perk, PerkType } from "../../types";
+import { type Perk, PerkType } from "types";
 
 export const pistolMastery = "/entry-point/weapon-masteries/PistolMastery.webp";
 export const smgMastery = "/entry-point/weapon-masteries/SMGMastery.webp";

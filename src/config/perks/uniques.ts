@@ -1,4 +1,4 @@
-import { type Perk, PerkType } from "../../types";
+import { type Perk, PerkType } from "types";
 
 const interference = "/entry-point/uniques/Interference.webp";
 const surveillanceState = "/entry-point/uniques/SurveillanceState.webp";

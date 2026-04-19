@@ -1,4 +1,4 @@
-import { type PerkEntry } from "../types";
+import { type PerkEntry } from "types";
 import { Perks } from "./perks";
 
 // prettier-ignore

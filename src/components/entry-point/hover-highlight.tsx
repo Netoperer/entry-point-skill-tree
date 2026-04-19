@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useEntryPointStore } from "../../store/entry-point";
-import { EntryPointGraph } from "../../core/entry-point/graph";
+import { useEntryPointStore } from "store/entry-point";
+import { EntryPointGraph } from "core/entry-point/graph";
 
 export function HoverHighlight() {
   const hoveredNode = useEntryPointStore((s) => s.hoveredNode);
