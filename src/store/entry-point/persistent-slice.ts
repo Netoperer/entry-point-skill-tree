@@ -6,12 +6,17 @@ import type { SelectionSlice } from "./selection-slice";
 export interface PersistentSlice {
   unlockedNodes: Set<string>;
   starterClass: StarterClass;
+  perkLimit: number;
+
   changeStarterClass: (id: StarterClass) => void;
+
   unlockNode: (id: string) => void;
   unlockNodes: (nodes: Array<string>) => void;
   lockNode: (id: string) => void;
   lockNodes: (nodes: Array<string>) => void;
   setUnlocked: (unlockedSet: Set<string>) => void;
+
+  setPerkLimit: (amout: number) => void;
 }
 
 // persistent between reloads via url not local storage
@@ -23,6 +28,7 @@ export const createPersistentSlice: StateCreator<
 > = (set): PersistentSlice => ({
   unlockedNodes: new Set<string>([StarterClass.Prodigy]),
   starterClass: StarterClass.Prodigy,
+  perkLimit: 75,
 
   unlockNode: (id) =>
     set((state: PersistentSlice) => {
@@ -62,5 +68,10 @@ export const createPersistentSlice: StateCreator<
     set((state) => {
       state.unlockedNodes = new Set([id]);
       state.starterClass = id;
+    }),
+
+  setPerkLimit: (amount) =>
+    set((state) => {
+      state.perkLimit = amount;
     }),
 });

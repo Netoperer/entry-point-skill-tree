@@ -14,6 +14,7 @@ const parseAsSet = createParser({
   },
 });
 
+// Yes i know this file is a mess
 export function URLSync() {
   const [unlockedQuery, setUnlockedQuery] = useQueryState(
     "unlocked",
@@ -25,14 +26,22 @@ export function URLSync() {
     parseAsInteger.withDefault(Number(StarterClass.Prodigy)),
   );
 
+  const [perkLimitQuery, setPerkLimitQuery] = useQueryState(
+    "perkLimit",
+    parseAsInteger.withDefault(75),
+  );
+
   const unlockedNodes = useEntryPointStore((s) => s.unlockedNodes);
   const starterClass = useEntryPointStore((s) => s.starterClass);
+  const perkLimit = useEntryPointStore((s) => s.perkLimit);
   const setUnlocked = useEntryPointStore((s) => s.setUnlocked);
   const changeStarterClass = useEntryPointStore((s) => s.changeStarterClass);
+  const setPerkLimit = useEntryPointStore((s) => s.setPerkLimit);
 
   // Track the state that we last successfully synced to both URL and Store
   const lastSyncedNodes = useRef<Set<string>>(unlockedNodes);
   const lastSyncedClass = useRef<string>(starterClass);
+  const lastSyncedLimit = useRef<number>(perkLimit);
 
   // 1. URL -> Store
   useEffect(() => {
@@ -44,7 +53,18 @@ export function URLSync() {
       lastSyncedClass.current = String(starterClassQuery);
       changeStarterClass(String(starterClassQuery) as StarterClass);
     }
-  }, [unlockedQuery, starterClassQuery, setUnlocked, changeStarterClass]);
+    if (perkLimitQuery !== lastSyncedLimit.current) {
+      lastSyncedLimit.current = perkLimitQuery;
+      setPerkLimit(perkLimitQuery);
+    }
+  }, [
+    unlockedQuery,
+    starterClassQuery,
+    perkLimitQuery,
+    setUnlocked,
+    changeStarterClass,
+    setPerkLimit,
+  ]);
 
   // 2. Store -> URL
   useEffect(() => {
@@ -56,7 +76,18 @@ export function URLSync() {
       lastSyncedClass.current = starterClass;
       setStarterClassQuery(Number(starterClass), { shallow: true });
     }
-  }, [unlockedNodes, starterClass, setUnlockedQuery, setStarterClassQuery]);
+    if (perkLimit !== lastSyncedLimit.current) {
+      lastSyncedLimit.current = perkLimit;
+      setPerkLimitQuery(perkLimit);
+    }
+  }, [
+    unlockedNodes,
+    starterClass,
+    perkLimit,
+    setUnlockedQuery,
+    setStarterClassQuery,
+    setPerkLimitQuery,
+  ]);
 
   return null;
 }
