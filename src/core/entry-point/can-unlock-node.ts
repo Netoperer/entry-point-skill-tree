@@ -8,7 +8,6 @@ const WEAPON_MASTERIES = [
   Perks.PistolMastery,
   Perks.SniperMastery,
   Perks.ShotgunMastery,
-  Perks.SniperMastery,
   Perks.HeavyWeaponsMastery,
 ];
 
@@ -20,6 +19,27 @@ const filterNodes = (
     .map((e) => PERK_ENTRIES[Number(e)])
     .filter(predicate);
 };
+
+export function getInvalidNodes(unlockedNodes: Set<string>): Array<string> {
+  const invalidNodes: Array<string> = [];
+
+  const hasCombatMastery =
+    filterNodes(unlockedNodes, (e) => e.perk === Perks.CombatMastery).length ===
+    1;
+
+  const unlockedWeaponMasteries = Array.from(unlockedNodes).filter((id) =>
+    WEAPON_MASTERIES.includes(PERK_ENTRIES[Number(id)].perk),
+  );
+
+  const maxAllowedMasteries = hasCombatMastery ? 2 : 1;
+
+  if (unlockedWeaponMasteries.length > maxAllowedMasteries) {
+    const toRemove = unlockedWeaponMasteries.slice(maxAllowedMasteries);
+    invalidNodes.push(...toRemove);
+  }
+
+  return invalidNodes;
+}
 
 export default function canUnlockNode(
   unlockedNodes: Set<string>,

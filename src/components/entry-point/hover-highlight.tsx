@@ -23,6 +23,7 @@ export function HoverHighlight() {
       const path = EntryPointGraph.pathToClosestUnlocked(
         hoveredNode,
         unlockedNodes,
+        perkLimit,
       );
       if (!path) {
         removeSelection();
@@ -32,7 +33,7 @@ export function HoverHighlight() {
       const unlockableNodes = getUnlockableNodes(
         unlockedNodes,
         perkLimit,
-        path.reverse(),
+        path,
       );
 
       setSelectedNodes(new Set(unlockableNodes));

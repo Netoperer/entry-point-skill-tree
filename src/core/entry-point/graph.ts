@@ -1,6 +1,7 @@
 import { CONNECTIONS } from "config/connections";
 import * as graph from "../shared/graph";
 import { StarterClass } from "types";
+import canUnlockNode from "./can-unlock-node";
 
 export const ADJACENCY_LIST = graph.buildAdjacencyList(CONNECTIONS);
 
@@ -34,8 +35,14 @@ export namespace EntryPointGraph {
   export function pathToClosestUnlocked(
     nodeId: string,
     unlockedNodes: Set<string>,
+    perkLimit: number,
   ) {
-    return graph.pathToClosestUnlocked(ADJACENCY_LIST, unlockedNodes, nodeId);
+    return graph.shortestValidPath(
+      ADJACENCY_LIST,
+      unlockedNodes,
+      nodeId,
+      (current, id) => canUnlockNode(current, perkLimit, id),
+    );
   }
 
   export function getDisconnectedNodes(

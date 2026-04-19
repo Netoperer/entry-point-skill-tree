@@ -1,10 +1,10 @@
 import { useEntryPointStore } from "store/entry-point";
 import { EntryPointGraph } from "./graph";
-import canUnlockNode, { getUnlockableNodes } from "./can-unlock-node";
+import canUnlockNode, {
+  getUnlockableNodes,
+  getInvalidNodes,
+} from "./can-unlock-node";
 
-// FIXME: removing the Combat Mastery class while having 2 weapon masteries unlocked
-// is not being handled and will result in an illegal tree
-// Also current implementation does not look for shortest **possible** path
 export function handleClick(id: string) {
   const { wouldDisconnect, isAdjacentToUnlocked, getDisconnectedNodes } =
     EntryPointGraph;
@@ -13,7 +13,6 @@ export function handleClick(id: string) {
     unlockedNodes,
     starterClass,
     unlockNode,
-    lockNode,
     unlockNodes,
     lockNodes,
     perkLimit,
@@ -26,24 +25,37 @@ export function handleClick(id: string) {
       return;
     }
 
+    const nextUnlockedNodes = new Set(unlockedNodes);
+    nextUnlockedNodes.delete(id);
+
+    const nodesToLock = [id];
+
     if (wouldDisconnect(id, unlockedNodes, starterClass)) {
-      const nodes = getDisconnectedNodes(id, unlockedNodes, starterClass);
-      lockNodes([...nodes, id]);
-    } else {
-      lockNode(id);
+      const disconnected = getDisconnectedNodes(
+        id,
+        unlockedNodes,
+        starterClass,
+      );
+      for (const n of disconnected) {
+        nodesToLock.push(n);
+        nextUnlockedNodes.delete(n);
+      }
     }
+
+    const invalidNodes = getInvalidNodes(nextUnlockedNodes);
+    lockNodes([...nodesToLock, ...invalidNodes]);
   } else {
     if (!isAdjacentToUnlocked(id, unlockedNodes)) {
-      const path = EntryPointGraph.pathToClosestUnlocked(id, unlockedNodes);
+      const path = EntryPointGraph.pathToClosestUnlocked(
+        id,
+        unlockedNodes,
+        perkLimit,
+      );
       if (!path) {
         return;
       }
 
-      const nodesToUnlock = getUnlockableNodes(
-        unlockedNodes,
-        perkLimit,
-        path.reverse(),
-      );
+      const nodesToUnlock = getUnlockableNodes(unlockedNodes, perkLimit, path);
       unlockNodes(nodesToUnlock);
     } else {
       if (!canUnlockNode(unlockedNodes, perkLimit, id)) {

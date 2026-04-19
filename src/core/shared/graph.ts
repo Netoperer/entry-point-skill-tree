@@ -45,6 +45,47 @@ export function shortestPath(
   return null;
 }
 
+export function shortestValidPath(
+  graph: AdjacencyList,
+  unlockedNodes: Set<string>,
+  targetNodeId: string,
+  canUnlock: (currentUnlocked: Set<string>, nodeToUnlock: string) => boolean,
+): string[] | null {
+  if (unlockedNodes.has(targetNodeId)) return [];
+
+  const queue: { node: string; path: string[] }[] = [];
+  for (const startNode of unlockedNodes) {
+    queue.push({ node: startNode, path: [] });
+  }
+
+  const visited = new Map<string, Set<string>>();
+
+  while (queue.length > 0) {
+    const { node, path } = queue.shift()!;
+
+    for (const neighbor of graph.get(node) ?? []) {
+      if (unlockedNodes.has(neighbor)) continue;
+
+      const currentUnlocked = new Set([...unlockedNodes, ...path]);
+      if (canUnlock(currentUnlocked, neighbor)) {
+        const newPath = [...path, neighbor];
+        if (neighbor === targetNodeId) return newPath;
+
+        const pathSet = new Set(newPath);
+        const existingPaths = visited.get(neighbor);
+        if (existingPaths) {
+          continue;
+        }
+
+        visited.set(neighbor, pathSet);
+        queue.push({ node: neighbor, path: newPath });
+      }
+    }
+  }
+
+  return null;
+}
+
 export function reachableNodes(
   graph: AdjacencyList,
   start: string,
@@ -131,31 +172,4 @@ export function isAdjacentToUnlocked(
   return (graph.get(nodeId) ?? []).some((neighbor) =>
     unlockedNodes.has(neighbor),
   );
-}
-
-export function pathToClosestUnlocked(
-  graph: AdjacencyList,
-  unlockedNodes: Set<string>,
-  nodeId: string,
-): string[] | null {
-  if (unlockedNodes.has(nodeId)) return [nodeId];
-
-  const visited = new Set<string>([nodeId]);
-  const queue: { node: string; path: string[] }[] = [
-    { node: nodeId, path: [nodeId] },
-  ];
-
-  while (queue.length > 0) {
-    const { node, path } = queue.shift()!;
-
-    for (const neighbor of graph.get(node) ?? []) {
-      if (unlockedNodes.has(neighbor)) return path;
-      if (!visited.has(neighbor)) {
-        visited.add(neighbor);
-        queue.push({ node: neighbor, path: [...path, neighbor] });
-      }
-    }
-  }
-
-  return null;
 }
