@@ -4,11 +4,13 @@ import PerkNode from "../components/entry-point/perk-node";
 import { CONNECTIONS } from "../config/connections";
 import { PERK_ENTRIES } from "../config/entries";
 import { URLSync } from "../components/entry-point/url-sync";
+import { HoverHighlight } from "../components/entry-point/hover-highlight";
 
 export default function EntryPoint() {
   return (
-    <div className="w-[90vw] rounded-sm p-2 lg:h-screen 2xl:w-full">
+    <div className="h-screen rounded-sm p-2 lg:h-screen 2xl:w-full aspect-square">
       <URLSync />
+      <HoverHighlight />
       <svg
         viewBox="0 0 700 700"
         preserveAspectRatio="xMidYMid meet"

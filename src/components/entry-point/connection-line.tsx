@@ -7,14 +7,24 @@ interface Props {
 
 // TODO: fix type mismatch (string and number)
 export default function ConnectionLine({ entries }: Props) {
-  const [id1, id2] = entries;
+  const [id1n, id2n] = entries;
+  const [id1, id2] = [id1n.toString(), id2n.toString()];
 
   const isPathUnlocked = useEntryPointStore(
-    (s) => s.unlockedNodes.has(`${id1}`) && s.unlockedNodes.has(`${id2}`),
+    (s) => s.unlockedNodes.has(id1) && s.unlockedNodes.has(id2),
   );
 
-  const perk1 = PERK_ENTRIES[id1]!;
-  const perk2 = PERK_ENTRIES[id2]!;
+  const isPathSelected = useEntryPointStore(
+    (s) =>
+      (s.selectedNodes.has(id1) && s.selectedNodes.has(id2)) ||
+      (s.selectedNodes.has(id1) && s.unlockedNodes.has(id2)) ||
+      (s.selectedNodes.has(id2) && s.unlockedNodes.has(id1)),
+  );
+
+  const perk1 = PERK_ENTRIES[id1n]!;
+  const perk2 = PERK_ENTRIES[id2n]!;
+
+  const stroke = isPathSelected ? "red" : isPathUnlocked ? "white" : "#ddd";
 
   return (
     <line
@@ -22,8 +32,8 @@ export default function ConnectionLine({ entries }: Props) {
       y1={perk1.coordinates.y}
       x2={perk2.coordinates.x}
       y2={perk2.coordinates.y}
-      stroke={isPathUnlocked ? "white" : "#ddd"}
-      strokeWidth={isPathUnlocked ? 1.5 : 0.5}
+      stroke={stroke}
+      strokeWidth={isPathUnlocked || isPathSelected ? 1.5 : 0.5}
     />
   );
 }

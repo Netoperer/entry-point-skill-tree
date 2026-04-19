@@ -79,12 +79,23 @@ export function wouldDisconnect(
   nodeToRemove: string,
   root: string,
 ): boolean {
+  return (
+    getDisconnectedNodes(graph, unlockedNodes, nodeToRemove, root).size !== 0
+  );
+}
+
+export function getDisconnectedNodes(
+  graph: AdjacencyList,
+  unlockedNodes: Set<string>,
+  nodeToRemove: string,
+  root: string,
+): Set<string> {
   const remaining = new Set(unlockedNodes);
   remaining.delete(nodeToRemove);
 
-  if (remaining.size === 0) return false;
-
-  if (!remaining.has(root)) return true;
+  if (remaining.size === 0 || !remaining.has(root)) {
+    return remaining;
+  }
 
   const visited = new Set<string>();
   const stack = [root];
@@ -92,14 +103,24 @@ export function wouldDisconnect(
   while (stack.length > 0) {
     const node = stack.pop()!;
     if (visited.has(node)) continue;
+
     visited.add(node);
 
     for (const neighbor of graph.get(node) ?? []) {
-      if (remaining.has(neighbor)) stack.push(neighbor);
+      if (remaining.has(neighbor) && !visited.has(neighbor)) {
+        stack.push(neighbor);
+      }
     }
   }
 
-  return [...remaining].some((n) => !visited.has(n));
+  const disconnected = new Set<string>();
+  for (const node of remaining) {
+    if (!visited.has(node)) {
+      disconnected.add(node);
+    }
+  }
+
+  return disconnected;
 }
 
 export function isAdjacentToUnlocked(
@@ -119,14 +140,22 @@ export function pathToClosestUnlocked(
 ): string[] | null {
   if (unlockedNodes.has(nodeId)) return [nodeId];
 
-  let shortest: string[] | null = null;
+  const visited = new Set<string>([nodeId]);
+  const queue: { node: string; path: string[] }[] = [
+    { node: nodeId, path: [nodeId] },
+  ];
 
-  for (const unlocked of unlockedNodes) {
-    const path = shortestPath(graph, nodeId, unlocked);
-    if (path && (!shortest || path.length < shortest.length)) {
-      shortest = path;
+  while (queue.length > 0) {
+    const { node, path } = queue.shift()!;
+
+    for (const neighbor of graph.get(node) ?? []) {
+      if (unlockedNodes.has(neighbor)) return path;
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push({ node: neighbor, path: [...path, neighbor] });
+      }
     }
   }
 
-  return shortest;
+  return null;
 }

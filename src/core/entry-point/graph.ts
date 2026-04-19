@@ -1,6 +1,6 @@
 import { CONNECTIONS } from "../../config/connections";
-import * as graph from "../../lib/graph";
-import { useEntryPointStore } from "../../store/entry-point";
+import * as graph from "../shared/graph";
+import { StarterClass } from "../../types";
 
 export const ADJACENCY_LIST = graph.buildAdjacencyList(CONNECTIONS);
 
@@ -11,8 +11,11 @@ export namespace EntryPointGraph {
   export const reachableNodes = (start: string): Set<string> =>
     graph.reachableNodes(ADJACENCY_LIST, start);
 
-  export function wouldDisconnect(nodeToRemove: string) {
-    const { unlockedNodes, starterClass } = useEntryPointStore.getState();
+  export function wouldDisconnect(
+    nodeToRemove: string,
+    unlockedNodes: Set<string>,
+    starterClass: StarterClass,
+  ) {
     return graph.wouldDisconnect(
       ADJACENCY_LIST,
       unlockedNodes,
@@ -21,13 +24,30 @@ export namespace EntryPointGraph {
     );
   }
 
-  export function isAdjacentToUnlocked(nodeId: string) {
-    const { unlockedNodes } = useEntryPointStore.getState();
+  export function isAdjacentToUnlocked(
+    nodeId: string,
+    unlockedNodes: Set<string>,
+  ) {
     return graph.isAdjacentToUnlocked(ADJACENCY_LIST, unlockedNodes, nodeId);
   }
 
-  export function usePathToClosestUnlocked(nodeId: string) {
-    const { unlockedNodes } = useEntryPointStore.getState();
+  export function pathToClosestUnlocked(
+    nodeId: string,
+    unlockedNodes: Set<string>,
+  ) {
     return graph.pathToClosestUnlocked(ADJACENCY_LIST, unlockedNodes, nodeId);
+  }
+
+  export function getDisconnectedNodes(
+    nodeToRemove: string,
+    unlockedNodes: Set<string>,
+    starterClass: StarterClass,
+  ) {
+    return graph.getDisconnectedNodes(
+      ADJACENCY_LIST,
+      unlockedNodes,
+      nodeToRemove,
+      starterClass,
+    );
   }
 }

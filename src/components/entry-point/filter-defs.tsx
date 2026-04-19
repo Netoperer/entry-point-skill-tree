@@ -10,6 +10,15 @@ export default function FilterDefs() {
         <feColorMatrix type="saturate" values="0.5" />
       </filter>
 
+      <filter id="selected">
+        <feComponentTransfer>
+          <feFuncR type="linear" slope="0.21" />
+          <feFuncG type="linear" slope="0.11" />
+          <feFuncB type="linear" slope="0.88" />
+        </feComponentTransfer>
+        <feColorMatrix type="saturate" values="0.5" />
+      </filter>
+
       <filter id="unavailable">
         <feComponentTransfer>
           <feFuncR type="linear" slope="0.3" />

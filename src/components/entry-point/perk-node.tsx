@@ -1,6 +1,6 @@
 import { useEntryPointStore } from "../../store/entry-point";
 import type { PerkEntry } from "../../types";
-import { handleClick } from "../../utils/entry-point/handle-click";
+import { handleClick } from "../../core/entry-point/handle-click";
 
 interface Props {
   perkEntry: PerkEntry;
@@ -10,8 +10,16 @@ interface Props {
 export default function PerkNode({ perkEntry, id }: Props) {
   const size = perkEntry.coordinates.z * 2;
 
-  const isLocked = useEntryPointStore((s) => !s.unlockedNodes.has(id));
+  const isUnocked = useEntryPointStore((store) => store.unlockedNodes.has(id));
+  const isSelected = useEntryPointStore((store) => store.selectedNodes.has(id));
+  const setHoveredNode = useEntryPointStore((store) => store.setHoveredNode);
   console.log(`rerender ${id}`);
+
+  const filter = isSelected
+    ? "url(#selected)"
+    : isUnocked
+      ? ""
+      : "url(#default)";
 
   return (
     <>
@@ -21,10 +29,16 @@ export default function PerkNode({ perkEntry, id }: Props) {
         x={perkEntry.coordinates.x - size / 2}
         y={perkEntry.coordinates.y - size / 2}
         href={perkEntry.perk.icon}
-        filter={isLocked ? "url(#default)" : ""}
+        filter={filter}
         style={{ cursor: "pointer", pointerEvents: "auto" }}
         onClick={() => {
           handleClick(id);
+        }}
+        onMouseEnter={() => {
+          setHoveredNode(id);
+        }}
+        onMouseLeave={() => {
+          setHoveredNode(null);
         }}
       >
         <title>{perkEntry.perk.description}</title>
