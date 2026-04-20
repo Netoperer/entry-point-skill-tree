@@ -1,33 +1,30 @@
-import ConnectionLine from "@/components/entry-point/connection-line";
-import FilterDefs from "@/components/entry-point/filter-defs";
-import PerkNode from "@/components/entry-point/perk-node";
-import { CONNECTIONS } from "@/config/connections";
-import { PERK_ENTRIES } from "@/config/entries";
 import { URLSync } from "@/components/entry-point/url-sync";
-import { HoverHighlight } from "@/components/entry-point/hover-highlight";
+import { Card } from "@/components/ui/card";
+import Editor from "@/components/entry-point/editor";
 
 export default function EntryPoint() {
   return (
-    <div className="h-screen rounded-sm p-2 lg:h-screen 2xl:w-full aspect-square">
+    <div className="h-screen w-screen flex flex-col items-center justify-center overflow-hidden bg-background">
       <URLSync />
-      <HoverHighlight />
-      <svg
-        viewBox="0 0 700 700"
-        preserveAspectRatio="xMidYMid meet"
-        width="100%"
-        height="100%"
-        className="m-auto rounded-xl shadow-md lg:h-screen lg:p-4"
-      >
-        <FilterDefs />
 
-        {...CONNECTIONS.map((entries) => {
-          return <ConnectionLine entries={entries} key={entries.join("-")} />;
-        })}
+      <header className="h-[5vh] flex items-center justify-center">
+        <span className="text-lg font-medium">
+          Entry Point Skill Tree Editor
+        </span>
+      </header>
 
-        {...Object.entries(PERK_ENTRIES).map(([id, perk]) => (
-          <PerkNode perkEntry={perk} id={id} key={`Perk_${id}`} />
-        ))}
-      </svg>
+      <div className="h-[90vh] w-full flex p-4">
+        <Card className="h-full aspect-square p-4 flex">
+          <Editor />
+        </Card>
+        <div className="flex-1 flex ">dd</div>
+      </div>
+
+      <footer className="h-[5vh] flex items-center justify-center">
+        <span className="text-lg font-medium">
+          Entry Point Skill Tree Editor
+        </span>
+      </footer>
     </div>
   );
 }

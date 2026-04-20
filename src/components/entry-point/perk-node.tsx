@@ -1,6 +1,7 @@
 import { useEntryPointStore } from "@/store/entry-point";
-import type { PerkEntry } from "types";
+import type { PerkEntry } from "@/types";
 import { handleClick } from "@/core/entry-point/handle-click";
+import { selectSelectedNodes } from "@/store/entry-point/selectors";
 
 interface Props {
   perkEntry: PerkEntry;
@@ -11,7 +12,9 @@ export default function PerkNode({ perkEntry, id }: Props) {
   const size = perkEntry.coordinates.z * 2;
 
   const isUnocked = useEntryPointStore((store) => store.unlockedNodes.has(id));
-  const isSelected = useEntryPointStore((store) => store.selectedNodes.has(id));
+  const isSelected = useEntryPointStore((store) =>
+    selectSelectedNodes(store).has(id),
+  );
   const setHoveredNode = useEntryPointStore((store) => store.setHoveredNode);
   console.log(`rerender ${id}`);
 

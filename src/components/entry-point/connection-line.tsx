@@ -1,5 +1,6 @@
 import { PERK_ENTRIES } from "@/config/entries";
 import { useEntryPointStore } from "@/store/entry-point";
+import { selectSelectedNodes } from "@/store/entry-point/selectors";
 
 interface Props {
   entries: [number, number];
@@ -14,12 +15,14 @@ export default function ConnectionLine({ entries }: Props) {
     (s) => s.unlockedNodes.has(id1) && s.unlockedNodes.has(id2),
   );
 
-  const isPathSelected = useEntryPointStore(
-    (s) =>
-      (s.selectedNodes.has(id1) && s.selectedNodes.has(id2)) ||
-      (s.selectedNodes.has(id1) && s.unlockedNodes.has(id2)) ||
-      (s.selectedNodes.has(id2) && s.unlockedNodes.has(id1)),
-  );
+  const isPathSelected = useEntryPointStore((s) => {
+    const selectedNodes = selectSelectedNodes(s);
+    return (
+      (selectedNodes.has(id1) && selectedNodes.has(id2)) ||
+      (selectedNodes.has(id1) && s.unlockedNodes.has(id2)) ||
+      (selectedNodes.has(id2) && s.unlockedNodes.has(id1))
+    );
+  });
 
   const perk1 = PERK_ENTRIES[id1n]!;
   const perk2 = PERK_ENTRIES[id2n]!;
