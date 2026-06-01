@@ -11,7 +11,7 @@ interface Props {
 export default function PerkNode({ perkEntry, id }: Props) {
   const size = perkEntry.coordinates.z * 2;
 
-  const isUnocked = useEntryPointStore((store) => store.unlockedNodes.has(id));
+  const isUnlocked = useEntryPointStore((store) => store.unlockedNodes.has(id));
   const isSelected = useEntryPointStore((store) =>
     selectSelectedNodes(store).has(id),
   );
@@ -20,7 +20,7 @@ export default function PerkNode({ perkEntry, id }: Props) {
 
   const filter = isSelected
     ? "url(#selected)"
-    : isUnocked
+    : isUnlocked
       ? ""
       : "url(#default)";
 
