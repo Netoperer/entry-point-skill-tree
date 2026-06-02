@@ -16,7 +16,7 @@ const filterNodes = (
   predicate: (element: PerkEntry) => boolean,
 ) => {
   return Array.from(nodes)
-    .map((e) => PERK_ENTRIES[Number(e)])
+    .map((e) => PERK_ENTRIES[e])
     .filter(predicate);
 };
 
@@ -50,7 +50,7 @@ export default function canUnlockNode(
     return false;
   }
 
-  const entry = PERK_ENTRIES[Number(id)];
+  const entry = PERK_ENTRIES[id];
 
   if (entry.perk.perkType === PerkType.Class) {
     const unlockedClasses = filterNodes(

@@ -6,7 +6,6 @@ interface Props {
   entries: [string, string];
 }
 
-// TODO: fix type mismatch (string and number)
 export default function ConnectionLine({ entries }: Props) {
   const [id1, id2] = entries;
 
