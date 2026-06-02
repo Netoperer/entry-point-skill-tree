@@ -84,3 +84,19 @@ export const selectUnlockedMinorPerksMap = createSelector(
     return map;
   },
 );
+
+export const selectUnlockedUniquePerks = createSelector(
+  [getUnlockedNodes],
+  (unlockedNodes) => {
+    const result = new Set<Perk>();
+
+    for (const node of unlockedNodes) {
+      const entry = PERK_ENTRIES[node];
+      if (entry?.perk.perkType === PerkType.Unique) {
+        result.add(entry.perk);
+      }
+    }
+
+    return result;
+  },
+);
