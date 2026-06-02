@@ -2,9 +2,8 @@ import { createSelector } from "reselect";
 import { EntryPointGraph } from "@/core/entry-point/graph";
 import { getUnlockableNodes } from "@/core/entry-point/can-unlock-node";
 import { getNodesToRemove } from "@/core/entry-point/get-nodes-to-remove";
-import type { SelectionSlice } from "./selection-slice";
-import type { PersistentSlice } from "./persistent-slice";
 import type { StoreState } from ".";
+import { PERK_ENTRIES } from "@/config/entries";
 
 const getHoveredNode = (state: StoreState) => state.hoveredNode;
 const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
@@ -48,6 +47,13 @@ export const selectSelectedNodes = createSelector(
   },
 );
 
-// export const selectUnlockedMinorPerks = createSelector([
+export const selectUnlockedMinorPerks = createSelector(
+  [getUnlockedNodes],
+  (unlockedNodes) => {
+    const result = new Set<string>();
 
-// ]);
+    for (const node of unlockedNodes) {
+      const perk = PERK_ENTRIES[parseInt(node)];
+    }
+  },
+);

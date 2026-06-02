@@ -1,14 +1,11 @@
 export type AdjacencyList = Map<string, string[]>;
 
 export function buildAdjacencyList(
-  connections: [number, number][],
+  connections: [string, string][],
 ): AdjacencyList {
   const graph: AdjacencyList = new Map();
 
-  for (const [an, bn] of connections) {
-    const a = `${an}`;
-    const b = `${bn}`;
-
+  for (const [a, b] of connections) {
     if (!graph.has(a)) graph.set(a, []);
     if (!graph.has(b)) graph.set(b, []);
     graph.get(a)!.push(b);

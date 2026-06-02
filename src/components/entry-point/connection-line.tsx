@@ -3,13 +3,12 @@ import { useEntryPointStore } from "@/store/entry-point";
 import { selectSelectedNodes } from "@/store/entry-point/selectors";
 
 interface Props {
-  entries: [number, number];
+  entries: [string, string];
 }
 
 // TODO: fix type mismatch (string and number)
 export default function ConnectionLine({ entries }: Props) {
-  const [id1n, id2n] = entries;
-  const [id1, id2] = [id1n.toString(), id2n.toString()];
+  const [id1, id2] = entries;
 
   const isPathUnlocked = useEntryPointStore(
     (s) => s.unlockedNodes.has(id1) && s.unlockedNodes.has(id2),
@@ -24,8 +23,8 @@ export default function ConnectionLine({ entries }: Props) {
     );
   });
 
-  const perk1 = PERK_ENTRIES[id1n]!;
-  const perk2 = PERK_ENTRIES[id2n]!;
+  const perk1 = PERK_ENTRIES[id1]!;
+  const perk2 = PERK_ENTRIES[id2]!;
 
   const stroke = isPathSelected ? "red" : isPathUnlocked ? "white" : "#ddd";
 
