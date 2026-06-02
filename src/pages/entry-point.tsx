@@ -14,7 +14,7 @@ export default function EntryPoint() {
         </span>
       </header>
 
-      <div className="h-[90vh] w-full flex p-4 gap-16 2xl:flex-row flex-col">
+      <div className="h-[90vh] w-full max-w-550 mx-auto flex p-4 gap-16 2xl:flex-row flex-col">
         <Card className="h-full aspect-square p-4 flex">
           <Editor />
         </Card>

@@ -4,13 +4,12 @@ import { getUnlockableNodes } from "@/core/entry-point/can-unlock-node";
 import { getNodesToRemove } from "@/core/entry-point/get-nodes-to-remove";
 import type { SelectionSlice } from "./selection-slice";
 import type { PersistentSlice } from "./persistent-slice";
+import type { StoreState } from ".";
 
-type State = SelectionSlice & PersistentSlice;
-
-const getHoveredNode = (state: State) => state.hoveredNode;
-const getUnlockedNodes = (state: State) => state.unlockedNodes;
-const getStarterClass = (state: State) => state.starterClass;
-const getPerkLimit = (state: State) => state.perkLimit;
+const getHoveredNode = (state: StoreState) => state.hoveredNode;
+const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
+const getStarterClass = (state: StoreState) => state.starterClass;
+const getPerkLimit = (state: StoreState) => state.perkLimit;
 
 export const selectSelectedNodes = createSelector(
   [getHoveredNode, getUnlockedNodes, getStarterClass, getPerkLimit],
@@ -48,3 +47,7 @@ export const selectSelectedNodes = createSelector(
     }
   },
 );
+
+// export const selectUnlockedMinorPerks = createSelector([
+
+// ]);

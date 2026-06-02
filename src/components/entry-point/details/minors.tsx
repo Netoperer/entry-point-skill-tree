@@ -1,21 +1,35 @@
-import { uniques } from "@/config/perks/uniques";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { Item, ItemContent, ItemTitle, ItemMedia } from "@/components/ui/item";
 import type { Perk } from "@/types";
+import { minors } from "@/config/perks/minors";
+import { Perks } from "@/config/perks";
+
+const WEAPON_TRAININGS = [
+  Perks.SmgTraining,
+  Perks.RifleTraining,
+  Perks.PistolTraining,
+  Perks.SniperTraining,
+  Perks.ShotgunTraining,
+  Perks.HeavyWeaponsTraining,
+];
 
 export default function MinorPerksDetails() {
   return (
     <Card className="gap-2 pt-1 shadow-none">
       <CardHeader className="flex flex-row items-center gap-3 px-5 py-4">
         <div className="h-7 w-1 rounded-full bg-foreground" />
-        <span className="font-semibold text-xl">Unique Perks</span>
+        <span className="font-semibold text-xl">Minor Perks</span>
       </CardHeader>
       <CardContent className="px-5 pb-5">
         <div className="grid grid-cols-3 gap-2.5">
-          {...Object.entries(uniques).map(([, perk]) => (
-            <UniquePerkItem perk={perk} />
-          ))}
+          {...Object.entries(minors).map(([, perk]) => {
+            if (WEAPON_TRAININGS.includes(perk)) {
+              return;
+            }
+
+            return <MinorPerkItem perk={perk} />;
+          })}
         </div>
       </CardContent>
     </Card>
@@ -26,7 +40,7 @@ interface Props {
   perk: Perk;
 }
 
-export function UniquePerkItem({ perk }: Props) {
+export function MinorPerkItem({ perk }: Props) {
   return (
     <Item
       variant="outline"
