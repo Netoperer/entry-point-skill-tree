@@ -100,3 +100,19 @@ export const selectUnlockedUniquePerks = createSelector(
     return result;
   },
 );
+
+export const selectUnlockedClassPerks = createSelector(
+  [getUnlockedNodes],
+  (unlockedNodes) => {
+    const result = new Set<Perk>();
+
+    for (const node of unlockedNodes) {
+      const entry = PERK_ENTRIES[node];
+      if (entry?.perk.perkType === PerkType.Class) {
+        result.add(entry.perk);
+      }
+    }
+
+    return result;
+  },
+);
