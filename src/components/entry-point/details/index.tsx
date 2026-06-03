@@ -3,9 +3,9 @@ import UniquePerksDetails from "./uniques";
 
 export default function Details() {
   return (
-    <div className="flex flex-1 w-full flex-col gap-6">
-      <UniquePerksDetails />
+    <div className="flex w-full flex-row gap-4 p-2">
       <MinorPerksDetails />
+      <UniquePerksDetails />
     </div>
   );
 }

@@ -5,28 +5,21 @@ import Sidebar from "@/components/entry-point/sidebar";
 
 export default function EntryPoint() {
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center overflow-hidden bg-background">
+    <div className="2xl:h-screen 2xl:w-screen flex flex-col items-center justify-center overflow-hidden bg-background">
       <URLSync />
+      <header className="h-[6vh] w-full bg-card/30 backdrop-blur-md border-b border-border/50 shadow-sm shrink-0" />
 
-      <header className="h-[5vh] flex items-center">
-        <span className="text-lg font-medium">
-          Entry Point Skill Tree Editor
-        </span>
-      </header>
-
-      <div className="h-[90vh] w-full max-w-550 mx-auto flex p-4 gap-16 2xl:flex-row flex-col">
-        <Card className="h-full aspect-square p-4 flex">
+      <main className="h-full w-full max-w-550 mx-auto flex p-8 gap-12 2xl:flex-row flex-col items-center justify-center overflow-hidden">
+        <Card className="h-full aspect-square flex bg-card/50 backdrop-blur-sm rounded-xl overflow-hidden group shrink-0">
           <Editor />
         </Card>
 
-        <Sidebar />
-      </div>
+        <div className="flex-1 h-full min-w-0">
+          <Sidebar />
+        </div>
+      </main>
 
-      <footer className="h-[5vh] flex items-center justify-center">
-        <span className="text-lg font-medium">
-          Entry Point Skill Tree Editor
-        </span>
-      </footer>
+      <footer className="h-[6vh] w-full border-t border-border/40 bg-muted/20 shrink-0" />
     </div>
   );
 }
