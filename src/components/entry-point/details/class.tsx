@@ -13,7 +13,21 @@ export default function ClassDetails() {
           <div className="h-6 w-1 rounded-full bg-foreground" />
           <span className="font-semibold text-lg flex-1 text-left">Class</span>
         </div>
-        <div className="font-bold">{getClassPerksTitle(classesUnlocked)}</div>
+        <div className="flex items-center justify-center">
+          <div className="flex">
+            {[...classesUnlocked].map((perk) => (
+              <img
+                src={perk.icon}
+                width={24}
+                height={24}
+                className="-ml-2 first:ml-0 border-card border-2 rounded-full"
+              />
+            ))}
+          </div>
+          <span className="pl-2 font-bold">
+            {getClassPerksTitle(classesUnlocked)}
+          </span>
+        </div>
       </CardHeader>
     </Card>
   );
