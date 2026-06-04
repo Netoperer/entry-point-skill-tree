@@ -9,7 +9,7 @@ export default function EntryPoint() {
     <div className="xl:h-screen xl:w-screen flex flex-col items-center justify-center overflow-hidden bg-background selection:bg-primary/30">
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_50%)] pointer-events-none" />
       <URLSync />
-      
+
       <Header />
 
       <main className="flex-1 w-full mx-auto flex p-4 xl:p-10 gap-10 xl:flex-row flex-col items-center justify-center overflow-hidden min-h-0 relative z-10">
@@ -17,7 +17,7 @@ export default function EntryPoint() {
           <Editor />
         </Card>
 
-        <div className="flex-1 h-full min-w-0 overflow-hidden flex flex-col">
+        <div className="flex-1 h-full min-w-0 overflow-hidden flex flex-col max-w-220">
           <Sidebar />
         </div>
       </main>

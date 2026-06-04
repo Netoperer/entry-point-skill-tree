@@ -7,10 +7,10 @@ export default function ClassDetails() {
   const classesUnlocked = useEntryPointStore(selectUnlockedClassPerks);
 
   return (
-    <Card className="w-full flex flex-col gap-4 p-5 transition-all duration-300 bg-card/60 backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 shadow-lg rounded-2xl">
-      <CardHeader className="px-2 py-0 flex flex-row justify-between items-center">
+    <Card className="w-full flex flex-col gap-4 px-4 py-5 transition-all duration-300 bg-card/60 backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 shadow-lg rounded-2xl">
+      <CardHeader className="px-1 py-0 flex flex-row justify-between items-center">
         <div className="flex flex-row items-center select-none gap-4">
-          <div className="h-8 w-1 rounded-full bg-primary/60 shadow-[0_0_8px_rgba(var(--primary-rgb),0.4)]" />
+          <div className="h-6 w-1 rounded-full bg-primary/60 shadow-[0_0_8px_rgba(var(--primary-rgb),0.4)]" />
           <span className="font-bold text-xl tracking-tight text-foreground/90">
             Class
           </span>

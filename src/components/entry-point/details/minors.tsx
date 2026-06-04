@@ -1,24 +1,11 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-  Item,
-  ItemContent,
-  ItemTitle,
-  ItemMedia,
-  ItemActions,
-} from "@/components/ui/item";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+import { Item, ItemContent, ItemTitle } from "@/components/ui/item";
 import type { Perk } from "@/types";
 import { minors } from "@/config/perks/minors";
 import { Perks } from "@/config/perks";
 import { useEntryPointStore } from "@/store/entry-point";
 import { selectUnlockedMinorPerksMap } from "@/store/entry-point/selectors";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 
 const WEAPON_TRAININGS = [
   Perks.SmgTraining,

@@ -1,15 +1,12 @@
 import { uniques } from "@/config/perks/uniques";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Item, ItemContent, ItemTitle, ItemMedia } from "@/components/ui/item";
+import { Item, ItemContent, ItemTitle } from "@/components/ui/item";
 import type { Perk } from "@/types";
 import { useEntryPointStore } from "@/store/entry-point";
 import { selectUnlockedUniquePerks } from "@/store/entry-point/selectors";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 
 export default function UniquePerksDetails() {
-  const [isOpen, setIsOpen] = useState(true);
-
   return (
     <Card className="flex flex-1 gap-2 p-3 transition-all duration-300 bg-card/60 backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 rounded-xl h-fit shrink-0">
       <CardHeader className="flex flex-row items-center gap-2 px-1 py-0 select-none">
@@ -42,7 +39,7 @@ export function UniquePerkItem({ perk }: Props) {
     <Item
       variant="outline"
       className={cn(
-        "p-1.5 group relative overflow-hidden transition-all duration-300 w-full cursor-default rounded-lg border-transparent",      
+        "p-1.5 group relative overflow-hidden transition-all duration-300 w-full cursor-default rounded-lg border-transparent",
         "bg-muted/30 hover:bg-muted/40",
         isUnlocked && [
           "bg-primary/10 border-primary/10 shadow-sm",
@@ -54,7 +51,9 @@ export function UniquePerkItem({ perk }: Props) {
         <div
           className={cn(
             "relative flex size-7 shrink-0 items-center justify-center rounded-md transition-all duration-500",
-            isUnlocked ? "bg-primary/20" : "bg-muted/50 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100",
+            isUnlocked
+              ? "bg-primary/20"
+              : "bg-muted/50 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100",
           )}
         >
           <img
@@ -69,7 +68,7 @@ export function UniquePerkItem({ perk }: Props) {
 
         <ItemTitle
           className={cn(
-            "flex-1 font-bold text-[11px] tracking-tight truncate",
+            "flex-1 font-bold text-[12px] tracking-tight truncate",
             isUnlocked ? "text-foreground" : "text-muted-foreground/60",
           )}
         >
@@ -79,4 +78,3 @@ export function UniquePerkItem({ perk }: Props) {
     </Item>
   );
 }
-

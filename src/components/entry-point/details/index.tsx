@@ -1,6 +1,7 @@
 import ClassDetails from "./class";
 import MinorPerksDetails from "./minors";
 import UniquePerksDetails from "./uniques";
+import WeaponMasteriesDetails from "./weapon-masteries";
 
 export default function Details() {
   return (
@@ -8,6 +9,7 @@ export default function Details() {
       <div className="lg:w-7/10 w-full flex flex-col gap-4">
         <ClassDetails />
         <MinorPerksDetails />
+        <WeaponMasteriesDetails />
       </div>
       <UniquePerksDetails />
     </div>

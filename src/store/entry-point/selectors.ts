@@ -116,3 +116,19 @@ export const selectUnlockedClassPerks = createSelector(
     return result;
   },
 );
+
+export const selectUnlockedWeaponMasteries = createSelector(
+  [getUnlockedNodes],
+  (unlockedNodes) => {
+    const result = new Set<Perk>();
+
+    for (const node of unlockedNodes) {
+      const entry = PERK_ENTRIES[node];
+      if (entry?.perk.perkType === PerkType.WeaponMastery) {
+        result.add(entry.perk);
+      }
+    }
+
+    return result;
+  },
+);
