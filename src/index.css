@@ -236,14 +236,31 @@ body {
     oklch(0.556 0 0);
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
   }
-  body {
-    @apply bg-background text-foreground;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
-  html {
-    @apply font-sans;
+  to {
+    transform: rotate(360deg);
   }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+:root {
+  --primary-rgb: 71, 101, 235; /* Matching oklch(0.488 0.243 264.376) roughly */
+}
+
+.dark {
+  --primary-rgb: 59, 83, 219;
 }

@@ -16,36 +16,33 @@ export default function PerkNode({ perkEntry, id }: Props) {
     selectSelectedNodes(store).has(id),
   );
   const setHoveredNode = useEntryPointStore((store) => store.setHoveredNode);
-  console.log(`rerender ${id}`);
 
   const filter = isSelected
     ? "url(#selected)"
     : isUnlocked
-      ? ""
+      ? "url(#unlocked)"
       : "url(#default)";
 
   return (
-    <>
-      <image
-        width={size}
-        height={size}
-        x={perkEntry.coordinates.x - size / 2}
-        y={perkEntry.coordinates.y - size / 2}
-        href={perkEntry.perk.icon}
-        filter={filter}
-        style={{ cursor: "pointer", pointerEvents: "auto" }}
-        onClick={() => {
-          handleClick(id);
-        }}
-        onMouseEnter={() => {
-          setHoveredNode(id);
-        }}
-        onMouseLeave={() => {
-          setHoveredNode(null);
-        }}
-      >
-        <title>{perkEntry.perk.description}</title>
-      </image>
-    </>
+    <image
+      width={size}
+      height={size}
+      x={perkEntry.coordinates.x - size / 2}
+      y={perkEntry.coordinates.y - size / 2}
+      href={perkEntry.perk.icon}
+      filter={filter}
+      style={{ cursor: "pointer", pointerEvents: "auto" }}
+      onClick={() => {
+        handleClick(id);
+      }}
+      onMouseEnter={() => {
+        setHoveredNode(id);
+      }}
+      onMouseLeave={() => {
+        setHoveredNode(null);
+      }}
+    >
+      <title>{perkEntry.perk.description}</title>
+    </image>
   );
 }

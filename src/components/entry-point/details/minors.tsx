@@ -35,15 +35,15 @@ export default function MinorPerksDetails() {
   );
 
   return (
-    <Card className="w-full flex flex-col gap-4 p-4 shadow-none transition-all duration-200 bg-card/50 h-fit shrink-0">
-      <CardHeader className="flex flex-row items-center gap-3 px-2 py-0 select-none">
-        <div className="h-6 w-1 rounded-full bg-secondary shadow-sm shadow-secondary/50" />
-        <span className="font-semibold text-lg flex-1 text-left">
+    <Card className="w-full flex flex-col gap-3 p-4 transition-all duration-300 bg-card/60 backdrop-blur-md border-border/50 ring-1 ring-secondary/5 hover:ring-secondary/10 rounded-xl h-fit shrink-0">
+      <CardHeader className="flex flex-row items-center gap-3 px-1 py-0 select-none">
+        <div className="h-6 w-1 rounded-full bg-secondary shadow-[0_0_8px_rgba(var(--secondary-rgb),0.3)]" />
+        <span className="font-bold text-lg tracking-tight text-foreground/90">
           Minor Perks
         </span>
       </CardHeader>
       <CardContent className="px-0 pb-0">
-        <div className="grid grid-cols-3 gap-2 mt-2">
+        <div className="grid grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-2 mt-3">
           {perks.map((perk) => (
             <MinorPerkItem key={perk.name} perk={perk} />
           ))}
@@ -67,55 +67,50 @@ export function MinorPerkItem({ perk }: Props) {
     <Item
       variant="outline"
       className={cn(
-        "group relative overflow-hidden transition-all duration-200 w-full cursor-default rounded-lg py-4 px-2",
-        "border border-border/50 hover:border-border hover:bg-muted/40",
+        "group relative overflow-hidden transition-all duration-300 w-full cursor-default rounded-lg py-2.5 px-2.5 border-transparent",
+        "bg-muted/30 hover:bg-muted/40",
         isUnlocked && [
-          "border-secondary/40 bg-secondary/10",
-          "hover:bg-secondary/15 hover:border-secondary/60 shadow-sm shadow-secondary/10",
+          "bg-secondary/10 border-secondary/15 shadow-sm",
+          "hover:bg-secondary/15 hover:border-secondary/40",
         ],
       )}
     >
-      {isUnlocked && (
-        <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-secondary/60 to-transparent" />
-      )}
-
-      <ItemContent className="flex flex-row items-center max-w-full">
-        <ItemMedia className="pr-1">
-          <div
-            className={cn(
-              "flex size-6 shrink-0 items-center justify-center rounded-md transition-colors",
-              isUnlocked ? "bg-secondary/20" : "bg-muted",
-            )}
-          >
-            <img
-              src={perk.icon}
-              alt={perk.name}
-              title={perk.description}
-              width={16}
-              height={16}
-              className={cn(
-                isUnlocked ? "opacity-100" : "opacity-40 grayscale",
-              )}
-            />
-          </div>
-        </ItemMedia>
+      <ItemContent className="flex flex-row items-center gap-2 w-full">
+        <div
+          className={cn(
+            "relative flex size-7 shrink-0 items-center justify-center rounded-md transition-all duration-500",
+            isUnlocked
+              ? "bg-secondary/20"
+              : "bg-muted/50 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100",
+          )}
+        >
+          <img
+            src={perk.icon}
+            alt={perk.name}
+            title={perk.description}
+            width={16}
+            height={16}
+            className="z-10"
+          />
+        </div>
 
         <ItemTitle
           className={cn(
-            "flex-1 min-w-0 font-medium text-[12px] leading-tight text-nowrap text-ellipsis!",
-            isUnlocked ? "text-foreground" : "text-muted-foreground",
+            "flex-1 font-bold text-[11px] leading-tight tracking-tight truncate overflow-hidden whitespace-nowrap",
+            isUnlocked ? "text-foreground" : "text-muted-foreground/60",
           )}
+          title={perk.name}
         >
           {perk.name}
         </ItemTitle>
 
-        <ItemActions className="pl-1">
+        <div className="w-5 flex justify-end shrink-0">
           {count > 0 && (
-            <span className="flex items-center justify-center size-6 min-w-3 px-1 rounded text-[10px] font-bold tabular-nums bg-secondary text-secondary-foreground">
+            <span className="flex items-center justify-center min-w-4 h-4 px-1 rounded-md text-[10px] font-black tabular-nums bg-secondary text-secondary-foreground">
               {count}
             </span>
           )}
-        </ItemActions>
+        </div>
       </ItemContent>
     </Item>
   );
