@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Details from "./details";
-import { LayoutGrid, Settings2, Share2 } from "lucide-react";
+import Settings from "./settings";
+import { LayoutGrid, Settings2 } from "lucide-react";
 
 export default function Sidebar() {
   return (
@@ -44,13 +45,8 @@ export default function Sidebar() {
           value={"settings"}
           className="flex-1 outline-none overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden min-h-0"
         >
-          <div className="p-8 border-border/50 border rounded-3xl bg-card/30 backdrop-blur-md flex flex-col gap-6 shadow-xl">
-            <h3 className="font-bold text-2xl flex items-center gap-4">
-              <div className="p-3 rounded-xl bg-primary/10">
-                <Share2 className="size-6 text-primary" />
-              </div>
-              Settings & Export
-            </h3>
+          <div className="h-full">
+            <Settings />
           </div>
         </TabsContent>
       </Tabs>

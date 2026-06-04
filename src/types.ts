@@ -22,8 +22,8 @@ export type Perk = {
 };
 
 export enum StarterClass {
-  Prodigy = "0",
-  TheArtOfTheSteal = "1",
+  TheArtOfTheSteal = "0",
+  CombatMastery = "1",
   DemolitionsExpert = "2",
-  CombatMastery = "3",
+  Prodigy = "3",
 }

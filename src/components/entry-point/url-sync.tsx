@@ -45,13 +45,20 @@ export function URLSync() {
 
   // 1. URL -> Store
   useEffect(() => {
+    if (String(starterClassQuery) !== lastSyncedClass.current) {
+      lastSyncedClass.current = String(starterClassQuery);
+
+      const starterClass = `${starterClassQuery}`;
+
+      if (!unlockedQuery.has(starterClass)) {
+        setUnlocked(new Set([starterClass]));
+      }
+
+      changeStarterClass(starterClass as StarterClass);
+    }
     if (!areSetsEqual(unlockedQuery, lastSyncedNodes.current)) {
       lastSyncedNodes.current = unlockedQuery;
       setUnlocked(unlockedQuery);
-    }
-    if (String(starterClassQuery) !== lastSyncedClass.current) {
-      lastSyncedClass.current = String(starterClassQuery);
-      changeStarterClass(String(starterClassQuery) as StarterClass);
     }
     if (perkLimitQuery !== lastSyncedLimit.current) {
       lastSyncedLimit.current = perkLimitQuery;
@@ -68,13 +75,13 @@ export function URLSync() {
 
   // 2. Store -> URL
   useEffect(() => {
-    if (!areSetsEqual(unlockedNodes, lastSyncedNodes.current)) {
-      lastSyncedNodes.current = unlockedNodes;
-      setUnlockedQuery(unlockedNodes, { shallow: true });
-    }
     if (starterClass !== lastSyncedClass.current) {
       lastSyncedClass.current = starterClass;
       setStarterClassQuery(Number(starterClass), { shallow: true });
+    }
+    if (!areSetsEqual(unlockedNodes, lastSyncedNodes.current)) {
+      lastSyncedNodes.current = unlockedNodes;
+      setUnlockedQuery(unlockedNodes, { shallow: true });
     }
     if (perkLimit !== lastSyncedLimit.current) {
       lastSyncedLimit.current = perkLimit;
