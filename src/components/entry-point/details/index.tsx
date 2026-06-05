@@ -1,5 +1,6 @@
 import ClassDetails from "./class";
 import MinorPerksDetails from "./minors";
+import PerkCount from "./perk-count";
 import UniquePerksDetails from "./uniques";
 import WeaponMasteriesDetails from "./weapon-masteries";
 
@@ -11,7 +12,11 @@ export default function Details() {
         <MinorPerksDetails />
         <WeaponMasteriesDetails />
       </div>
-      <UniquePerksDetails />
+
+      <div className="w-full flex flex-col flex-1 gap-4">
+        <PerkCount />
+        <UniquePerksDetails />
+      </div>
     </div>
   );
 }

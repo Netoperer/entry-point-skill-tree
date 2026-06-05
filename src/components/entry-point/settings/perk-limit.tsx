@@ -26,7 +26,7 @@ export default function PerkLimit() {
                 {perkLimit}
               </span>
               <div className="flex gap-1">
-                {[50, 75, 100].map((val) => (
+                {[25, 40, 75, 100].map((val) => (
                   <button
                     key={val}
                     onClick={() => setPerkLimit(val)}
