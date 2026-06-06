@@ -1,16 +1,16 @@
+import { useEntryPointStore } from "@/store/entry-point";
+import { selectExportBlob } from "@/store/entry-point/selectors/select-export-url";
 import { Loader2 } from "lucide-react";
 
-interface Props {
-  previewUrl: string | null;
-}
+export function ExportPreview() {
+  const exportUrl = useEntryPointStore(selectExportBlob);
 
-export function ExportPreview({ previewUrl }: Props) {
   return (
     <div className="relative aspect-square w-full rounded-lg overflow-hidden border border-border/50 bg-muted/20 group/preview flex items-center justify-center animate-in fade-in zoom-in-95 duration-200">
-      {previewUrl ? (
+      {exportUrl ? (
         <>
           <img
-            src={previewUrl}
+            src={exportUrl}
             alt="Tree Preview"
             className="w-full h-full object-contain"
           />

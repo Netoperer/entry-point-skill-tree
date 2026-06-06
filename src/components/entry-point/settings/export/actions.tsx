@@ -1,22 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Check, Copy, Download } from "lucide-react";
+import { downloadImage, copyImageToClipboard } from "./utils";
+import { useEntryPointStore } from "@/store/entry-point";
+import { selectUnlockedClassPerks } from "@/store/entry-point/selectors";
+import { selectExportBlob } from "@/store/entry-point/selectors/select-export-url";
+import { useState } from "react";
 
-interface Props {
-  isReady: boolean;
-  copied: boolean;
-  onExport: () => void;
-  onCopy: () => void;
-}
+export function ExportActions() {
+  const [copied, setCopied] = useState(false);
 
-export function ExportActions({ isReady, copied, onExport, onCopy }: Props) {
+  const unlockedNodes = useEntryPointStore((state) => state.unlockedNodes);
+  const unlockedClassPerks = useEntryPointStore(selectUnlockedClassPerks);
+  const exportUrl = useEntryPointStore(selectExportBlob);
+
+  const handleExport = () => {
+    downloadImage(exportUrl, unlockedClassPerks, unlockedNodes.size);
+  };
+
+  const handleCopy = async () => {
+    const success = await copyImageToClipboard(exportUrl);
+    if (success) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   return (
     <div className="grid grid-cols-2 gap-2">
       <Button
         variant="outline"
         size="sm"
-        disabled={!isReady}
         className="h-8 text-[11px] font-bold uppercase tracking-tight"
-        onClick={onExport}
+        onClick={handleExport}
       >
         <Download className="size-3 mr-1" />
         Save PNG
@@ -24,9 +39,8 @@ export function ExportActions({ isReady, copied, onExport, onCopy }: Props) {
       <Button
         variant="outline"
         size="sm"
-        disabled={!isReady}
         className="h-8 text-[11px] font-bold uppercase tracking-tight"
-        onClick={onCopy}
+        onClick={handleCopy}
       >
         {copied ? (
           <Check className="size-3 mr-1 text-green-500" />

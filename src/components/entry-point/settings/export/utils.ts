@@ -3,23 +3,23 @@ import { CONNECTIONS } from "@/config/connections";
 import { getClassPerksTitle } from "@/core/entry-point/getClassPerksTitle";
 import type { Perk } from "@/types";
 
-export async function preloadImages(
-  imageCache: React.RefObject<Map<string, HTMLImageElement>>,
-) {
+export async function preloadImages() {
+  const imageCache = new Map<string, HTMLImageElement>();
+
   const entries = Object.values(PERK_ENTRIES);
   const uniqueIcons = Array.from(new Set(entries.map((e) => e.perk.icon)));
 
   const promises = uniqueIcons.map(
     (src) =>
       new Promise<void>((resolve) => {
-        if (imageCache.current.has(src)) {
+        if (imageCache.has(src)) {
           resolve();
           return;
         }
         const img = new Image();
         img.src = src;
         img.onload = () => {
-          imageCache.current.set(src, img);
+          imageCache.set(src, img);
           resolve();
         };
         img.onerror = () => resolve();
@@ -27,6 +27,7 @@ export async function preloadImages(
   );
 
   await Promise.all(promises);
+  return imageCache;
 }
 
 export function renderTreeToCanvas(
@@ -90,8 +91,8 @@ export function renderTreeToCanvas(
   ctx.restore();
 }
 
-export function downloadCanvas(
-  canvas: HTMLCanvasElement,
+export function downloadImage(
+  dataUrl: string,
   unlockedClassPerks: Set<Perk>,
   unlockedCount: number,
 ) {
@@ -99,28 +100,17 @@ export function downloadCanvas(
   const fileName = `${title}-${unlockedCount}-tree.png`;
   const link = document.createElement("a");
   link.download = fileName;
-  link.href = canvas.toDataURL("image/png");
+  link.href = dataUrl;
   link.click();
 }
 
-export async function copyCanvasToClipboard(
-  canvas: HTMLCanvasElement,
-): Promise<boolean> {
-  return new Promise((resolve) => {
-    canvas.toBlob(async (blob) => {
-      if (!blob) {
-        resolve(false);
-        return;
-      }
-      try {
-        await navigator.clipboard.write([
-          new ClipboardItem({ "image/png": blob }),
-        ]);
-        resolve(true);
-      } catch (err) {
-        console.error("Clipboard fail:", err);
-        resolve(false);
-      }
-    });
-  });
+export async function copyImageToClipboard(dataUrl: string) {
+  try {
+    const blob = await fetch(dataUrl).then((r) => r.blob());
+    await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+    return true;
+  } catch (err) {
+    console.error("Clipboard fail:", err);
+    return false;
+  }
 }
