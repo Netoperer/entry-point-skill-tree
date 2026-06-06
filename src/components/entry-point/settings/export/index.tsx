@@ -18,9 +18,6 @@ export default function ExportSettings() {
   const unlockedClassPerks = useEntryPointStore(selectUnlockedClassPerks);
 
   const [copied, setCopied] = useState(false);
-  const [withBackground, setWithBackground] = useState(false);
-  const [showPreview, setShowPreview] = useState(true);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [isReady, setIsReady] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);

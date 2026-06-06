@@ -1,7 +1,7 @@
 import type { StateCreator } from "zustand";
 import { StarterClass } from "@/types";
 import { areSetsEqual } from "@/utils/are-sets-equal";
-import type { SelectionSlice } from "./selection-slice";
+import type { StoreState } from ".";
 
 export interface PersistentSlice {
   unlockedNodes: Set<string>;
@@ -21,7 +21,7 @@ export interface PersistentSlice {
 
 // persistent between reloads via url not local storage
 export const createPersistentSlice: StateCreator<
-  PersistentSlice & SelectionSlice,
+  StoreState,
   [["zustand/immer", never]],
   [],
   PersistentSlice

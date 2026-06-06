@@ -3,25 +3,28 @@ import { CONNECTIONS } from "@/config/connections";
 import { getClassPerksTitle } from "@/core/entry-point/getClassPerksTitle";
 import type { Perk } from "@/types";
 
-export async function preloadImages(imageCache: React.MutableRefObject<Map<string, HTMLImageElement>>) {
+export async function preloadImages(
+  imageCache: React.RefObject<Map<string, HTMLImageElement>>,
+) {
   const entries = Object.values(PERK_ENTRIES);
   const uniqueIcons = Array.from(new Set(entries.map((e) => e.perk.icon)));
 
-  const promises = uniqueIcons.map((src) => {
-    return new Promise((resolve) => {
-      if (imageCache.current.has(src)) {
-        resolve(null);
-        return;
-      }
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        imageCache.current.set(src, img);
-        resolve(null);
-      };
-      img.onerror = () => resolve(null);
-    });
-  });
+  const promises = uniqueIcons.map(
+    (src) =>
+      new Promise<void>((resolve) => {
+        if (imageCache.current.has(src)) {
+          resolve();
+          return;
+        }
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          imageCache.current.set(src, img);
+          resolve();
+        };
+        img.onerror = () => resolve();
+      }),
+  );
 
   await Promise.all(promises);
 }
@@ -87,7 +90,11 @@ export function renderTreeToCanvas(
   ctx.restore();
 }
 
-export function downloadCanvas(canvas: HTMLCanvasElement, unlockedClassPerks: Set<Perk>, unlockedCount: number) {
+export function downloadCanvas(
+  canvas: HTMLCanvasElement,
+  unlockedClassPerks: Set<Perk>,
+  unlockedCount: number,
+) {
   const title = getClassPerksTitle(unlockedClassPerks);
   const fileName = `${title}-${unlockedCount}-tree.png`;
   const link = document.createElement("a");
@@ -96,7 +103,9 @@ export function downloadCanvas(canvas: HTMLCanvasElement, unlockedClassPerks: Se
   link.click();
 }
 
-export async function copyCanvasToClipboard(canvas: HTMLCanvasElement): Promise<boolean> {
+export async function copyCanvasToClipboard(
+  canvas: HTMLCanvasElement,
+): Promise<boolean> {
   return new Promise((resolve) => {
     canvas.toBlob(async (blob) => {
       if (!blob) {

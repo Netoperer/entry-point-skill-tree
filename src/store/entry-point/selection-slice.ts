@@ -1,5 +1,5 @@
 import type { StateCreator } from "zustand";
-import type { PersistentSlice } from "./persistent-slice";
+import type { StoreState } from ".";
 
 export interface SelectionSlice {
   hoveredNode: string | null;
@@ -8,7 +8,7 @@ export interface SelectionSlice {
 }
 
 export const createSelectionSlice: StateCreator<
-  SelectionSlice & PersistentSlice,
+  StoreState,
   [["zustand/immer", never]],
   [],
   SelectionSlice
