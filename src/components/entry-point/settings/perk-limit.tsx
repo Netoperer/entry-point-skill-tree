@@ -8,7 +8,7 @@ export default function PerkLimit() {
   const setPerkLimit = useEntryPointStore((s) => s.setPerkLimit);
 
   return (
-    <Card className="bg-card/60 backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-md overflow-hidden">
+    <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-md overflow-hidden">
       <CardContent className="px-4 py-0">
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">

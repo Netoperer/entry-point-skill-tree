@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 
 export default function UniquePerksDetails() {
   return (
-    <Card className="flex flex-1 gap-2 p-3 transition-all duration-300 bg-card/60 backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 rounded-xl h-fit shrink-0">
+    <Card className="flex flex-1 gap-2 p-3 transition-all duration-300 bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 rounded-xl h-fit shrink-0">
       <CardHeader className="flex flex-row items-center gap-2 px-1 py-0 select-none">
         <div className="h-5 w-1 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]" />
         <span className="font-bold text-base tracking-tight text-foreground/90">

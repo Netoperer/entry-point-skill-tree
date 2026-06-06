@@ -17,7 +17,7 @@ export default function StarterClassSettings() {
   const changeStarterClass = useEntryPointStore((s) => s.changeStarterClass);
 
   return (
-    <Card className="bg-card/60 backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-lg overflow-hidden">
+    <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-lg overflow-hidden">
       <CardHeader className="px-4 py-0 pb-0">
         <div className="flex items-center gap-2">
           <div className="p-1 rounded bg-secondary/10">

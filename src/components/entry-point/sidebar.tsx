@@ -10,7 +10,7 @@ export default function Sidebar() {
         defaultValue="details"
         className="flex-1 flex flex-col gap-3 w-full h-full min-h-0"
       >
-        <TabsList className="bg-muted/40 backdrop-blur-md gap-1 border-border/50 border w-full p-1 h-10 xl:h-12 rounded-xl shadow-inner shrink-0">
+        <TabsList className="bg-muted/40 md:backdrop-blur-md gap-1 border-border/50 border w-full p-1 h-10 xl:h-12 rounded-xl shadow-inner shrink-0">
           <TabsTrigger
             key={"details"}
             value={"details"}

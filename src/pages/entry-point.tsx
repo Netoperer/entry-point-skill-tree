@@ -13,11 +13,11 @@ export default function EntryPoint() {
       <Header />
 
       <main className="flex-1 w-full mx-auto flex p-4 xl:p-10 gap-10 xl:flex-row flex-col items-center justify-center overflow-hidden min-h-0 relative z-10">
-        <Card className="lg:w-1/2 max-h-full w-full aspect-square flex bg-card/60 backdrop-blur-md rounded-2xl overflow-hidden group shadow-2xl ring-1 ring-primary/10 transition-all duration-500 hover:ring-primary/20">
+        <Card className="lg:w-1/2 max-h-full w-full aspect-square flex bg-card/60 md:backdrop-blur-md rounded-2xl overflow-hidden group shadow-2xl ring-1 ring-primary/10 transition-all duration-500 hover:ring-primary/20">
           <Editor />
         </Card>
 
-        <div className="flex-1 h-full min-w-0 overflow-hidden flex flex-col max-w-220">
+        <div className="flex-1 h-full min-w-0 overflow-hidden flex flex-col w-full lg:max-w-220">
           <Sidebar />
         </div>
       </main>
