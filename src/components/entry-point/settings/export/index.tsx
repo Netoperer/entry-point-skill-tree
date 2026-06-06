@@ -17,6 +17,11 @@ export default function ExportSettings() {
   const unlockedNodes = useEntryPointStore((state) => state.unlockedNodes);
   const unlockedClassPerks = useEntryPointStore(selectUnlockedClassPerks);
 
+  const showPreview = useEntryPointStore((s) => s.showPreview);
+
+  const withBackground = useEntryPointStore((s) => s.withBackground);
+  const [exportUrl, setExportUrl] = useState<string>("");
+
   const [copied, setCopied] = useState(false);
   const [isReady, setIsReady] = useState(false);
 
@@ -41,7 +46,8 @@ export default function ExportSettings() {
       withBackground,
       imageCache.current,
     );
-    setPreviewUrl(canvas.toDataURL("image/png"));
+
+    setExportUrl(canvas.toDataURL("image/png"));
   }, [unlockedNodes, withBackground, isReady]);
 
   const handleExport = () => {
@@ -74,15 +80,10 @@ export default function ExportSettings() {
               </span>
             </div>
 
-            <ExportControls
-              showPreview={showPreview}
-              setShowPreview={setShowPreview}
-              withBackground={withBackground}
-              setWithBackground={setWithBackground}
-            />
+            <ExportControls />
           </div>
 
-          {showPreview && <ExportPreview previewUrl={previewUrl} />}
+          {showPreview && <ExportPreview previewUrl={exportUrl} />}
 
           <ExportActions
             isReady={isReady}

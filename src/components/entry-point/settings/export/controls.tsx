@@ -1,19 +1,13 @@
 import { cn } from "@/lib/utils";
+import { useEntryPointStore } from "@/store/entry-point";
 import { Eye, EyeOff, Image as ImageIcon, ImageOff } from "lucide-react";
 
-interface Props {
-  showPreview: boolean;
-  setShowPreview: (val: boolean) => void;
-  withBackground: boolean;
-  setWithBackground: (val: boolean) => void;
-}
+export function ExportControls() {
+  const showPreview = useEntryPointStore((s) => s.showPreview);
+  const setShowPreview = useEntryPointStore((s) => s.setShowPreview);
+  const withBackground = useEntryPointStore((s) => s.withBackground);
+  const setWithBackground = useEntryPointStore((s) => s.setWithBackground);
 
-export function ExportControls({
-  showPreview,
-  setShowPreview,
-  withBackground,
-  setWithBackground,
-}: Props) {
   return (
     <div className="flex items-center gap-2">
       <button
@@ -26,7 +20,11 @@ export function ExportControls({
         )}
         title={showPreview ? "Hide Preview" : "Show Preview"}
       >
-        {showPreview ? <Eye className="size-3" /> : <EyeOff className="size-3" />}
+        {showPreview ? (
+          <Eye className="size-3" />
+        ) : (
+          <EyeOff className="size-3" />
+        )}
       </button>
 
       <div className="flex items-center gap-1 bg-muted/50 p-0.5 rounded-lg border border-border/50">
