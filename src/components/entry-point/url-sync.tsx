@@ -18,12 +18,12 @@ const parseAsSet = createParser({
 export function URLSync() {
   const [unlockedQuery, setUnlockedQuery] = useQueryState(
     "unlocked",
-    parseAsSet.withDefault(new Set<string>([StarterClass.Prodigy])),
+    parseAsSet.withDefault(new Set<string>([StarterClass.TheArtOfTheSteal])),
   );
 
   const [starterClassQuery, setStarterClassQuery] = useQueryState(
     "starterClass",
-    parseAsInteger.withDefault(Number(StarterClass.Prodigy)),
+    parseAsInteger.withDefault(Number(StarterClass.TheArtOfTheSteal)),
   );
 
   const [perkLimitQuery, setPerkLimitQuery] = useQueryState(

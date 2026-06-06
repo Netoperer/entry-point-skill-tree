@@ -26,8 +26,8 @@ export const createPersistentSlice: StateCreator<
   [],
   PersistentSlice
 > = (set): PersistentSlice => ({
-  unlockedNodes: new Set<string>([StarterClass.Prodigy]),
-  starterClass: StarterClass.Prodigy,
+  unlockedNodes: new Set<string>([StarterClass.TheArtOfTheSteal]),
+  starterClass: StarterClass.TheArtOfTheSteal,
   perkLimit: 75,
 
   unlockNode: (id) =>
