@@ -1,4 +1,4 @@
-import { uniques } from "@/config/perks/uniques";
+import { uniques } from "@/config/entry-point/perks/uniques";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Item, ItemContent, ItemTitle } from "@/components/ui/item";
 import type { Perk } from "@/types";

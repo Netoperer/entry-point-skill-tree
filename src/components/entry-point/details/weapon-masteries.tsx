@@ -5,7 +5,7 @@ import {
   selectUnlockedWeaponMasteries,
   selectUnlockedMinorPerksMap,
 } from "@/store/entry-point/selectors";
-import { Perks } from "@/config/perks";
+import { Perks } from "@/config/entry-point/perks";
 import type { Perk } from "@/types";
 import { cn } from "@/lib/utils";
 

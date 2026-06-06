@@ -1,5 +1,5 @@
-import { PERK_ENTRIES } from "@/config/entries";
-import { Perks } from "@/config/perks";
+import { PERK_ENTRIES } from "@/config/entry-point/entries";
+import { Perks } from "@/config/entry-point/perks";
 import { PerkType, type PerkEntry } from "@/types";
 
 const WEAPON_MASTERIES = [

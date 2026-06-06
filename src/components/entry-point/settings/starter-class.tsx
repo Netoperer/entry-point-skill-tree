@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { classes } from "@/config/perks/classes";
+import { classes } from "@/config/entry-point/perks/classes";
 import { cn } from "@/lib/utils";
 import { useEntryPointStore } from "@/store/entry-point";
 import { StarterClass } from "@/types";

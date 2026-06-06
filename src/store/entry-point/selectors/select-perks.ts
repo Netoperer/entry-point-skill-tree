@@ -1,4 +1,4 @@
-import { PERK_ENTRIES } from "@/config/entries";
+import { PERK_ENTRIES } from "@/config/entry-point/entries";
 import { PerkType, type Perk } from "@/types";
 import { areSetsEqual } from "@/utils/are-sets-equal";
 import { createSelector } from "reselect";

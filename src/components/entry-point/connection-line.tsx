@@ -1,4 +1,4 @@
-import { PERK_ENTRIES } from "@/config/entries";
+import { PERK_ENTRIES } from "@/config/entry-point/entries";
 import { useEntryPointStore } from "@/store/entry-point";
 import { selectSelectedNodes } from "@/store/entry-point/selectors";
 

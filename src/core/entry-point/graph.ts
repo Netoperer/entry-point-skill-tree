@@ -1,4 +1,4 @@
-import { CONNECTIONS } from "@/config/connections";
+import { CONNECTIONS } from "@/config/entry-point/connections";
 import * as graph from "../shared/graph";
 import { StarterClass } from "@/types";
 import canUnlockNode from "./can-unlock-node";

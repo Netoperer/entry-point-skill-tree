@@ -1,5 +1,5 @@
-import { CONNECTIONS } from "@/config/connections";
-import { PERK_ENTRIES } from "@/config/entries";
+import { CONNECTIONS } from "@/config/entry-point/connections";
+import { PERK_ENTRIES } from "@/config/entry-point/entries";
 import ConnectionLine from "./connection-line";
 import FilterDefs from "./filter-defs";
 import PerkNode from "./perk-node";

@@ -1,4 +1,4 @@
-import { Perks } from "@/config/perks";
+import { Perks } from "@/config/entry-point/perks";
 import type { Perk } from "@/types";
 
 const rolePerks = {
