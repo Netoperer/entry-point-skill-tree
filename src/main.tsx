@@ -6,6 +6,7 @@ import { StrictMode } from "react";
 import EntryPoint from "./pages/entry-point";
 import { enableMapSet } from "immer";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
+import FreelancersCut from "./pages/freelancers-cut";
 
 const root = document.getElementById("root")!;
 
@@ -26,6 +27,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="entry-point" element={<EntryPoint />} />
+      <Route path="freelancers-cut" element={<FreelancersCut />} />
     </Routes>
   );
 }

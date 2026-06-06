@@ -15,9 +15,9 @@ export function handleClick(id: string) {
     perkLimit,
   } = useEntryPointStore.getState();
 
-  const isLocked = !unlockedNodes.has(id);
+  const isUnlocked = unlockedNodes.has(id);
 
-  if (!isLocked) {
+  if (!isUnlocked) {
     if (starterClass == id) {
       return;
     }
