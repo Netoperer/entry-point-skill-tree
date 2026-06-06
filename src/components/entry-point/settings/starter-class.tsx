@@ -21,7 +21,7 @@ export default function StarterClassSettings() {
       <CardHeader className="px-4 py-0 pb-0">
         <div className="flex items-center gap-2">
           <div className="p-1 rounded bg-secondary/10">
-            <User className="size-4 text-secondary" />
+            <User className="size-4 text-primary" />
           </div>
           <span className="font-bold text-[14px] tracking-tight text-foreground">
             Starter Class
@@ -61,7 +61,7 @@ export default function StarterClassSettings() {
                 </div>
                 <span
                   className={cn(
-                    "text-[10px] font-black uppercase tracking-tight transition-colors",
+                    "text-[12px] font-bold tracking-tight transition-colors",
                     isActive
                       ? "text-secondary-foreground"
                       : "text-muted-foreground",
