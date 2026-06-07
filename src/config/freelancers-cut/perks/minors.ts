@@ -3,7 +3,6 @@ import { multiplicativeAbility } from "../descriptions";
 
 const AmmoReservesIcon = "/freelancers-cut/minors/AmmoReserves.webp";
 const AppliedForceIcon = "/freelancers-cut/minors/AppliedForce.webp";
-const BlastRadiusIcon = "/freelancers-cut/minors/BlastRadius.webp";
 const ConditioningIcon = "/freelancers-cut/minors/Conditioning.webp";
 const DataCompressionIcon = "/freelancers-cut/minors/DataCompression.webp";
 const DiscretionIcon = "/freelancers-cut/minors/Discretion.webp";
@@ -13,7 +12,6 @@ const FastHandsIcon = "/freelancers-cut/minors/FastHands.webp";
 const LowProfileIcon = "/freelancers-cut/minors/LowProfile.webp";
 const MasqueradeIcon = "/freelancers-cut/minors/Masquerade.webp";
 const QuickSwapIcon = "/freelancers-cut/minors/QuickSwap.webp";
-const ReinforcementIcon = "/freelancers-cut/minors/Reinforcement.webp";
 const TechnicalExpertIcon = "/freelancers-cut/minors/TechnicalExpert.webp";
 const VitalTargetsIcon = "/freelancers-cut/minors/VitalTargets.webp";
 const VitalityIcon = "/freelancers-cut/minors/Vitality.webp";
@@ -33,16 +31,6 @@ const AppliedForce: Perk = {
   description: multiplicativeAbility("Drilling speed is increased by {}%.", 5),
 } as const;
 
-const BlastRadius: Perk = {
-  name: "Blast Radius",
-  perkType: PerkType.Minor,
-  icon: BlastRadiusIcon,
-  description: multiplicativeAbility(
-    "Explosives have {}% increased range/damage.",
-    8,
-  ),
-} as const;
-
 const Conditioning: Perk = {
   name: "Conditioning",
   perkType: PerkType.Minor,
@@ -53,8 +41,8 @@ const Conditioning: Perk = {
   ),
 } as const;
 
-const DataCompression: Perk = {
-  name: "Data Compression",
+const CriticalInsights: Perk = {
+  name: "Data CriticalInsights",
   perkType: PerkType.Minor,
   icon: DataCompressionIcon,
   description: multiplicativeAbility(
@@ -121,16 +109,6 @@ const QuickSwap: Perk = {
   description: multiplicativeAbility("Reload all weapons {}% faster.", 4),
 } as const;
 
-const Reinforcement: Perk = {
-  name: "Reinforcement",
-  perkType: PerkType.Minor,
-  icon: ReinforcementIcon,
-  description: multiplicativeAbility(
-    "Take {}% less damage while wearing armor.",
-    2,
-  ),
-} as const;
-
 const TechnicalExpert: Perk = {
   name: "Technical Expert",
   perkType: PerkType.Minor,
@@ -163,20 +141,15 @@ const WeakPoints: Perk = {
 } as const;
 
 export const minors = {
-  AmmoReserves,
   AppliedForce,
-  BlastRadius,
   Conditioning,
-  DataCompression,
+  CriticalInsights,
   Discretion,
   EfficientAlgorithms,
   FastHands,
   LowProfile,
   Masquerade,
   QuickSwap,
-  Reinforcement,
   TechnicalExpert,
-  VitalTargets,
-  Vitality,
   WeakPoints,
 };

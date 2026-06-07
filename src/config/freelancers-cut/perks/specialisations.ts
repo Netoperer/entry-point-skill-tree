@@ -19,15 +19,6 @@ const SignalDisruptionIcon =
 const ThespianIcon = "/freelancers-cut/specialisations/Thespian.webp";
 const WorkshopIcon = "/freelancers-cut/specialisations/Workshop.webp";
 
-const AmmoEconomy: Perk = {
-  name: "Ammo Economy",
-  perkType: PerkType.Specialisation,
-  icon: AmmoEconomyIcon,
-  description: description(
-    "Ammo drops you can't use are coverted to other ammo types at 40% efficiency.",
-  ),
-} as const;
-
 const CovertTakeover: Perk = {
   name: "Covert Takeover",
   perkType: PerkType.Specialisation,
@@ -120,7 +111,6 @@ const Workshop: Perk = {
 } as const;
 
 export const specialistaions = {
-  AmmoEconomy,
   CovertTakeover,
   DeadSilence,
   EfficientPacking,

@@ -4,7 +4,6 @@ import { setAbility } from "../descriptions";
 
 const AdvancedProtocolsIcon = "/freelancers-cut/majors/AdvancedProtocols.webp";
 const AgilityIcon = "/freelancers-cut/majors/Agility.webp";
-const ArmorProficiencyIcon = "/freelancers-cut/majors/ArmorProficiency.webp";
 const AwarenessIcon = "/freelancers-cut/majors/Awareness.webp";
 const BruteStrengthIcon = "/freelancers-cut/majors/BruteStrength.webp";
 const ClimberIcon = "/freelancers-cut/majors/Climber.webp";
@@ -43,17 +42,6 @@ const Agility: Perk = {
     "Crouched movement and sprinting are both faster.",
     "30% dodge chance while sprinting.",
     "Stamina recovery is faster.",
-  ]),
-} as const;
-
-const ArmorProficiency: Perk = {
-  name: "Armor Proficiency",
-  perkType: PerkType.Major,
-  icon: ArmorProficiencyIcon,
-  description: setAbility([
-    "Armor has a lower impact on your encumbrance level.",
-    "All armor also protects from explosive damage.",
-    "Concealed items can be used with heavy armor.",
   ]),
 } as const;
 
@@ -101,6 +89,16 @@ const ElectricalEngineering: Perk = {
   ]),
 } as const;
 
+const EquipmentSpecialist: Perk = {
+  name: "Equipment Specialist",
+  perkType: PerkType.Major,
+  icon: "placeholder",
+  description: setAbility([
+    "Makes tech items cost 50% less.",
+    "Grants two extra space in the player's main inventory.",
+    "Allows the player to use two modifications on a single item rather than just one.",
+  ]),
+} as const;
 const Gunsmith: Perk = {
   name: "Gunsmith",
   perkType: PerkType.Major,
@@ -123,6 +121,17 @@ const Intimidation: Perk = {
   ]),
 } as const;
 
+const Inconspicuous: Perk = {
+  name: "Inconspicuous",
+  perkType: PerkType.Major,
+  icon: "placeholder",
+  description: setAbility([
+    "Makes walking silent and the audible range of running is reduced from 25 studs to 10.",
+    "Increases the max concealable weapon size by 1 and multiplies the player's visual detection range by 0.85",
+    "Multiplies the audible range of the player's non-movement noises by 0.8.",
+  ]),
+} as const;
+
 const LockArtist: Perk = {
   name: "Lock Artist",
   perkType: PerkType.Major,
@@ -131,17 +140,6 @@ const LockArtist: Perk = {
     "Some lockpicking progress will be recovered if lockpicking is interrupted.",
     "More difficult locks can be picked.",
     "20% faster lockpicking speed while not in combat.",
-  ]),
-} as const;
-
-const MobileAttacker: Perk = {
-  name: "Mobile Attacker",
-  perkType: PerkType.Major,
-  icon: MobileAttackerIcon,
-  description: setAbility([
-    "Move faster while aiming down sights.",
-    "Able to shoot while sprinting or sliding.",
-    "Able to reload while sprinting or sliding.",
   ]),
 } as const;
 
@@ -154,24 +152,6 @@ const OrdnanceSupply: Perk = {
     "Loading costs for explosives are reduced by 25%.",
     "Can bring one extra of all explosives.",
   ]),
-} as const;
-
-const Perseverance: Perk = {
-  name: "Perseverance",
-  perkType: PerkType.Major,
-  icon: PerseveranceIcon,
-  description: (level: number, ownedNodes: Array<Perk>) => {
-    const vitalityNodeCount = ownedNodes.filter(
-      (perk) => perk === Perks.Vitality,
-    ).length;
-    const array = [
-      "Increases the amount of health you can regenerate.",
-      "Shortens the amount of time it takes for health to start regenerating.",
-      `Each two 'Vitality' (you have ${vitalityNodeCount}) perks you have increases the amount your health regenerates.`,
-    ];
-
-    return setAbility(array)(level, ownedNodes);
-  },
 } as const;
 
 const Pickpocket: Perk = {
@@ -254,17 +234,15 @@ const Undertaker: Perk = {
 export const majors = {
   AdvancedProtocols,
   Agility,
-  ArmorProficiency,
   Awareness,
   BruteStrength,
   Climber,
   ElectricalEngineering,
+  EquipmentSpecialist,
   Gunsmith,
   Intimidation,
+  Inconspicuous,
   LockArtist,
-  MobileAttacker,
-  OrdnanceSupply,
-  Perseverance,
   Pickpocket,
   ReliableContacts,
   RemoteAccess,
