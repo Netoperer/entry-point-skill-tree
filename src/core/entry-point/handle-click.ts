@@ -17,7 +17,7 @@ export function handleClick(id: string) {
 
   const isUnlocked = unlockedNodes.has(id);
 
-  if (!isUnlocked) {
+  if (isUnlocked) {
     if (starterClass == id) {
       return;
     }
