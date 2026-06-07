@@ -20,10 +20,13 @@ export default function ConnectionLine({ entries }: Props) {
   //     );
   //   });
 
+  const isPathSelected = false;
+  const isPathUnlocked = false;
+
   const perk1 = PERK_ENTRIES[id1]!;
   const perk2 = PERK_ENTRIES[id2]!;
 
-  //   const stroke = isPathSelected ? "red" : isPathUnlocked ? "white" : "#ddd";
+  const stroke = isPathSelected ? "red" : isPathUnlocked ? "white" : "#ddd";
 
   return (
     <line
@@ -31,9 +34,8 @@ export default function ConnectionLine({ entries }: Props) {
       y1={perk1.position.y}
       x2={perk2.position.x}
       y2={perk2.position.y}
-      //   stroke={stroke}
-      stroke="red"
-      //   strokeWidth={isPathUnlocked || isPathSelected ? 1.5 : 0.5}
+      stroke={stroke}
+      strokeWidth={isPathUnlocked || isPathSelected ? 1.5 : 0.5}
     />
   );
 }

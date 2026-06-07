@@ -29,7 +29,13 @@ export default function Editor() {
           height: "100%",
         }}
       >
-        <svg viewBox="0 0 700 700" className="w-full h-full select-none">
+        <svg
+          viewBox="0 0 700 700"
+          className="w-full h-full select-none"
+          preserveAspectRatio="xMidYMid meet"
+          width="100%"
+          height="100%"
+        >
           <FilterDefs />
 
           {...CONNECTIONS.map((entries) => {

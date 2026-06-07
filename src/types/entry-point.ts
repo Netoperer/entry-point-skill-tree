@@ -1,3 +1,4 @@
+// well in reality, z is just size
 export type PerkEntry = {
   coordinates: {
     x: number;

@@ -1,6 +1,7 @@
 import type { PerkEntry } from "@/types/freelancers-cut";
 import { Perks } from "./perks";
 
+// prettier-ignore
 export const PERK_ENTRIES: { [key: string]: PerkEntry } = {
   "1": { perk: Perks.AdvancedProtocols, position: { x: 168, y: 192 } },
   "2": { perk: Perks.AdvancedProtocols, position: { x: 169, y: 141 } },

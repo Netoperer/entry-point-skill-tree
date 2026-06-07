@@ -1,24 +1,33 @@
-import type { PerkEntry } from "@/types/freelancers-cut";
+import { PerkType, type PerkEntry } from "@/types/freelancers-cut";
 
 interface Props {
   perkEntry: PerkEntry;
   id: string;
 }
 
-export function PerkNode({ perkEntry, id }: Props) {
-  const size = 8;
+const sizeMap: Record<PerkType, number> = {
+  [PerkType.Minor]: 4,
+  [PerkType.Major]: 6,
+  [PerkType.Specialisation]: 8,
+};
 
+export function PerkNode({ perkEntry, id }: Props) {
   //   const isUnlocked = useEntryPointStore((store) => store.unlockedNodes.has(id));
   //   const isSelected = useEntryPointStore((store) =>
   //     selectSelectedNodes(store).has(id),
   //   );
   //   const setHoveredNode = useEntryPointStore((store) => store.setHoveredNode);
 
-  //   const filter = isSelected
-  //     ? "url(#selected)"
-  //     : isUnlocked
-  //       ? "url(#unlocked)"
-  //       : "url(#default)";
+  const isSelected = false;
+  const isUnlocked = false;
+
+  const filter = isSelected
+    ? "url(#selected)"
+    : isUnlocked
+      ? "url(#unlocked)"
+      : "url(#default)";
+
+  const size = sizeMap[perkEntry.perk.perkType];
 
   return (
     <image
@@ -27,7 +36,7 @@ export function PerkNode({ perkEntry, id }: Props) {
       x={perkEntry.position.x - size / 2}
       y={perkEntry.position.y - size / 2}
       href={perkEntry.perk.icon}
-      //   filter={filter}
+      filter={filter}
       style={{ cursor: "pointer", pointerEvents: "auto" }}
       //   onClick={() => {
       //     handleClick(id);
