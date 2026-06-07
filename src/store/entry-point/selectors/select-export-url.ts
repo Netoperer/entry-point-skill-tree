@@ -6,7 +6,7 @@ import { IMAGE_CACHE } from "@/config/entry-point/image-cache";
 const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
 const getWithBackground = (state: StoreState) => state.withBackground;
 
-export const selectExportBlob = createSelector(
+export const selectExportUrl = createSelector(
   [getUnlockedNodes, getWithBackground],
   (unlockedNodes, withBackground) => {
     const canvas = document.createElement("canvas");

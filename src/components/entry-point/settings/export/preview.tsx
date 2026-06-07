@@ -1,9 +1,9 @@
 import { useEntryPointStore } from "@/store/entry-point";
-import { selectExportBlob } from "@/store/entry-point/selectors/select-export-url";
+import { selectExportUrl } from "@/store/entry-point/selectors/select-export-url";
 import { Loader2 } from "lucide-react";
 
 export function ExportPreview() {
-  const exportUrl = useEntryPointStore(selectExportBlob);
+  const exportUrl = useEntryPointStore(selectExportUrl);
 
   return (
     <div className="relative aspect-square w-full rounded-lg overflow-hidden border border-border/50 bg-muted/20 group/preview flex items-center justify-center animate-in fade-in zoom-in-95 duration-200">

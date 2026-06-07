@@ -3,7 +3,7 @@ import { Check, Copy, Download } from "lucide-react";
 import { downloadImage, copyImageToClipboard } from "./utils";
 import { useEntryPointStore } from "@/store/entry-point";
 import { selectUnlockedClassPerks } from "@/store/entry-point/selectors";
-import { selectExportBlob } from "@/store/entry-point/selectors/select-export-url";
+import { selectExportUrl } from "@/store/entry-point/selectors/select-export-url";
 import { useState } from "react";
 
 export function ExportActions() {
@@ -11,7 +11,7 @@ export function ExportActions() {
 
   const unlockedNodes = useEntryPointStore((state) => state.unlockedNodes);
   const unlockedClassPerks = useEntryPointStore(selectUnlockedClassPerks);
-  const exportUrl = useEntryPointStore(selectExportBlob);
+  const exportUrl = useEntryPointStore(selectExportUrl);
 
   const handleExport = () => {
     downloadImage(exportUrl, unlockedClassPerks, unlockedNodes.size);
