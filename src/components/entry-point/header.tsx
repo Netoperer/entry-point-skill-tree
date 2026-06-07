@@ -1,5 +1,6 @@
 import { Badge } from "lucide-react";
 import { Link } from "react-router";
+import { DiscordLogo, GithubLogo } from "../home/logos";
 
 export default function Header() {
   return (
@@ -11,7 +12,11 @@ export default function Header() {
           </div>
           <span className="font-bold">Entry Point Skill Tree Editor</span>
         </div>
-        <div>
+        <div className="flex items-center gap-12">
+          <div className="flex items-center gap-2">
+            <GithubLogo />
+            <DiscordLogo />
+          </div>
           <Link to={"/"} className="font-bold">
             Home
           </Link>
