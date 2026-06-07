@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router";
 import "./index.css";
 import Home from "./pages/home";
 import { StrictMode } from "react";
@@ -24,10 +24,12 @@ ReactDOM.createRoot(root).render(
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="entry-point" element={<EntryPoint />} />
-      <Route path="freelancers-cut" element={<FreelancersCut />} />
-    </Routes>
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="entry-point" element={<EntryPoint />} />
+        <Route path="freelancers-cut" element={<FreelancersCut />} />
+      </Routes>
+    </HashRouter>
   );
 }
