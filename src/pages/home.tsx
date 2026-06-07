@@ -27,11 +27,13 @@ export default function Home() {
               title="Entry Point"
               to="/entry-point"
               bgImage="/ep.webp"
+              isReady={true}
             />
             <ModeCard
               title="Freelancer's Cut"
               to="/freelancers-cut"
               bgImage="/epfc.htm"
+              isReady={false}
             />
           </div>
         </div>
