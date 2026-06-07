@@ -1,7 +1,7 @@
 import { PERK_ENTRIES } from "@/config/entry-point/entries";
 import { CONNECTIONS } from "@/config/entry-point/connections";
 import { getClassPerksTitle } from "@/core/entry-point/getClassPerksTitle";
-import type { Perk } from "@/types";
+import type { Perk } from "@/types/entry-point";
 
 export async function preloadImages() {
   const imageCache = new Map<string, HTMLImageElement>();

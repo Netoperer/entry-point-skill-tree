@@ -1,5 +1,5 @@
 import { Perks } from "@/config/entry-point/perks";
-import type { Perk } from "@/types";
+import type { Perk } from "@/types/entry-point";
 
 const rolePerks = {
   Infiltrator: [Perks.TheArtOfTheSteal, Perks.Prodigy],

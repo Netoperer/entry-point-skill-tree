@@ -1,6 +1,4 @@
-import type { Perk } from "./perks";
-
-export type Description = (level: number, ownedPerks: Perk[]) => string;
+import type { Description } from "@/types/freelancers-cut";
 
 export function description(data: string): Description {
   return (_) => data;

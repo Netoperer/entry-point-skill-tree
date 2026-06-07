@@ -3,7 +3,7 @@ import { useQueryState, createParser, parseAsInteger } from "nuqs";
 import { useEntryPointStore } from "@/store/entry-point";
 import { decode, encode } from "@/utils/compress-url";
 import { areSetsEqual } from "@/utils/are-sets-equal";
-import { StarterClass } from "@/types";
+import { StarterClass } from "@/types/entry-point";
 
 const parseAsSet = createParser({
   parse(queryValue) {

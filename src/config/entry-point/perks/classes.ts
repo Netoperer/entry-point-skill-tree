@@ -1,4 +1,4 @@
-import { type Perk, PerkType } from "@/types";
+import { type Perk, PerkType } from "@/types/entry-point";
 
 const theArtOfTheSteal = "/entry-point/classes/TheArtOfTheSteal.webp";
 const prodigy = "/entry-point/classes/Prodigy.webp";

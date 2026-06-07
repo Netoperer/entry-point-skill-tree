@@ -2,7 +2,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { classes } from "@/config/entry-point/perks/classes";
 import { cn } from "@/lib/utils";
 import { useEntryPointStore } from "@/store/entry-point";
-import { StarterClass } from "@/types";
+import { StarterClass } from "@/types/entry-point";
 import { User } from "lucide-react";
 
 const CLASS_TO_ENUM: Record<string, StarterClass> = {

@@ -1,6 +1,6 @@
 import { PERK_ENTRIES } from "@/config/entry-point/entries";
 import { Perks } from "@/config/entry-point/perks";
-import { PerkType, type PerkEntry } from "@/types";
+import { PerkType, type PerkEntry } from "@/types/entry-point";
 
 const WEAPON_MASTERIES = [
   Perks.SmgMastery,

@@ -24,7 +24,7 @@ export const heavyWeaponsMastery =
   "/entry-point/minors/HeavyWeaponsMastery.webp";
 export const sniperMastery = "/entry-point/minors/SniperMastery.webp";
 
-import { type Perk, PerkType } from "@/types";
+import { type Perk, PerkType } from "@/types/entry-point";
 
 export const FastHands: Perk = {
   perkType: PerkType.Minor,

@@ -1,23 +1,23 @@
-import { multiplicativeAbility, type Description } from "../descriptions";
-import { PerkType, type Perk } from ".";
+import { PerkType, type Perk } from "@/types/freelancers-cut";
+import { multiplicativeAbility } from "../descriptions";
 
-const AmmoReservesIcon = "/freelancers-cut/minor/AmmoReserves.webp";
-const AppliedForceIcon = "/freelancers-cut/minor/AppliedForce.webp";
-const BlastRadiusIcon = "/freelancers-cut/minor/BlastRadius.webp";
-const ConditioningIcon = "/freelancers-cut/minor/Conditioning.webp";
-const DataCompressionIcon = "/freelancers-cut/minor/DataCompression.webp";
-const DiscretionIcon = "/freelancers-cut/minor/Discretion.webp";
+const AmmoReservesIcon = "/freelancers-cut/minors/AmmoReserves.webp";
+const AppliedForceIcon = "/freelancers-cut/minors/AppliedForce.webp";
+const BlastRadiusIcon = "/freelancers-cut/minors/BlastRadius.webp";
+const ConditioningIcon = "/freelancers-cut/minors/Conditioning.webp";
+const DataCompressionIcon = "/freelancers-cut/minors/DataCompression.webp";
+const DiscretionIcon = "/freelancers-cut/minors/Discretion.webp";
 const EfficientAlgorithmsIcon =
-  "/freelancers-cut/minor/EfficientAlgorithms.webp";
-const FastHandsIcon = "/freelancers-cut/minor/FastHands.webp";
-const LowProfileIcon = "/freelancers-cut/minor/LowProfile.webp";
-const MasqueradeIcon = "/freelancers-cut/minor/Masquerade.webp";
-const QuickSwapIcon = "/freelancers-cut/minor/QuickSwap.webp";
-const ReinforcementIcon = "/freelancers-cut/minor/Reinforcement.webp";
-const TechnicalExpertIcon = "/freelancers-cut/minor/TechnicalExpert.webp";
-const VitalTargetsIcon = "/freelancers-cut/minor/VitalTargets.webp";
-const VitalityIcon = "/freelancers-cut/minor/Vitality.webp";
-const WeakPointsIcon = "/freelancers-cut/minor/WeakPoints.webp";
+  "/freelancers-cut/minors/EfficientAlgorithms.webp";
+const FastHandsIcon = "/freelancers-cut/minors/FastHands.webp";
+const LowProfileIcon = "/freelancers-cut/minors/LowProfile.webp";
+const MasqueradeIcon = "/freelancers-cut/minors/Masquerade.webp";
+const QuickSwapIcon = "/freelancers-cut/minors/QuickSwap.webp";
+const ReinforcementIcon = "/freelancers-cut/minors/Reinforcement.webp";
+const TechnicalExpertIcon = "/freelancers-cut/minors/TechnicalExpert.webp";
+const VitalTargetsIcon = "/freelancers-cut/minors/VitalTargets.webp";
+const VitalityIcon = "/freelancers-cut/minors/Vitality.webp";
+const WeakPointsIcon = "/freelancers-cut/minors/WeakPoints.webp";
 
 const AmmoReserves: Perk = {
   name: "Ammo Reserves",
@@ -162,7 +162,7 @@ const WeakPoints: Perk = {
   description: multiplicativeAbility("Your shots ignore {}% of armor.", 6),
 } as const;
 
-export const MINOR_PERKS = {
+export const minors = {
   AmmoReserves,
   AppliedForce,
   BlastRadius,

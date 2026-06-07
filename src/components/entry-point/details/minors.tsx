@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Item, ItemContent, ItemTitle } from "@/components/ui/item";
-import type { Perk } from "@/types";
+import type { Perk } from "@/types/entry-point";
 import { minors } from "@/config/entry-point/perks/minors";
 import { Perks } from "@/config/entry-point/perks";
 import { useEntryPointStore } from "@/store/entry-point";

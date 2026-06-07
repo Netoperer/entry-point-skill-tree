@@ -1,5 +1,5 @@
 import type { StateCreator } from "zustand";
-import { StarterClass } from "@/types";
+import { StarterClass } from "@/types/entry-point";
 import { areSetsEqual } from "@/utils/are-sets-equal";
 import type { StoreState } from ".";
 

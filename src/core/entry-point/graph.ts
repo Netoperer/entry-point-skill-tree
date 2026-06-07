@@ -1,6 +1,6 @@
 import { CONNECTIONS } from "@/config/entry-point/connections";
 import * as graph from "../shared/graph";
-import { StarterClass } from "@/types";
+import { StarterClass } from "@/types/entry-point";
 import canUnlockNode from "./can-unlock-node";
 
 export const ADJACENCY_LIST = graph.buildAdjacencyList(CONNECTIONS);

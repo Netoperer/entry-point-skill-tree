@@ -1,23 +1,23 @@
-import { description, type Description } from "../descriptions";
-import { PerkType, type Perk } from ".";
+import { PerkType, type Perk } from "@/types/freelancers-cut";
+import { description } from "../descriptions";
 
-const AmmoEconomyIcon = "/freelancers-cut/specialisation/AmmoEconomy.webp";
+const AmmoEconomyIcon = "/freelancers-cut/specialisations/AmmoEconomy.webp";
 const CovertTakeoverIcon =
-  "/freelancers-cut/specialisation/CovertTakeover.webp";
-const DeadSilenceIcon = "/freelancers-cut/specialisation/DeadSilence.webp";
+  "/freelancers-cut/specialisations/CovertTakeover.webp";
+const DeadSilenceIcon = "/freelancers-cut/specialisations/DeadSilence.webp";
 const EfficientPackingIcon =
-  "/freelancers-cut/specialisation/EfficientPacking.webp";
-const ExecutionerIcon = "/freelancers-cut/specialisation/Executioner.webp";
-const FullArsenalIcon = "/freelancers-cut/specialisation/FullArsenal.webp";
+  "/freelancers-cut/specialisations/EfficientPacking.webp";
+const ExecutionerIcon = "/freelancers-cut/specialisations/Executioner.webp";
+const FullArsenalIcon = "/freelancers-cut/specialisations/FullArsenal.webp";
 const RefinedCompositionIcon =
-  "/freelancers-cut/specialisation/RefinedComposition.webp";
-const SafecrackerIcon = "/freelancers-cut/specialisation/Safecracker.webp";
+  "/freelancers-cut/specialisations/RefinedComposition.webp";
+const SafecrackerIcon = "/freelancers-cut/specialisations/Safecracker.webp";
 const SharpenedSensesIcon =
-  "/freelancers-cut/specialisation/SharpenedSenses.webp";
+  "/freelancers-cut/specialisations/SharpenedSenses.webp";
 const SignalDisruptionIcon =
-  "/freelancers-cut/specialisation/SignalDisruption.webp";
-const ThespianIcon = "/freelancers-cut/specialisation/Thespian.webp";
-const WorkshopIcon = "/freelancers-cut/specialisation/Workshop.webp";
+  "/freelancers-cut/specialisations/SignalDisruption.webp";
+const ThespianIcon = "/freelancers-cut/specialisations/Thespian.webp";
+const WorkshopIcon = "/freelancers-cut/specialisations/Workshop.webp";
 
 const AmmoEconomy: Perk = {
   name: "Ammo Economy",
@@ -119,7 +119,7 @@ const Workshop: Perk = {
   description: description("Can use two item mods per item instead of one."),
 } as const;
 
-export const SPECIALISATION_PERKS = {
+export const specialistaions = {
   AmmoEconomy,
   CovertTakeover,
   DeadSilence,

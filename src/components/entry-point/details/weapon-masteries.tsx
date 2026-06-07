@@ -6,7 +6,7 @@ import {
   selectUnlockedMinorPerksMap,
 } from "@/store/entry-point/selectors";
 import { Perks } from "@/config/entry-point/perks";
-import type { Perk } from "@/types";
+import type { Perk } from "@/types/entry-point";
 import { cn } from "@/lib/utils";
 
 const MASTER_TRAINING_MAP: Record<string, Perk> = {

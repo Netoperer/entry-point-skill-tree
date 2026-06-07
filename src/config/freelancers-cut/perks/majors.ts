@@ -1,27 +1,28 @@
-import { setAbility, type Description } from "../descriptions";
-import { PERKS, PerkType, type Perk } from ".";
+import { PerkType, type Perk } from "@/types/freelancers-cut";
+import { Perks } from ".";
+import { setAbility } from "../descriptions";
 
-const AdvancedProtocolsIcon = "/freelancers-cut/major/AdvancedProtocols.webp";
-const AgilityIcon = "/freelancers-cut/major/Agility.webp";
-const ArmorProficiencyIcon = "/freelancers-cut/major/ArmorProficiency.webp";
-const AwarenessIcon = "/freelancers-cut/major/Awareness.webp";
-const BruteStrengthIcon = "/freelancers-cut/major/BruteStrength.webp";
-const ClimberIcon = "/freelancers-cut/major/Climber.webp";
+const AdvancedProtocolsIcon = "/freelancers-cut/majors/AdvancedProtocols.webp";
+const AgilityIcon = "/freelancers-cut/majors/Agility.webp";
+const ArmorProficiencyIcon = "/freelancers-cut/majors/ArmorProficiency.webp";
+const AwarenessIcon = "/freelancers-cut/majors/Awareness.webp";
+const BruteStrengthIcon = "/freelancers-cut/majors/BruteStrength.webp";
+const ClimberIcon = "/freelancers-cut/majors/Climber.webp";
 const ElectricalEngineeringIcon =
-  "/freelancers-cut/major/ElectricalEngineering.webp";
-const GunsmithIcon = "/freelancers-cut/major/Gunsmith.webp";
-const IntimidationIcon = "/freelancers-cut/major/Intimidation.webp";
-const LockArtistIcon = "/freelancers-cut/major/LockArtist.webp";
-const MobileAttackerIcon = "/freelancers-cut/major/MobileAttacker.webp";
-const OrdnanceSupplyIcon = "/freelancers-cut/major/OrdnanceSupply.webp";
-const PerseveranceIcon = "/freelancers-cut/major/Perseverance.webp";
-const PickpocketIcon = "/freelancers-cut/major/Pickpocket.webp";
-const ReliableContactsIcon = "/freelancers-cut/major/ReliableContacts.webp";
-const RemoteAccessIcon = "/freelancers-cut/major/RemoteAccess.webp";
-const SocialEngineeringIcon = "/freelancers-cut/major/SocialEngineering.webp";
-const TraversalIcon = "/freelancers-cut/major/Traversal.webp";
-const TriangulationIcon = "/freelancers-cut/major/Triangulation.webp";
-const UndertakerIcon = "/freelancers-cut/major/Undertaker.webp";
+  "/freelancers-cut/majors/ElectricalEngineering.webp";
+const GunsmithIcon = "/freelancers-cut/majors/Gunsmith.webp";
+const IntimidationIcon = "/freelancers-cut/majors/Intimidation.webp";
+const LockArtistIcon = "/freelancers-cut/majors/LockArtist.webp";
+const MobileAttackerIcon = "/freelancers-cut/majors/MobileAttacker.webp";
+const OrdnanceSupplyIcon = "/freelancers-cut/majors/OrdnanceSupply.webp";
+const PerseveranceIcon = "/freelancers-cut/majors/Perseverance.webp";
+const PickpocketIcon = "/freelancers-cut/majors/Pickpocket.webp";
+const ReliableContactsIcon = "/freelancers-cut/majors/ReliableContacts.webp";
+const RemoteAccessIcon = "/freelancers-cut/majors/RemoteAccess.webp";
+const SocialEngineeringIcon = "/freelancers-cut/majors/SocialEngineering.webp";
+const TraversalIcon = "/freelancers-cut/majors/Traversal.webp";
+const TriangulationIcon = "/freelancers-cut/majors/Triangulation.webp";
+const UndertakerIcon = "/freelancers-cut/majors/Undertaker.webp";
 
 const AdvancedProtocols: Perk = {
   name: "Advanced Protocols",
@@ -159,9 +160,9 @@ const Perseverance: Perk = {
   name: "Perseverance",
   perkType: PerkType.Major,
   icon: PerseveranceIcon,
-  description: (level, ownedNodes) => {
+  description: (level: number, ownedNodes: Array<Perk>) => {
     const vitalityNodeCount = ownedNodes.filter(
-      (perk) => perk === PERKS.Vitality,
+      (perk) => perk === Perks.Vitality,
     ).length;
     const array = [
       "Increases the amount of health you can regenerate.",
@@ -250,7 +251,7 @@ const Undertaker: Perk = {
   ]),
 } as const;
 
-export const MAJOR_PERKS = {
+export const majors = {
   AdvancedProtocols,
   Agility,
   ArmorProficiency,

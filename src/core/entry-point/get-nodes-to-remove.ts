@@ -1,9 +1,6 @@
 import { EntryPointGraph } from "./graph";
-import {
-  getUnlockableNodes,
-  getInvalidNodes,
-} from "./can-unlock-node";
-import type { StarterClass } from "@/types";
+import { getUnlockableNodes, getInvalidNodes } from "./can-unlock-node";
+import type { StarterClass } from "@/types/entry-point";
 
 export function getNodesToRemove(
   id: string,

@@ -1,7 +1,7 @@
 import { uniques } from "@/config/entry-point/perks/uniques";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Item, ItemContent, ItemTitle } from "@/components/ui/item";
-import type { Perk } from "@/types";
+import type { Perk } from "@/types/entry-point";
 import { useEntryPointStore } from "@/store/entry-point";
 import { selectUnlockedUniquePerks } from "@/store/entry-point/selectors";
 import { cn } from "@/lib/utils";

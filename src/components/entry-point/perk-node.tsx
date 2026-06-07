@@ -1,5 +1,5 @@
 import { useEntryPointStore } from "@/store/entry-point";
-import type { PerkEntry } from "@/types";
+import type { PerkEntry } from "@/types/entry-point";
 import { handleClick } from "@/core/entry-point/handle-click";
 import { selectSelectedNodes } from "@/store/entry-point/selectors";
 
