@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, HashRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router";
 import "./index.css";
 import Home from "./pages/home";
 import { StrictMode } from "react";
@@ -14,11 +14,11 @@ enableMapSet();
 
 ReactDOM.createRoot(root).render(
   <StrictMode>
-    <HashRouter>
+    <BrowserRouter>
       <NuqsAdapter>
         <App />
       </NuqsAdapter>
-    </HashRouter>
+    </BrowserRouter>
   </StrictMode>,
 );
 
