@@ -27,28 +27,39 @@ export function PerkNode({ perkEntry, id }: Props) {
       ? "url(#unlocked)"
       : "url(#default)";
 
-  const size = sizeMap[perkEntry.perk.perkType];
+  const size = sizeMap[perkEntry.perk.perkType] * 2;
 
   return (
-    <image
-      width={size}
-      height={size}
-      x={perkEntry.position.x - size / 2}
-      y={perkEntry.position.y - size / 2}
-      href={perkEntry.perk.icon}
-      filter={filter}
-      style={{ cursor: "pointer", pointerEvents: "auto" }}
-      //   onClick={() => {
-      //     handleClick(id);
-      //   }}
-      //   onMouseEnter={() => {
-      //     setHoveredNode(id);
-      //   }}
-      //   onMouseLeave={() => {
-      //     setHoveredNode(null);
-      //   }}
-    >
-      <title>{perkEntry.perk.description(1, [])}</title>
-    </image>
+    <>
+      <image
+        width={size}
+        height={size}
+        x={perkEntry.position.x - size / 2}
+        y={perkEntry.position.y - size / 2}
+        href={perkEntry.perk.icon}
+        filter={filter}
+        style={{ cursor: "pointer", pointerEvents: "auto" }}
+        //   onClick={() => {
+        //     handleClick(id);
+        //   }}
+        //   onMouseEnter={() => {
+        //     setHoveredNode(id);
+        //   }}
+        //   onMouseLeave={() => {
+        //     setHoveredNode(null);
+        //   }}
+      >
+        <title>{perkEntry.perk.description(1, [])}</title>
+      </image>
+
+      <text
+        x={perkEntry.position.x - size / 2}
+        y={perkEntry.position.y - size / 2}
+        font-size="24"
+        fill="blue"
+      >
+        {id}
+      </text>
+    </>
   );
 }

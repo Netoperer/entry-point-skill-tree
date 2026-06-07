@@ -30,7 +30,7 @@ export default function Editor() {
         }}
       >
         <svg
-          viewBox="0 0 300 285"
+          viewBox="0 -20 640 690"
           className="w-full h-full select-none"
           preserveAspectRatio="xMidYMid meet"
           width="100%"
