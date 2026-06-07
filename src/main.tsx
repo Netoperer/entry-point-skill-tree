@@ -14,22 +14,20 @@ enableMapSet();
 
 ReactDOM.createRoot(root).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <NuqsAdapter>
         <App />
       </NuqsAdapter>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 );
 
 function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="entry-point" element={<EntryPoint />} />
-        <Route path="freelancers-cut" element={<FreelancersCut />} />
-      </Routes>
-    </HashRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="entry-point" element={<EntryPoint />} />
+      <Route path="freelancers-cut" element={<FreelancersCut />} />
+    </Routes>
   );
 }
