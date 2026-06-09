@@ -1,5 +1,5 @@
-import Editor from "@/components/freelancers-cut/editor";
-import { Card } from "@/components/ui/card";
+import Editor from "@/features/freelancers-cut/components/editor";
+import { Card } from "@/shared/components/ui/card";
 
 export default function FreelancersCut() {
   return (

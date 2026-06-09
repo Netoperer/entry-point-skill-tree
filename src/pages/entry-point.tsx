@@ -1,8 +1,8 @@
-import { URLSync } from "@/components/entry-point/url-sync";
-import { Card } from "@/components/ui/card";
-import Editor from "@/components/entry-point/editor";
-import Sidebar from "@/components/entry-point/sidebar";
-import Header from "@/components/entry-point/header";
+import { URLSync } from "@/features/entry-point/components/url-sync";
+import { Card } from "@/shared/components/ui/card";
+import Editor from "@/features/entry-point/components/editor";
+import Sidebar from "@/features/entry-point/components/sidebar";
+import Header from "@/features/entry-point/components/header";
 
 export default function EntryPoint() {
   return (
