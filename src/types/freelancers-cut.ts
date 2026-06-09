@@ -6,7 +6,6 @@ export interface PerkEntry {
 export enum PerkType {
   Minor,
   Major,
-  Specialisation,
 }
 
 export interface Position {

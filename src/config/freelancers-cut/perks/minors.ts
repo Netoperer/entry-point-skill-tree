@@ -95,7 +95,7 @@ const Masquerade: Perk = {
 
 const SignalDisruption: Perk = {
   name: "Signal Disruption",
-  perkType: PerkType.Specialisation,
+  perkType: PerkType.Minor,
   icon: SignalDisruptionIcon,
   description: multiplicativeAbility("Cameras detect you {}% slower.", 4),
 } as const;

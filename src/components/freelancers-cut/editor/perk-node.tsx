@@ -6,9 +6,8 @@ interface Props {
 }
 
 const sizeMap: Record<PerkType, number> = {
-  [PerkType.Minor]: 4,
-  [PerkType.Major]: 6,
-  [PerkType.Specialisation]: 8,
+  [PerkType.Minor]: 3,
+  [PerkType.Major]: 5,
 };
 
 export function PerkNode({ perkEntry, id }: Props) {
@@ -27,39 +26,51 @@ export function PerkNode({ perkEntry, id }: Props) {
       ? "url(#unlocked)"
       : "url(#default)";
 
-  const size = sizeMap[perkEntry.perk.perkType] * 4;
+  const size = sizeMap[perkEntry.perk.perkType] * 6;
+
+  const centerX = perkEntry.position.x;
+  const centerY = perkEntry.position.y;
+  const radius = size / 2;
 
   return (
-    <>
-      <image
-        width={size}
-        height={size}
-        x={perkEntry.position.x - size / 2}
-        y={perkEntry.position.y - size / 2}
-        href={perkEntry.perk.icon}
-        filter={filter}
-        style={{ cursor: "pointer", pointerEvents: "auto" }}
-        //   onClick={() => {
-        //     handleClick(id);
-        //   }}
-        //   onMouseEnter={() => {
-        //     setHoveredNode(id);
-        //   }}
-        //   onMouseLeave={() => {
-        //     setHoveredNode(null);
-        //   }}
-      >
-        <title>{perkEntry.perk.description(1, [])}</title>
-      </image>
-
-      <text
+    <g
+      style={{ cursor: "pointer", pointerEvents: "auto" }}
+      //   onClick={() => {
+      //     handleClick(id);
+      //   }}
+      //   onMouseEnter={() => {
+      //     setHoveredNode(id);
+      //   }}
+      //   onMouseLeave={() => {
+      //     setHoveredNode(null);
+      //   }}
+    >
+      <defs>
+        <clipPath id={`clip-${id}`}>
+          <circle cx={centerX} cy={centerY} r={radius} />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#clip-${id})`}>
+        <image
+          width={size}
+          height={size}
+          x={centerX - radius}
+          y={centerY - radius}
+          href={perkEntry.perk.icon}
+          filter={filter}
+          preserveAspectRatio="xMidYMid slice"
+        >
+          <title>{perkEntry.perk.description(1, [])}</title>
+        </image>
+      </g>
+      {/* <text
         x={perkEntry.position.x - size / 2}
         y={perkEntry.position.y - size / 2}
         font-size="24"
         fill="blue"
       >
         {id}
-      </text>
-    </>
+      </text>{" "} */}
+    </g>
   );
 }

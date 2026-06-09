@@ -18,6 +18,7 @@ const TraversalIcon = "/freelancers-cut/majors/Traversal.png";
 const TriangulationIcon = "/freelancers-cut/majors/Triangulation.png";
 const EquipmentSpecialistIcon =
   "/freelancers-cut/majors/EquipmentSpecialist.png";
+const InconspicuousIcon = "/freelancers-cut/majors/Inconspicuous.png";
 
 const AdvancedProtocols: Perk = {
   name: "Advanced Protocols",
@@ -110,7 +111,7 @@ const Intimidation: Perk = {
 const Inconspicuous: Perk = {
   name: "Inconspicuous",
   perkType: PerkType.Major,
-  icon: "Inconspicuous.",
+  icon: InconspicuousIcon,
   description: setAbility([
     "Walking is silent and running makes less noise.",
     "Weapons one size larger can be concealed and people can't detect you from as far away.",
