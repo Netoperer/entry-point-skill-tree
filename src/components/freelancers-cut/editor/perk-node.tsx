@@ -27,7 +27,7 @@ export function PerkNode({ perkEntry, id }: Props) {
       ? "url(#unlocked)"
       : "url(#default)";
 
-  const size = sizeMap[perkEntry.perk.perkType] * 3;
+  const size = sizeMap[perkEntry.perk.perkType] * 4;
 
   return (
     <>

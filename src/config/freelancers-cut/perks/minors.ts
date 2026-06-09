@@ -17,7 +17,7 @@ const AppliedForce: Perk = {
   name: "Applied Force",
   perkType: PerkType.Minor,
   icon: AppliedForceIcon,
-  description: multiplicativeAbility("Drilling speed is increased by {}%.", 5),
+  description: multiplicativeAbility("Drills and Saws are {}%. faster", 5),
 } as const;
 
 const Conditioning: Perk = {
@@ -26,7 +26,7 @@ const Conditioning: Perk = {
   icon: ConditioningIcon,
   description: multiplicativeAbility(
     "Increase your maximum stamina by {}%.",
-    10,
+    6,
   ),
 } as const;
 
@@ -35,8 +35,9 @@ const CriticalInsights: Perk = {
   perkType: PerkType.Minor,
   icon: DataCompressionIcon,
   description: multiplicativeAbility(
-    "Network resource cost of hacks is reduced by {}%.",
+    "Network resource cost of hacks decreased by {}%. Increase critical hit rate by {}%",
     5,
+    1.5,
   ),
 } as const;
 
@@ -65,8 +66,9 @@ const FastHands: Perk = {
   perkType: PerkType.Minor,
   icon: FastHandsIcon,
   description: multiplicativeAbility(
-    "Lockpicking speed is increased by {}%.",
+    "Lockpicking speed is increased by {}% and weapon reload speed is increased {}%.",
     5,
+    3,
   ),
 } as const;
 
@@ -75,7 +77,7 @@ const LowProfile: Perk = {
   perkType: PerkType.Minor,
   icon: LowProfileIcon,
   description: multiplicativeAbility(
-    "When crouched, {}% slower detection and {}% dodge chance.",
+    "When crouched, {}% slower detection and dodge {}% of shots.",
     4,
     3,
   ),
@@ -87,7 +89,7 @@ const Masquerade: Perk = {
   icon: MasqueradeIcon,
   description: multiplicativeAbility(
     "Detection against disguises is {}% slower.",
-    5,
+    4,
   ),
 } as const;
 
@@ -95,10 +97,7 @@ const SignalDisruption: Perk = {
   name: "Signal Disruption",
   perkType: PerkType.Specialisation,
   icon: SignalDisruptionIcon,
-  description: multiplicativeAbility(
-    "Cameras detect you slower. Effect is increased on intercepted cameras.",
-    4,
-  ),
+  description: multiplicativeAbility("Cameras detect you {}% slower.", 4),
 } as const;
 
 const TechnicalExpert: Perk = {
