@@ -65,7 +65,7 @@ export function PerkNode({ perkEntry, id }: Props) {
           preserveAspectRatio="xMidYMid slice"
         >
           <title>
-            {perkEntry.perk.name}: {perkEntry.perk.description(1, [])}
+            {perkEntry.perk.name}: {perkEntry.perk.description(1)}
           </title>
         </image>
       </g>
@@ -80,4 +80,3 @@ export function PerkNode({ perkEntry, id }: Props) {
     </g>
   );
 }
-

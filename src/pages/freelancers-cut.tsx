@@ -1,4 +1,5 @@
 import Editor from "@/features/freelancers-cut/components/editor";
+import Header from "@/shared/components/header";
 import { Card } from "@/shared/components/ui/card";
 
 export default function FreelancersCut() {
@@ -7,7 +8,7 @@ export default function FreelancersCut() {
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_50%)] pointer-events-none" />
       {/* <URLSync /> */}
 
-      {/* <Header /> */}
+      <Header title={"Entry Point: Freelancer's Cut Skill Tree Editor"} />
 
       <main className="flex-1 w-full mx-auto flex p-4 xl:p-10 gap-10 xl:flex-row flex-col items-center justify-center overflow-hidden min-h-0 relative z-10">
         <Card className="lg:w-1/2 max-h-full w-full aspect-square flex bg-card/60 md:backdrop-blur-md rounded-2xl overflow-hidden group ring-1 ring-primary/10 transition-all duration-500 hover:ring-primary/20">

@@ -46,4 +46,3 @@ export function handleClick(id: string) {
     }
   }
 }
-

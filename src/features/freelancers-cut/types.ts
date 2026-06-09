@@ -28,5 +28,4 @@ export enum RootNode {
   SocialEngineering = "126",
 }
 
-export type Description = (level: number, ownedPerks: Perk[]) => string;
-
+export type Description = (level: number) => string;

@@ -28,7 +28,7 @@ export const createPersistentSlice: StateCreator<
 > = (set): PersistentSlice => ({
   unlockedNodes: new Set<string>([RootNode.LockArtist]),
   rootNode: RootNode.LockArtist,
-  perkLimit: 75,
+  perkLimit: 50,
 
   unlockNode: (id) =>
     set((state: PersistentSlice) => {

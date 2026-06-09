@@ -201,5 +201,4 @@ export const majors = {
   SocialEngineering,
   Traversal,
   Triangulation,
-};
-
+} as const;

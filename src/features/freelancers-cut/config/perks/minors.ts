@@ -121,5 +121,4 @@ export const minors = {
   Masquerade,
   SignalDisruption,
   TechnicalExpert,
-};
-
+} as const;
