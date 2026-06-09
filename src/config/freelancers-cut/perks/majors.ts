@@ -10,14 +10,12 @@ const ElectricalEngineeringIcon =
   "/freelancers-cut/majors/ElectricalEngineering.png";
 const IntimidationIcon = "/freelancers-cut/majors/Intimidation.png";
 const LockArtistIcon = "/freelancers-cut/majors/LockArtist.png";
-const OrdnanceSupplyIcon = "/freelancers-cut/majors/OrdnanceSupply.png";
 const PickpocketIcon = "/freelancers-cut/majors/Pickpocket.png";
 const ReliableContactsIcon = "/freelancers-cut/majors/ReliableContacts.png";
 const RemoteAccessIcon = "/freelancers-cut/majors/RemoteAccess.png";
 const SocialEngineeringIcon = "/freelancers-cut/majors/SocialEngineering.png";
 const TraversalIcon = "/freelancers-cut/majors/Traversal.png";
 const TriangulationIcon = "/freelancers-cut/majors/Triangulation.png";
-const UndertakerIcon = "/freelancers-cut/majors/Undertaker.png";
 const EquipmentSpecialistIcon =
   "/freelancers-cut/majors/EquipmentSpecialist.png";
 
