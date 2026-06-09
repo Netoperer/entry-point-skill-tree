@@ -21,8 +21,8 @@ export function getNodesToRemove(
     nextUnlockedNodes.delete(nodeId);
 
     const disconnected = getDisconnectedNodes(
-      nodeId,
       currentNodes,
+      nodeId,
       starterClass,
     );
     for (const d of disconnected) {

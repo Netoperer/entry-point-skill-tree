@@ -25,7 +25,7 @@ export function handleClick(id: string) {
     const nodesToLock = getNodesToRemove(id, unlockedNodes, starterClass);
     lockNodes(Array.from(nodesToLock));
   } else {
-    if (!isAdjacentToUnlocked(id, unlockedNodes)) {
+    if (!isAdjacentToUnlocked(unlockedNodes, id)) {
       const path = EntryPointGraph.pathToClosestUnlocked(
         id,
         unlockedNodes,
