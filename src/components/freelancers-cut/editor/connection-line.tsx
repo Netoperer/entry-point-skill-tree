@@ -1,4 +1,6 @@
 import { PERK_ENTRIES } from "@/config/freelancers-cut/entries";
+import { useFreelancersCutStore } from "@/store/freelancers-cut";
+import { selectSelectedNodes } from "@/store/freelancers-cut/selectors";
 
 interface Props {
   entries: [string, string];
@@ -7,21 +9,18 @@ interface Props {
 export default function ConnectionLine({ entries }: Props) {
   const [id1, id2] = entries;
 
-  //   const isPathUnlocked = useEntryPointStore(
-  //     (s) => s.unlockedNodes.has(id1) && s.unlockedNodes.has(id2),
-  //   );
+  const isPathUnlocked = useFreelancersCutStore(
+    (s) => s.unlockedNodes.has(id1) && s.unlockedNodes.has(id2),
+  );
 
-  //   const isPathSelected = useEntryPointStore((s) => {
-  //     const selectedNodes = selectSelectedNodes(s);
-  //     return (
-  //       (selectedNodes.has(id1) && selectedNodes.has(id2)) ||
-  //       (selectedNodes.has(id1) && s.unlockedNodes.has(id2)) ||
-  //       (selectedNodes.has(id2) && s.unlockedNodes.has(id1))
-  //     );
-  //   });
-
-  const isPathSelected = false;
-  const isPathUnlocked = false;
+  const isPathSelected = useFreelancersCutStore((s) => {
+    const selectedNodes = selectSelectedNodes(s);
+    return (
+      (selectedNodes.has(id1) && selectedNodes.has(id2)) ||
+      (selectedNodes.has(id1) && s.unlockedNodes.has(id2)) ||
+      (selectedNodes.has(id2) && s.unlockedNodes.has(id1))
+    );
+  });
 
   const perk1 = PERK_ENTRIES[id1]!;
   const perk2 = PERK_ENTRIES[id2]!;

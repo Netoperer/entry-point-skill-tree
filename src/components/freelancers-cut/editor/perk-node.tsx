@@ -1,3 +1,6 @@
+import { handleClick } from "@/core/freelancers-cut/handle-click";
+import { useFreelancersCutStore } from "@/store/freelancers-cut";
+import { selectSelectedNodes } from "@/store/freelancers-cut/selectors";
 import { PerkType, type PerkEntry } from "@/types/freelancers-cut";
 
 interface Props {
@@ -11,14 +14,15 @@ const sizeMap: Record<PerkType, number> = {
 };
 
 export function PerkNode({ perkEntry, id }: Props) {
-  //   const isUnlocked = useEntryPointStore((store) => store.unlockedNodes.has(id));
-  //   const isSelected = useEntryPointStore((store) =>
-  //     selectSelectedNodes(store).has(id),
-  //   );
-  //   const setHoveredNode = useEntryPointStore((store) => store.setHoveredNode);
-
-  const isSelected = false;
-  const isUnlocked = false;
+  const isUnlocked = useFreelancersCutStore((store) =>
+    store.unlockedNodes.has(id),
+  );
+  const isSelected = useFreelancersCutStore((store) =>
+    selectSelectedNodes(store).has(id),
+  );
+  const setHoveredNode = useFreelancersCutStore(
+    (store) => store.setHoveredNode,
+  );
 
   const filter = isSelected
     ? "url(#selected)"
@@ -35,15 +39,15 @@ export function PerkNode({ perkEntry, id }: Props) {
   return (
     <g
       style={{ cursor: "pointer", pointerEvents: "auto" }}
-      //   onClick={() => {
-      //     handleClick(id);
-      //   }}
-      //   onMouseEnter={() => {
-      //     setHoveredNode(id);
-      //   }}
-      //   onMouseLeave={() => {
-      //     setHoveredNode(null);
-      //   }}
+      onClick={() => {
+        handleClick(id);
+      }}
+      onMouseEnter={() => {
+        setHoveredNode(id);
+      }}
+      onMouseLeave={() => {
+        setHoveredNode(null);
+      }}
     >
       <defs>
         <clipPath id={`clip-${id}`}>
@@ -60,7 +64,9 @@ export function PerkNode({ perkEntry, id }: Props) {
           filter={filter}
           preserveAspectRatio="xMidYMid slice"
         >
-          <title>{perkEntry.perk.description(1, [])}</title>
+          <title>
+            {perkEntry.perk.name}: {perkEntry.perk.description(1, [])}
+          </title>
         </image>
       </g>
       {/* <text

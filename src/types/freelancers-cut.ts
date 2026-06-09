@@ -20,4 +20,12 @@ export interface Perk {
   description: Description;
 }
 
+export enum RootNode {
+  AdvancedProtocols = "0",
+  ElectricalEngineering = "65",
+  Intimidation = "84",
+  LockArtist = "87",
+  SocialEngineering = "126",
+}
+
 export type Description = (level: number, ownedPerks: Perk[]) => string;
