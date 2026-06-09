@@ -33,7 +33,7 @@ export default function Home() {
               title="Freelancer's Cut"
               to="/freelancers-cut"
               bgImage="/epfc.htm"
-              isReady={false}
+              isReady={true}
             />
           </div>
         </div>

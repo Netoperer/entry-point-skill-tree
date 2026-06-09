@@ -1,28 +1,17 @@
 import { PerkType, type Perk } from "@/types/freelancers-cut";
 import { multiplicativeAbility } from "../descriptions";
 
-const AmmoReservesIcon = "/freelancers-cut/minors/AmmoReserves.webp";
-const AppliedForceIcon = "/freelancers-cut/minors/AppliedForce.webp";
-const ConditioningIcon = "/freelancers-cut/minors/Conditioning.webp";
-const DataCompressionIcon = "/freelancers-cut/minors/DataCompression.webp";
-const DiscretionIcon = "/freelancers-cut/minors/Discretion.webp";
+const AppliedForceIcon = "/freelancers-cut/minors/AppliedForce.png";
+const ConditioningIcon = "/freelancers-cut/minors/Conditioning.png";
+const DataCompressionIcon = "/freelancers-cut/minors/CriticalInsights.png";
+const DiscretionIcon = "/freelancers-cut/minors/Discretion.png";
 const EfficientAlgorithmsIcon =
-  "/freelancers-cut/minors/EfficientAlgorithms.webp";
-const FastHandsIcon = "/freelancers-cut/minors/FastHands.webp";
-const LowProfileIcon = "/freelancers-cut/minors/LowProfile.webp";
-const MasqueradeIcon = "/freelancers-cut/minors/Masquerade.webp";
-const QuickSwapIcon = "/freelancers-cut/minors/QuickSwap.webp";
-const TechnicalExpertIcon = "/freelancers-cut/minors/TechnicalExpert.webp";
-const VitalTargetsIcon = "/freelancers-cut/minors/VitalTargets.webp";
-const VitalityIcon = "/freelancers-cut/minors/Vitality.webp";
-const WeakPointsIcon = "/freelancers-cut/minors/WeakPoints.webp";
-
-const AmmoReserves: Perk = {
-  name: "Ammo Reserves",
-  perkType: PerkType.Minor,
-  icon: AmmoReservesIcon,
-  description: multiplicativeAbility("Carry {}% more ammo in reserve.", 5),
-} as const;
+  "/freelancers-cut/minors/EfficientAlgorithms.png";
+const FastHandsIcon = "/freelancers-cut/minors/FastHands.png";
+const LowProfileIcon = "/freelancers-cut/minors/LowProfile.png";
+const MasqueradeIcon = "/freelancers-cut/minors/Masquerade.png";
+const SignalDisruptionIcon = "/freelancers-cut/minors/SignalDisruption.png";
+const TechnicalExpertIcon = "/freelancers-cut/minors/TechnicalExpert.png";
 
 const AppliedForce: Perk = {
   name: "Applied Force",
@@ -102,11 +91,14 @@ const Masquerade: Perk = {
   ),
 } as const;
 
-const QuickSwap: Perk = {
-  name: "Quick Swap",
-  perkType: PerkType.Minor,
-  icon: QuickSwapIcon,
-  description: multiplicativeAbility("Reload all weapons {}% faster.", 4),
+const SignalDisruption: Perk = {
+  name: "Signal Disruption",
+  perkType: PerkType.Specialisation,
+  icon: SignalDisruptionIcon,
+  description: multiplicativeAbility(
+    "Cameras detect you slower. Effect is increased on intercepted cameras.",
+    4,
+  ),
 } as const;
 
 const TechnicalExpert: Perk = {
@@ -119,27 +111,6 @@ const TechnicalExpert: Perk = {
   ),
 } as const;
 
-const VitalTargets: Perk = {
-  name: "Vital Targets",
-  perkType: PerkType.Minor,
-  icon: VitalTargetsIcon,
-  description: multiplicativeAbility("All damage is increased by {}%.", 4),
-} as const;
-
-const Vitality: Perk = {
-  name: "Vitality",
-  perkType: PerkType.Minor,
-  icon: VitalityIcon,
-  description: multiplicativeAbility("Increase your maximum health by {}%.", 5),
-} as const;
-
-const WeakPoints: Perk = {
-  name: "Weak Points",
-  perkType: PerkType.Minor,
-  icon: WeakPointsIcon,
-  description: multiplicativeAbility("Your shots ignore {}% of armor.", 6),
-} as const;
-
 export const minors = {
   AppliedForce,
   Conditioning,
@@ -149,7 +120,6 @@ export const minors = {
   FastHands,
   LowProfile,
   Masquerade,
-  QuickSwap,
+  SignalDisruption,
   TechnicalExpert,
-  WeakPoints,
 };

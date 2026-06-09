@@ -1,27 +1,25 @@
 import { PerkType, type Perk } from "@/types/freelancers-cut";
-import { Perks } from ".";
 import { setAbility } from "../descriptions";
 
-const AdvancedProtocolsIcon = "/freelancers-cut/majors/AdvancedProtocols.webp";
-const AgilityIcon = "/freelancers-cut/majors/Agility.webp";
-const AwarenessIcon = "/freelancers-cut/majors/Awareness.webp";
-const BruteStrengthIcon = "/freelancers-cut/majors/BruteStrength.webp";
-const ClimberIcon = "/freelancers-cut/majors/Climber.webp";
+const AdvancedProtocolsIcon = "/freelancers-cut/majors/AdvancedProtocols.png";
+const AgilityIcon = "/freelancers-cut/majors/Agility.png";
+const AwarenessIcon = "/freelancers-cut/majors/Awareness.png";
+const BruteStrengthIcon = "/freelancers-cut/majors/BruteStrength.png";
+const ClimberIcon = "/freelancers-cut/majors/Climber.png";
 const ElectricalEngineeringIcon =
-  "/freelancers-cut/majors/ElectricalEngineering.webp";
-const GunsmithIcon = "/freelancers-cut/majors/Gunsmith.webp";
-const IntimidationIcon = "/freelancers-cut/majors/Intimidation.webp";
-const LockArtistIcon = "/freelancers-cut/majors/LockArtist.webp";
-const MobileAttackerIcon = "/freelancers-cut/majors/MobileAttacker.webp";
-const OrdnanceSupplyIcon = "/freelancers-cut/majors/OrdnanceSupply.webp";
-const PerseveranceIcon = "/freelancers-cut/majors/Perseverance.webp";
-const PickpocketIcon = "/freelancers-cut/majors/Pickpocket.webp";
-const ReliableContactsIcon = "/freelancers-cut/majors/ReliableContacts.webp";
-const RemoteAccessIcon = "/freelancers-cut/majors/RemoteAccess.webp";
-const SocialEngineeringIcon = "/freelancers-cut/majors/SocialEngineering.webp";
-const TraversalIcon = "/freelancers-cut/majors/Traversal.webp";
-const TriangulationIcon = "/freelancers-cut/majors/Triangulation.webp";
-const UndertakerIcon = "/freelancers-cut/majors/Undertaker.webp";
+  "/freelancers-cut/majors/ElectricalEngineering.png";
+const IntimidationIcon = "/freelancers-cut/majors/Intimidation.png";
+const LockArtistIcon = "/freelancers-cut/majors/LockArtist.png";
+const OrdnanceSupplyIcon = "/freelancers-cut/majors/OrdnanceSupply.png";
+const PickpocketIcon = "/freelancers-cut/majors/Pickpocket.png";
+const ReliableContactsIcon = "/freelancers-cut/majors/ReliableContacts.png";
+const RemoteAccessIcon = "/freelancers-cut/majors/RemoteAccess.png";
+const SocialEngineeringIcon = "/freelancers-cut/majors/SocialEngineering.png";
+const TraversalIcon = "/freelancers-cut/majors/Traversal.png";
+const TriangulationIcon = "/freelancers-cut/majors/Triangulation.png";
+const UndertakerIcon = "/freelancers-cut/majors/Undertaker.png";
+const EquipmentSpecialistIcon =
+  "/freelancers-cut/majors/EquipmentSpecialist.png";
 
 const AdvancedProtocols: Perk = {
   name: "Advanced Protocols",
@@ -92,21 +90,11 @@ const ElectricalEngineering: Perk = {
 const EquipmentSpecialist: Perk = {
   name: "Equipment Specialist",
   perkType: PerkType.Major,
-  icon: "placeholder",
+  icon: EquipmentSpecialistIcon,
   description: setAbility([
     "Makes tech items cost 50% less.",
     "Grants two extra space in the player's main inventory.",
     "Allows the player to use two modifications on a single item rather than just one.",
-  ]),
-} as const;
-const Gunsmith: Perk = {
-  name: "Gunsmith",
-  perkType: PerkType.Major,
-  icon: GunsmithIcon,
-  description: setAbility([
-    "All weapon modifications are free.",
-    "Certain guns can be rechambered, switching the type of ammo they fire.",
-    "Certain guns can have their fire modes modified.",
   ]),
 } as const;
 
@@ -124,7 +112,7 @@ const Intimidation: Perk = {
 const Inconspicuous: Perk = {
   name: "Inconspicuous",
   perkType: PerkType.Major,
-  icon: "placeholder",
+  icon: "Inconspicuous",
   description: setAbility([
     "Makes walking silent and the audible range of running is reduced from 25 studs to 10.",
     "Increases the max concealable weapon size by 1 and multiplies the player's visual detection range by 0.85",
@@ -140,17 +128,6 @@ const LockArtist: Perk = {
     "Some lockpicking progress will be recovered if lockpicking is interrupted.",
     "More difficult locks can be picked.",
     "20% faster lockpicking speed while not in combat.",
-  ]),
-} as const;
-
-const OrdnanceSupply: Perk = {
-  name: "Ordnance Supply",
-  perkType: PerkType.Major,
-  icon: OrdnanceSupplyIcon,
-  description: setAbility([
-    "Can bring an extra C4 to missions",
-    "Loading costs for explosives are reduced by 25%.",
-    "Can bring one extra of all explosives.",
   ]),
 } as const;
 
@@ -220,17 +197,6 @@ const Triangulation: Perk = {
   ]),
 } as const;
 
-const Undertaker: Perk = {
-  name: "Undertaker",
-  perkType: PerkType.Major,
-  icon: UndertakerIcon,
-  description: setAbility([
-    "Automatically search bodies when picking them up. Both actions are also faster.",
-    "Movement speed penalty for maximum encumbrance is reduced.",
-    "Enemies drop more ammo and restore a small amount of health when killed.",
-  ]),
-} as const;
-
 export const majors = {
   AdvancedProtocols,
   Agility,
@@ -239,15 +205,12 @@ export const majors = {
   Climber,
   ElectricalEngineering,
   EquipmentSpecialist,
-  Gunsmith,
   Intimidation,
   Inconspicuous,
   LockArtist,
   Pickpocket,
-  ReliableContacts,
   RemoteAccess,
   SocialEngineering,
   Traversal,
   Triangulation,
-  Undertaker,
 };

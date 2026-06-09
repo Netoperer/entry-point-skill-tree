@@ -1,23 +1,23 @@
 import { PerkType, type Perk } from "@/types/freelancers-cut";
 import { description } from "../descriptions";
 
-const AmmoEconomyIcon = "/freelancers-cut/specialisations/AmmoEconomy.webp";
+const AmmoEconomyIcon = "/freelancers-cut/specialisations/AmmoEconomy.png";
 const CovertTakeoverIcon =
-  "/freelancers-cut/specialisations/CovertTakeover.webp";
-const DeadSilenceIcon = "/freelancers-cut/specialisations/DeadSilence.webp";
+  "/freelancers-cut/specialisations/CovertTakeover.png";
+const DeadSilenceIcon = "/freelancers-cut/specialisations/DeadSilence.png";
 const EfficientPackingIcon =
-  "/freelancers-cut/specialisations/EfficientPacking.webp";
-const ExecutionerIcon = "/freelancers-cut/specialisations/Executioner.webp";
-const FullArsenalIcon = "/freelancers-cut/specialisations/FullArsenal.webp";
+  "/freelancers-cut/specialisations/EfficientPacking.png";
+const ExecutionerIcon = "/freelancers-cut/specialisations/Executioner.png";
+const FullArsenalIcon = "/freelancers-cut/specialisations/FullArsenal.png";
 const RefinedCompositionIcon =
-  "/freelancers-cut/specialisations/RefinedComposition.webp";
-const SafecrackerIcon = "/freelancers-cut/specialisations/Safecracker.webp";
+  "/freelancers-cut/specialisations/RefinedComposition.png";
+const SafecrackerIcon = "/freelancers-cut/specialisations/Safecracker.png";
 const SharpenedSensesIcon =
-  "/freelancers-cut/specialisations/SharpenedSenses.webp";
+  "/freelancers-cut/specialisations/SharpenedSenses.png";
 const SignalDisruptionIcon =
-  "/freelancers-cut/specialisations/SignalDisruption.webp";
-const ThespianIcon = "/freelancers-cut/specialisations/Thespian.webp";
-const WorkshopIcon = "/freelancers-cut/specialisations/Workshop.webp";
+  "/freelancers-cut/specialisations/SignalDisruption.png";
+const ThespianIcon = "/freelancers-cut/specialisations/Thespian.png";
+const WorkshopIcon = "/freelancers-cut/specialisations/Workshop.png";
 
 const CovertTakeover: Perk = {
   name: "Covert Takeover",
@@ -85,15 +85,6 @@ const SharpenedSenses: Perk = {
   ),
 } as const;
 
-const SignalDisruption: Perk = {
-  name: "Signal Disruption",
-  perkType: PerkType.Specialisation,
-  icon: SignalDisruptionIcon,
-  description: description(
-    "Cameras detect you slower. Effect is increased on intercepted cameras.",
-  ),
-} as const;
-
 const Thespian: Perk = {
   name: "Thespian",
   perkType: PerkType.Specialisation,
@@ -119,7 +110,6 @@ export const specialistaions = {
   RefinedComposition,
   Safecracker,
   SharpenedSenses,
-  SignalDisruption,
   Thespian,
   Workshop,
 };
