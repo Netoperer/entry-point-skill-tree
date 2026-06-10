@@ -68,7 +68,7 @@ export function ModeCard({
 }) {
   return (
     <Card
-      className={`relative overflow-hidden group bg-card/40 border-border/40 hover:border-primary/50 transition-all duration-300 min-h-[300px] sm:min-h-[400px] flex flex-col ${!isReady ? "opacity-60 grayscale-[0.8]" : ""}`}
+      className={`relative overflow-hidden group bg-card/40 border-border/40 hover:border-primary/50 transition-all duration-300 min-h-[300px] md:min-h-[600px] flex flex-col ${!isReady ? "opacity-60 grayscale-[0.8]" : ""}`}
     >
       <img
         src={bgImage}
