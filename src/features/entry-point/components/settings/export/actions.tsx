@@ -4,14 +4,21 @@ import { downloadImage, copyImageToClipboard } from "./utils";
 import { useEntryPointStore } from "@/features/entry-point/store";
 import { selectUnlockedClassPerks } from "@/features/entry-point/store/selectors";
 import { selectExportUrl } from "@/features/entry-point/store/selectors/select-export-url";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { initCache } from "@/features/entry-point/config/image-cache";
 
 export function ExportActions() {
   const [copied, setCopied] = useState(false);
+  const isCacheInitialized = useEntryPointStore((s) => s.isCacheInitialized);
+  const setIsCacheInitialized = useEntryPointStore((s) => s.setIsCacheInitialized);
 
-  const unlockedNodes = useEntryPointStore((state) => state.unlockedNodes);
+  const unlockedNodes = useEntryPointStore((s) => s.unlockedNodes);
   const unlockedClassPerks = useEntryPointStore(selectUnlockedClassPerks);
   const exportUrl = useEntryPointStore(selectExportUrl);
+
+  useEffect(() => {
+    initCache().then(() => setIsCacheInitialized(true));
+  }, [setIsCacheInitialized]);
 
   const handleExport = () => {
     downloadImage(exportUrl, unlockedClassPerks, unlockedNodes.size);
@@ -32,6 +39,7 @@ export function ExportActions() {
         size="sm"
         className="h-8 text-[11px] font-bold uppercase tracking-tight"
         onClick={handleExport}
+        disabled={!isCacheInitialized}
       >
         <Download className="size-3 mr-1" />
         Save PNG
@@ -41,6 +49,7 @@ export function ExportActions() {
         size="sm"
         className="h-8 text-[11px] font-bold uppercase tracking-tight"
         onClick={handleCopy}
+        disabled={!isCacheInitialized}
       >
         {copied ? (
           <Check className="size-3 mr-1 text-green-500" />
