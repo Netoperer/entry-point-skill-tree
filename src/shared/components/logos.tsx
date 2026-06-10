@@ -9,7 +9,11 @@ export function GithubLogo() {
       asChild
       title="Source Code"
     >
-      <a href="https://github.com/ep-st/ep-st" target="_blank" rel="noreferrer">
+      <a
+        href="https://github.com/Netoperer/entry-point-skill-tree"
+        target="_blank"
+        rel="noreferrer"
+      >
         <svg
           viewBox="0 0 24 24"
           fill="none"
