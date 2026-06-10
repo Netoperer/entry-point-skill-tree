@@ -9,15 +9,15 @@ export default function RootNodeSelector() {
   const rootNode = useFreelancersCutStore((s) => s.rootNode);
   const setRootNode = useFreelancersCutStore((s) => s.setRootNode);
 
-  const rootNodes = Object.entries(RootNode).map(([name, id]) => ({
+  const rootNodes = Object.entries(RootNode).map(([_, id]) => ({
     name: PERK_ENTRIES[id].perk.name,
     icon: PERK_ENTRIES[id].perk.icon,
-    id: id as RootNode,
+    id,
   }));
 
   return (
     <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-md overflow-hidden">
-      <CardContent className="p-4">
+      <CardContent className="px-4">
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
             <div className="p-1 rounded bg-primary/10">
@@ -28,7 +28,7 @@ export default function RootNodeSelector() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 gap-1.5">
+          <div className="grid grid-cols-2 gap-1.5">
             {rootNodes.map((node) => (
               <button
                 key={node.id}
@@ -57,7 +57,7 @@ export default function RootNodeSelector() {
                 </div>
                 <span
                   className={cn(
-                    "text-[12px] font-bold flex-1",
+                    "text-[12px] font-bold flex-1 truncate",
                     rootNode === node.id
                       ? "text-foreground"
                       : "text-muted-foreground",
@@ -65,9 +65,6 @@ export default function RootNodeSelector() {
                 >
                   {node.name}
                 </span>
-                {rootNode === node.id && (
-                  <div className="size-1.5 rounded-full bg-primary animate-pulse" />
-                )}
               </button>
             ))}
           </div>
