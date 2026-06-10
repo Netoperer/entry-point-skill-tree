@@ -11,12 +11,11 @@ import { Link } from "react-router";
 
 export default function Home() {
   return (
-    <div className="h-screen w-full flex flex-col bg-background text-foreground">
-      <header className="h-[7vh] w-full border-b border-border/40 flex items-center px-6 sm:px-12 shrink-0 bg-background/50 backdrop-blur-md sticky">
-        <div className="flex justify-between w-full items-center max-w-500 mx-auto">
-          <div className="flex items-center gap-2.5 text-[10px] font-bold tracking-[0.25em] text-muted-foreground/50">
-            Skill Tree Editors for
-            <span className="text-primary/30 font-normal">/</span>
+    <div className="min-h-screen w-full flex flex-col bg-background text-foreground">
+      <header className="h-16 w-full border-b border-border/40 flex items-center px-6 sm:px-12 shrink-0 bg-background/50 backdrop-blur-md sticky top-0 z-50">
+        <div className="flex justify-between w-full items-center max-w-6xl mx-auto">
+          <div className="flex items-center gap-2.5 text-[10px] font-bold tracking-[0.25em] text-muted-foreground/50 truncate">
+            <span className="hidden sm:inline">Skill Tree Editors for</span>
             <span className="text-foreground/70">Entry Point</span>
             <span className="text-primary/30 font-normal">&</span>
             <span className="text-foreground/70">Freelancer's Cut</span>
@@ -28,9 +27,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 h-[86vh] mx-auto w-full max-w-5xl">
+      <main className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 mx-auto w-full max-w-5xl">
         <div className="w-full space-y-16 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
             <ModeCard
               title="Entry Point"
               to="/entry-point"
@@ -47,8 +46,8 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="h-[5vh] border-t border-border/40 px-6 sm:px-12 bg-background/50 items-center flex">
-        <div className="max-w-500 mx-auto flex justify-center items-center text-[10px] font-bold text-muted-foreground/30 tracking-widest">
+      <footer className="h-16 border-t border-border/40 px-6 sm:px-12 bg-background/50 items-center flex shrink-0">
+        <div className="max-w-5xl mx-auto flex justify-center items-center text-[10px] font-bold text-muted-foreground/30 tracking-widest text-center">
           This project is unofficial and has no association with Cishshato.
         </div>
       </footer>
@@ -69,7 +68,7 @@ export function ModeCard({
 }) {
   return (
     <Card
-      className={`relative overflow-hidden group bg-card/40 border-border/40 hover:border-primary/50 transition-all duration-300 min-h-150 flex flex-col ${!isReady ? "opacity-60 grayscale-[0.8]" : ""}`}
+      className={`relative overflow-hidden group bg-card/40 border-border/40 hover:border-primary/50 transition-all duration-300 min-h-[300px] sm:min-h-[400px] flex flex-col ${!isReady ? "opacity-60 grayscale-[0.8]" : ""}`}
     >
       <img
         src={bgImage}
