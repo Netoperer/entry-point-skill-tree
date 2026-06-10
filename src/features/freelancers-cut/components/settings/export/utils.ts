@@ -67,7 +67,7 @@ export function renderTreeToCanvas(
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.scale(scale, scale);
-  ctx.translate(offsetX, offsetY); // Use translation to center
+  ctx.translate(offsetX, offsetY);
 
   if (withBackground) {
     ctx.fillStyle = "#0f1117";

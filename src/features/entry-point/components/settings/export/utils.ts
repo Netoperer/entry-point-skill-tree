@@ -53,7 +53,6 @@ export function renderTreeToCanvas(
     ctx.fillRect(0, 0, 700, 700);
   }
 
-  // Draw connections
   CONNECTIONS.forEach(([id1, id2]) => {
     const perk1 = PERK_ENTRIES[id1];
     const perk2 = PERK_ENTRIES[id2];
@@ -69,7 +68,6 @@ export function renderTreeToCanvas(
     ctx.stroke();
   });
 
-  // Draw perks using cache
   const entries = Object.entries(PERK_ENTRIES);
   for (const [id, entry] of entries) {
     const image = imageCache.get(entry.perk.icon);
@@ -114,4 +112,3 @@ export async function copyImageToClipboard(dataUrl: string) {
     return false;
   }
 }
-
