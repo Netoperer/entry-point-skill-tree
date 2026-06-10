@@ -1,9 +1,18 @@
 import { useEntryPointStore } from "@/features/entry-point/store";
 import { selectExportUrl } from "@/features/entry-point/store/selectors/select-export-url";
 import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
+import { initCache } from "@/features/entry-point/config/image-cache";
 
 export function ExportPreview() {
   const exportUrl = useEntryPointStore(selectExportUrl);
+  const setIsCacheInitialized = useEntryPointStore(
+    (s) => s.setIsCacheInitialized,
+  );
+
+  useEffect(() => {
+    initCache().then(() => setIsCacheInitialized(true));
+  }, [setIsCacheInitialized]);
 
   return (
     <div className="relative aspect-square w-full rounded-lg overflow-hidden border border-border/50 bg-muted/20 group/preview flex items-center justify-center animate-in fade-in zoom-in-95 duration-200">
@@ -31,4 +40,3 @@ export function ExportPreview() {
     </div>
   );
 }
-

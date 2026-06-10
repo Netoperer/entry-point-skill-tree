@@ -1,13 +1,21 @@
 import { useFreelancersCutStore } from "@/features/freelancers-cut/store";
 import { selectExportUrl } from "@/features/freelancers-cut/store/selectors/select-export-url";
 import { Loader2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { initCache } from "@/features/freelancers-cut/config/image-cache";
 
 export function ExportPreview() {
   const exportUrl = useFreelancersCutStore(selectExportUrl);
+  const isCacheInitialized = useFreelancersCutStore((s) => s.isCacheInitialized);
+  const setIsCacheInitialized = useFreelancersCutStore((s) => s.setIsCacheInitialized);
+
+  useEffect(() => {
+    initCache().then(() => setIsCacheInitialized(true));
+  }, [setIsCacheInitialized]);
 
   return (
     <div className="relative aspect-square w-full rounded-lg overflow-hidden border border-border/50 bg-muted/20 group/preview flex items-center justify-center animate-in fade-in zoom-in-95 duration-200">
-      {exportUrl ? (
+      {isCacheInitialized && exportUrl ? (
         <>
           <img
             src={exportUrl}
