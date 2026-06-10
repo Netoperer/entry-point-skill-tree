@@ -9,7 +9,7 @@ export default function PerkLimit() {
 
   return (
     <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-md overflow-hidden">
-      <CardContent className="p-4">
+      <CardContent className="px-4">
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -26,7 +26,7 @@ export default function PerkLimit() {
                 {perkLimit}
               </span>
               <div className="flex gap-1">
-                {[25, 40, 50, 75, 100].map((val) => (
+                {[50].map((val) => (
                   <button
                     key={val}
                     onClick={() => setPerkLimit(val)}
@@ -47,7 +47,7 @@ export default function PerkLimit() {
           <input
             type="range"
             min="1"
-            max="100"
+            max="50"
             value={perkLimit}
             onChange={(e) => setPerkLimit(parseInt(e.target.value))}
             className="w-full h-1.5 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"

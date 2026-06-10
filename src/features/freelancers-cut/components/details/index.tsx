@@ -5,18 +5,20 @@ import ClassPlaceholder from "./class-placeholder";
 
 export default function Details() {
   return (
-    <div className="flex w-full flex-col gap-4 p-1">
-      <div className="flex flex-row gap-3 items-stretch">
-        <div className="flex-1">
+    <div className="flex w-full flex-col gap-4 p-1 h-full">
+      <div className="flex w-full flex-col lg:flex-row items-start gap-3 2xl:gap-4">
+        {/* Left Side: Class and Majors */}
+        <div className="lg:w-7/11 w-full flex flex-col gap-4">
           <ClassPlaceholder />
+          <MajorPerksDetails />
         </div>
-        <div className="w-1/3 min-w-[100px]">
+
+        {/* Right Side: PerkCount and Minors */}
+        <div className="w-full flex-1 flex flex-col gap-4">
           <PerkCount />
+          <MinorPerksDetails />
         </div>
       </div>
-
-      <MajorPerksDetails />
-      <MinorPerksDetails />
     </div>
   );
 }

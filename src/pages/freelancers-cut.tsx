@@ -1,5 +1,6 @@
 import Editor from "@/features/freelancers-cut/components/editor";
 import Sidebar from "@/features/freelancers-cut/components/sidebar";
+import { URLSync } from "@/features/freelancers-cut/components/url-sync";
 import Header from "@/shared/components/header";
 import { Card } from "@/shared/components/ui/card";
 
@@ -7,7 +8,7 @@ export default function FreelancersCut() {
   return (
     <div className="xl:h-screen xl:w-screen flex flex-col items-center justify-center overflow-hidden bg-background selection:bg-primary/30">
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_50%)] pointer-events-none" />
-      {/* <URLSync /> */}
+      <URLSync />
 
       <Header title={"Entry Point: Freelancer's Cut Skill Tree Editor"} />
 
