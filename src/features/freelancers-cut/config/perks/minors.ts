@@ -31,7 +31,7 @@ const Conditioning: Perk = {
 } as const;
 
 const CriticalInsights: Perk = {
-  name: "Data CriticalInsights",
+  name: "Critical Insights",
   perkType: PerkType.Minor,
   icon: DataCompressionIcon,
   description: multiplicativeAbility(

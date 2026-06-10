@@ -1,4 +1,5 @@
 import Editor from "@/features/freelancers-cut/components/editor";
+import Sidebar from "@/features/freelancers-cut/components/sidebar";
 import Header from "@/shared/components/header";
 import { Card } from "@/shared/components/ui/card";
 
@@ -16,7 +17,7 @@ export default function FreelancersCut() {
         </Card>
 
         <div className="flex-1 h-full min-w-0 overflow-hidden flex flex-col w-full lg:max-w-220">
-          {/* <Sidebar /> */}
+          <Sidebar />
         </div>
       </main>
 
