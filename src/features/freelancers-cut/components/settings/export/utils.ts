@@ -33,6 +33,7 @@ export function renderTreeToCanvas(
   canvas: HTMLCanvasElement,
   unlockedNodes: Set<string>,
   withBackground: boolean,
+  withMajorPerks: boolean,
   imageCache: Map<string, HTMLImageElement>,
 ) {
   const scale = 2;
@@ -54,6 +55,19 @@ export function renderTreeToCanvas(
   const treeWidth = maxX - minX;
   const treeHeight = maxY - minY;
 
+  const unlockedMajorsMap = new Map<string, number>();
+  if (withMajorPerks) {
+    for (const node of unlockedNodes) {
+      const entry = PERK_ENTRIES[node];
+      if (entry?.perk.perkType === PerkType.Major) {
+        unlockedMajorsMap.set(
+          entry.perk.name,
+          (unlockedMajorsMap.get(entry.perk.name) ?? 0) + 1,
+        );
+      }
+    }
+  }
+
   canvas.width = (treeWidth + padding) * scale;
   canvas.height = (treeHeight + padding) * scale;
 
@@ -67,17 +81,14 @@ export function renderTreeToCanvas(
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.scale(scale, scale);
-  ctx.translate(offsetX, offsetY);
 
   if (withBackground) {
-    ctx.fillStyle = "#0f1117";
-    ctx.fillRect(
-      minX - padding / 2,
-      minY - padding / 2,
-      treeWidth + padding,
-      treeHeight + padding,
-    );
+    ctx.fillStyle = "#1a1a1a";
+    ctx.fillRect(0, 0, canvas.width / scale, canvas.height / scale);
   }
+
+  ctx.save();
+  ctx.translate(offsetX, offsetY);
 
   // Draw connections
   CONNECTIONS.forEach(([id1, id2]) => {
@@ -101,11 +112,11 @@ export function renderTreeToCanvas(
     const image = imageCache.get(entry.perk.icon);
     if (!image) continue;
 
-    ctx.filter = unlockedNodes.has(id)
-      ? "none"
-      : "brightness(30%) saturate(30%)";
+    const isUnlocked = unlockedNodes.has(id);
+    ctx.filter = isUnlocked ? "none" : "brightness(30%) saturate(30%)";
 
-    const size = entry.perk.perkType === PerkType.Major ? 15 : 9;
+    const isMajor = entry.perk.perkType === PerkType.Major;
+    const size = isMajor ? 15 : 9;
     const x = entry.position.x;
     const y = entry.position.y;
 
@@ -116,7 +127,44 @@ export function renderTreeToCanvas(
     ctx.drawImage(image, x - size, y - size, size * 2, size * 2);
     ctx.restore();
   }
-  ctx.restore();
+  ctx.restore(); // Restore from translate(offsetX, offsetY)
+
+  // Reset filter for text!
+  ctx.filter = "none";
+
+  // Draw major perks list in the middle
+  if (withMajorPerks && unlockedMajorsMap.size > 0) {
+    const centerX = (treeWidth + padding) / 2;
+    const centerY = (treeHeight + padding) / 2;
+
+    ctx.save();
+    ctx.translate(centerX, centerY + 10);
+
+    const sortedMajors = Array.from(unlockedMajorsMap.entries()).sort(
+      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
+    );
+
+    const lineHeight = 9;
+    const totalHeight = sortedMajors.length * lineHeight;
+    let currentY = -totalHeight / 2;
+
+    sortedMajors.forEach(([name, count]) => {
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const text = `${name} ${count}`;
+
+      ctx.font = "600 8px 'Inter', system-ui, sans-serif";
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillText(text, 0, currentY);
+
+      currentY += lineHeight;
+    });
+
+    ctx.restore();
+  }
+
+  ctx.restore(); // Restore from scale/setTransform
 }
 
 export function downloadImage(dataUrl: string, unlockedCount: number) {

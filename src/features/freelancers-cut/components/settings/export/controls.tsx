@@ -1,12 +1,14 @@
 import { cn } from "@/shared/lib/utils";
 import { useFreelancersCutStore } from "@/features/freelancers-cut/store";
-import { Eye, EyeOff, Image as ImageIcon, ImageOff } from "lucide-react";
+import { Eye, EyeOff, Image as ImageIcon, ImageOff, List } from "lucide-react";
 
 export function ExportControls() {
   const showPreview = useFreelancersCutStore((s) => s.showPreview);
   const setShowPreview = useFreelancersCutStore((s) => s.setShowPreview);
   const withBackground = useFreelancersCutStore((s) => s.withBackground);
   const setWithBackground = useFreelancersCutStore((s) => s.setWithBackground);
+  const withMajorPerks = useFreelancersCutStore((s) => s.withMajorPerks);
+  const setWithMajorPerks = useFreelancersCutStore((s) => s.setWithMajorPerks);
 
   return (
     <div className="flex items-center gap-2">
@@ -25,6 +27,19 @@ export function ExportControls() {
         ) : (
           <EyeOff className="size-3" />
         )}
+      </button>
+
+      <button
+        onClick={() => setWithMajorPerks(!withMajorPerks)}
+        className={cn(
+          "p-1 rounded-md transition-all border border-border/50 bg-muted/30",
+          withMajorPerks
+            ? "text-primary hover:bg-muted/50"
+            : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
+        )}
+        title={withMajorPerks ? "Hide Major Perks" : "Show Major Perks"}
+      >
+        <List className="size-3" />
       </button>
 
       <div className="flex items-center gap-1 bg-muted/50 p-0.5 rounded-lg border border-border/50">
