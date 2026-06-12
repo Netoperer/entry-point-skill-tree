@@ -16,7 +16,10 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const url = new URL(request.url);
   const params = url.searchParams;
 
-  if (!url.pathname.startsWith("/freelancers-cut")) {
+  if (
+    !url.pathname.startsWith("/freelancers-cut") ||
+    url.pathname.includes("image")
+  ) {
     return next();
   }
 

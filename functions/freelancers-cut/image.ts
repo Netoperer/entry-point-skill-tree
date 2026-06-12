@@ -6,7 +6,7 @@ import type { PagesFunction } from "@cloudflare/workers-types";
 // @ts-ignore
 import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
 
-export const onRequest: PagesFunction = (async (context: any) => {
+export const onRequest: PagesFunction = async (context: any) => {
   const url = new URL(context.request.url);
   const unlockedPerksQuery = url.searchParams.get("unlocked");
 
@@ -28,11 +28,11 @@ export const onRequest: PagesFunction = (async (context: any) => {
         "X-Content-Type-Options": "nosniff",
         "Content-Length": png.byteLength.toString(),
       },
-    });
+    }) as any;
   } catch (err: any) {
     console.error("Image generation failed:", err);
     return new Response(`Image generation failed: ${err.message}`, {
       status: 500,
     });
   }
-}) as any;
+};
