@@ -29,7 +29,6 @@ export const onRequest: PagesFunction = (async (context: any) => {
         "Content-Length": png.byteLength.toString(),
       },
     });
-    }) as any;
   } catch (err: any) {
     console.error("Image generation failed:", err);
     return new Response(`Image generation failed: ${err.message}`, {
