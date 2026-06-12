@@ -11,24 +11,25 @@ export const onRequest: PagesFunction = (async (context: any) => {
   const unlockedPerksQuery = url.searchParams.get("unlocked");
 
   if (!unlockedPerksQuery) {
-    return new Response("Missing unlockedPerks", { status: 400 });
+    return new Response("Missing 'unlocked' parameter", { status: 400 });
   }
 
   try {
     const unlockedNodes = decode(unlockedPerksQuery);
     const imageCache = await loadServerImages(url.origin);
     const svg = renderTreeToSvg(unlockedNodes, imageCache);
-
+    
     const png = await svgToPng(svg, resvgWasm, 1200);
 
     return new Response(png as any, {
       headers: {
         "Content-Type": "image/png",
         "Cache-Control": "public, max-age=604800, immutable",
+        "X-Content-Type-Options": "nosniff",
       },
     }) as any;
-  } catch (err) {
+  } catch (err: any) {
     console.error("Image generation failed:", err);
-    return new Response("Internal Server Error", { status: 500 });
+    return new Response(`Image generation failed: ${err.message}`, { status: 500 });
   }
 }) as any;

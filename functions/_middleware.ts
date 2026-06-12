@@ -35,7 +35,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   const title = "Entry Point: Freelancer's Cut Skill Tree";
   const description = Array.from(unlockedMajorPerks.entries())
     .map(([perk, level]) => `${perk.name}: ${level}`)
-    .join(", ");
+    .join("\n");
 
   const imageUrl = new URL("/freelancers-cut/image", url.origin);
   imageUrl.searchParams.set("unlocked", unlockedPerksQuery);

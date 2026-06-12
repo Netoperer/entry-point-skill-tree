@@ -16,12 +16,12 @@ export async function loadServerImages(origin: string): Promise<Map<string, stri
       if (!response.ok) throw new Error(`Failed to fetch ${url}`);
       
       const arrayBuffer = await response.arrayBuffer();
-      const base64 = btoa(
-        new Uint8Array(arrayBuffer).reduce(
-          (data, byte) => data + String.fromCharCode(byte),
-          "",
-        )
-      );
+      const bytes = new Uint8Array(arrayBuffer);
+      let binary = "";
+      for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+      }
+      const base64 = btoa(binary);
       
       const mimeType = iconPath.endsWith(".png") ? "image/png" : "image/webp";
       const dataUrl = `data:${mimeType};base64,${base64}`;
