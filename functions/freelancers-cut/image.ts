@@ -18,10 +18,10 @@ export const onRequest: PagesFunction = (async (context: any) => {
     const unlockedNodes = decode(unlockedPerksQuery);
     const imageCache = await loadServerImages(url.origin);
     const svg = renderTreeToSvg(unlockedNodes, imageCache);
-    
+
     const png = await svgToPng(svg, resvgWasm, 1200);
 
-    return new Response(png as any, {
+    return new Response(png.buffer as any, {
       headers: {
         "Content-Type": "image/png",
         "Cache-Control": "public, max-age=604800, immutable",
@@ -30,6 +30,8 @@ export const onRequest: PagesFunction = (async (context: any) => {
     }) as any;
   } catch (err: any) {
     console.error("Image generation failed:", err);
-    return new Response(`Image generation failed: ${err.message}`, { status: 500 });
+    return new Response(`Image generation failed: ${err.message}`, {
+      status: 500,
+    });
   }
 }) as any;
