@@ -20,7 +20,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     return next();
   }
 
-  const unlockedPerksQuery = params.get("unlockedPerks");
+  const unlockedPerksQuery = params.get("unlocked");
 
   if (!unlockedPerksQuery) {
     return next();
@@ -38,7 +38,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
     .join(", ");
 
   const imageUrl = new URL("/freelancers-cut/image", url.origin);
-  imageUrl.searchParams.set("unlockedPerks", unlockedPerksQuery);
+  imageUrl.searchParams.set("unlocked", unlockedPerksQuery);
   const image = imageUrl.toString();
   const canonicalUrl = url.origin + url.pathname + url.search;
 
