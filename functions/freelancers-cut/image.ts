@@ -21,10 +21,7 @@ export const onRequest: PagesFunction = (async (context: any) => {
 
     const png = await svgToPng(svg, resvgWasm, 1200);
 
-    const blob = new Blob([png.buffer as ArrayBuffer], { type: "image/png" });
-    const image_url = URL.createObjectURL(blob);
-
-    return new Response(image_url, {
+    return new Response(png as unknown as BodyInit, {
       headers: {
         "Content-Type": "image/png",
         "Cache-Control": "public, max-age=604800, immutable",
