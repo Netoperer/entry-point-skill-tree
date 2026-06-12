@@ -54,7 +54,7 @@ export function renderTreeToSvg(
     
     // Fallback if image not in cache
     const imageElement = iconBase64 
-      ? `<image href="${iconBase64}" x="${x - size}" y="${y - size}" width="${size * 2}" height="${size * 2}" />`
+      ? `<image href="${iconBase64}" x="${x - size}" y="${y - size}" width="${size * 2}" height="${size * 2}" clip-path="url(#clip-${id})" />`
       : `<circle cx="${x}" cy="${y}" r="${size}" fill="${isUnlocked ? "white" : "#444"}" />`;
 
     return `
