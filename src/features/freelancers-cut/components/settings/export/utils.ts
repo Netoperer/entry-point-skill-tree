@@ -1,6 +1,7 @@
 import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
 import { CONNECTIONS } from "@/features/freelancers-cut/config/connections";
 import { PerkType } from "@/features/freelancers-cut/types";
+import { getUnlockedMajors } from "@/features/freelancers-cut/core/get-unlocked-majors";
 
 export async function preloadImages() {
   const imageCache = new Map<string, HTMLImageElement>();
@@ -54,19 +55,6 @@ export function renderTreeToCanvas(
 
   const treeWidth = maxX - minX;
   const treeHeight = maxY - minY;
-
-  const unlockedMajorsMap = new Map<string, number>();
-  if (withMajorPerks) {
-    for (const node of unlockedNodes) {
-      const entry = PERK_ENTRIES[node];
-      if (entry?.perk.perkType === PerkType.Major) {
-        unlockedMajorsMap.set(
-          entry.perk.name,
-          (unlockedMajorsMap.get(entry.perk.name) ?? 0) + 1,
-        );
-      }
-    }
-  }
 
   canvas.width = (treeWidth + padding) * scale;
   canvas.height = (treeHeight + padding) * scale;
@@ -129,30 +117,31 @@ export function renderTreeToCanvas(
   }
   ctx.restore(); // Restore from translate(offsetX, offsetY)
 
-  // Reset filter for text!
   ctx.filter = "none";
 
   // Draw major perks list in the middle
-  if (withMajorPerks && unlockedMajorsMap.size > 0) {
+  if (withMajorPerks) {
+    const unlockedMajors = getUnlockedMajors(unlockedNodes);
+
     const centerX = (treeWidth + padding) / 2;
     const centerY = (treeHeight + padding) / 2;
 
     ctx.save();
     ctx.translate(centerX, centerY + 10);
 
-    const sortedMajors = Array.from(unlockedMajorsMap.entries()).sort(
-      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
+    const sortedMajors = Array.from(unlockedMajors.entries()).sort(
+      (a, b) => b[1] - a[1] || a[0].name.localeCompare(b[0].name),
     );
 
     const lineHeight = 9;
     const totalHeight = sortedMajors.length * lineHeight;
     let currentY = -totalHeight / 2;
 
-    sortedMajors.forEach(([name, count]) => {
+    sortedMajors.forEach(([perk, count]) => {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      const text = `${name} ${count}`;
+      const text = `${perk.name} ${count}`;
 
       ctx.font = "600 8px 'Inter', system-ui, sans-serif";
       ctx.fillStyle = "#FFFFFF";
