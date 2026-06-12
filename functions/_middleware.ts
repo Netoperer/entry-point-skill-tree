@@ -1,8 +1,7 @@
 // functions/_middleware.ts
-import { initCache } from "@/features/freelancers-cut/config/image-cache";
 import { getUnlockedMajors } from "@/features/freelancers-cut/core/get-unlocked-majors";
 import { decode } from "@/shared/utils/compress-url";
-import { type PagesFunction, Response } from "@cloudflare/workers-types";
+import { type PagesFunction } from "@cloudflare/workers-types";
 
 function escapeHtml(unsafe: string) {
   return unsafe
@@ -57,5 +56,5 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   // Inject before </head>
   const modified = html.replace("</head>", `${metaTags}\n</head>`);
 
-  return new Response(modified);
+  return new Response(modified) as any;
 };
