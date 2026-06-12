@@ -59,8 +59,7 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   return new Response(modified, {
     headers: {
       ...Object.fromEntries(response.headers),
-      'content-type': 'text/html;charset=UTF-8',
+      "content-type": "text/html;charset=UTF-8",
     },
-  });
-};
+  }) as any;
 };
