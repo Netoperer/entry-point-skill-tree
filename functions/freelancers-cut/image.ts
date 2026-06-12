@@ -21,12 +21,14 @@ export const onRequest: PagesFunction = (async (context: any) => {
 
     const png = await svgToPng(svg, resvgWasm, 1200);
 
-    return new Response(new Uint8Array(png) as any, {
+    return new Response(png.buffer as ArrayBuffer, {
       headers: {
         "Content-Type": "image/png",
         "Cache-Control": "public, max-age=604800, immutable",
         "X-Content-Type-Options": "nosniff",
+        "Content-Length": png.byteLength.toString(),
       },
+    });
     }) as any;
   } catch (err: any) {
     console.error("Image generation failed:", err);
