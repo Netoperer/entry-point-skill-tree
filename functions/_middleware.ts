@@ -56,5 +56,11 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
   // Inject before </head>
   const modified = html.replace("</head>", `${metaTags}\n</head>`);
 
-  return new Response(modified) as any;
+  return new Response(modified, {
+    headers: {
+      ...Object.fromEntries(response.headers),
+      'content-type': 'text/html;charset=UTF-8',
+    },
+  });
+};
 };
