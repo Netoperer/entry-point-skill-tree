@@ -8,7 +8,7 @@ import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
 
 export const onRequest: PagesFunction = (async (context: any) => {
   const url = new URL(context.request.url);
-  const unlockedPerksQuery = url.searchParams.get("unlockedPerks");
+  const unlockedPerksQuery = url.searchParams.get("unlocked");
 
   if (!unlockedPerksQuery) {
     return new Response("Missing unlockedPerks", { status: 400 });
