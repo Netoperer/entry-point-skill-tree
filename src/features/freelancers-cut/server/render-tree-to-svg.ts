@@ -6,9 +6,12 @@ export function renderTreeToSvg(
   unlockedNodes: Set<string>,
   imageCache: Map<string, string>, // base64 images
 ): string {
-  const width = 640;
-  const height = 690;
-  const viewBox = "0 -20 640 690";
+  const padding = 40;
+  const originalWidth = 640;
+  const originalHeight = 690;
+  const width = originalWidth + padding * 2;
+  const height = originalHeight + padding * 2;
+  const viewBox = `0 0 ${width} ${height}`;
 
   const unlockedFilter = `
     <filter id="unlocked" x="-20%" y="-20%" width="140%" height="140%">
@@ -76,8 +79,10 @@ export function renderTreeToSvg(
         ${unlockedFilter}
         ${unlockedGrad}
       </defs>
-      ${connections}
-      ${nodes}
+      <g transform="translate(${padding}, ${padding + 20})">
+        ${connections}
+        ${nodes}
+      </g>
     </svg>
   `;
 }
