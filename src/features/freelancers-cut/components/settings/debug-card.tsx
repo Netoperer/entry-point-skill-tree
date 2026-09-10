@@ -6,7 +6,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";
-import { ItemSeparator } from "@/shared/components/ui/item";
 import { Switch } from "@/shared/components/ui/switch";
 
 function ToggleRow({
@@ -46,6 +45,7 @@ export function DebugCard() {
 					label="Show perk ids"
 					desc="Not implemented yet"
 					on={labels}
+					// biome-ignore lint/performance/noJsxPropsBind: no
 					onToggle={() => setLabels((v) => !v)}
 				/>
 				{/* <ItemSeparator /> */}

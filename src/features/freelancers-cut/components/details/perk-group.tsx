@@ -13,7 +13,7 @@ function DotLevelDisplay({ count }: { count: number }) {
 					key={level}
 					className={cn(
 						"size-1.5 rounded-full transition-all duration-300",
-						level <= count ? "bg-destructive" : "bg-primary/10",
+						level <= count ? "bg-destructive" : "bg-primary/50",
 					)}
 				/>
 			))}

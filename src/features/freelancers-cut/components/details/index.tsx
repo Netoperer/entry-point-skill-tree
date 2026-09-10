@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/performance/noJsxPropsBind: no */
 import { type Perk, PerkType } from "../../types";
 import { ClassCard } from "./class-card";
 import { PerkGroup } from "./perk-group";

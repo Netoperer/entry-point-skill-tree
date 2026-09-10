@@ -36,6 +36,7 @@ export function RootNodeSelector() {
 						<button
 							type="button"
 							key={node.id}
+							// biome-ignore lint/performance/noJsxPropsBind: no
 							onClick={() => setRootNode(node.id)}
 							className={cn(
 								"flex items-center gap-3 rounded-lg border px-3 py-2 text-left transition-all",

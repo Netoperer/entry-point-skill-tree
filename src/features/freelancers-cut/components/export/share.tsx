@@ -21,9 +21,7 @@ export function ShareCard() {
 					<Link2 className="size-4" />
 					Share build
 				</CardTitle>
-				<CardDescription>
-					Copy a link that encodes your current tree.
-				</CardDescription>
+				<CardDescription>Copy the link with the saved tree.</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<div className="flex items-center gap-2">
