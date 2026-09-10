@@ -7,3 +7,5 @@ export const Perks = {
 	...minors,
 	...majors,
 } as const;
+
+export type PerkKey = keyof typeof Perks;

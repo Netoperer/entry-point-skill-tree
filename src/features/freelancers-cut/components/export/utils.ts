@@ -166,10 +166,9 @@ export function renderTreeToCanvas(
 	ctx.restore(); // Restore from scale/setTransform
 }
 
-export function downloadImage(dataUrl: string, unlockedCount: number) {
-	const fileName = `freelancer-tree-${unlockedCount}.png`;
+export function downloadImage(dataUrl: string, filename: string) {
 	const link = document.createElement("a");
-	link.download = fileName;
+	link.download = filename;
 	link.href = dataUrl;
 	link.click();
 }

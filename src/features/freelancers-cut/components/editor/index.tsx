@@ -1,52 +1,42 @@
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
-import { CONNECTIONS } from "@/features/freelancers-cut/config/connections";
-import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
-import { ConnectionLine } from "./connection-line";
-import { FilterDefs } from "./filter-defs";
-import { PerkNode } from "./perk-node";
+import { Card } from "@/shared/components/ui/card";
+import { Controls } from "./controls";
+import { Tree } from "./tree";
 
 export function Editor() {
 	return (
-		<TransformWrapper
-			initialPositionX={0}
-			initialPositionY={0}
-			centerOnInit={true}
-			doubleClick={{ disabled: true }}
-			maxScale={3}
-			wheel={{ step: 0.001 }}
-			pinch={{ step: 0.001 }}
-			panning={{
-				excluded: ["image"],
-			}}
-		>
-			<TransformComponent
-				wrapperStyle={{
-					width: "100%",
-					height: "100%",
-				}}
-				contentStyle={{
-					width: "100%",
-					height: "100%",
+		<Card className="relative flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-border bg-card lg:min-h-0">
+			<div className="tactical-grid absolute inset-0" aria-hidden="true" />
+			<div
+				className="radial-vignette pointer-events-none absolute inset-0 z-10"
+				aria-hidden="true"
+			/>
+			<TransformWrapper
+				initialPositionX={0}
+				initialPositionY={0}
+				centerOnInit={true}
+				doubleClick={{ disabled: true }}
+				maxScale={3}
+				wheel={{ step: 0.001 }}
+				pinch={{ step: 0.001 }}
+				panning={{
+					excluded: ["image"],
 				}}
 			>
-				<svg
-					aria-label="Tree"
-					viewBox="0 -20 640 690"
-					className="h-full w-full select-none"
-					preserveAspectRatio="xMidYMid meet"
-					width="100%"
-					height="100%"
+				<Controls />
+				<TransformComponent
+					wrapperStyle={{
+						width: "100%",
+						height: "100%",
+					}}
+					contentStyle={{
+						width: "100%",
+						height: "100%",
+					}}
 				>
-					<FilterDefs />
-
-					{...CONNECTIONS.map((entries) => (
-						<ConnectionLine entries={entries} key={entries.join("-")} />
-					))}
-					{...Object.entries(PERK_ENTRIES).map(([id, perk]) => (
-						<PerkNode perkEntry={perk} id={id} key={`Perk_${id}`} />
-					))}
-				</svg>
-			</TransformComponent>
-		</TransformWrapper>
+					<Tree />
+				</TransformComponent>
+			</TransformWrapper>
+		</Card>
 	);
 }

@@ -1,21 +1,23 @@
-import { ClassPlaceholder } from "./class-placeholder";
-import { MajorPerksDetails } from "./majors";
-import { MinorPerksDetails } from "./minors";
-import { PerkCount } from "./perk-count";
+import { type Perk, PerkType } from "../../types";
+import { ClassCard } from "./class-card";
+import { PerkGroup } from "./perk-group";
+import { SelectedCard } from "./selected-card";
 
 export function Details() {
 	return (
-		<div className="flex h-full w-full flex-col gap-4 p-1">
-			<div className="flex w-full flex-col items-start gap-3 lg:flex-row 2xl:gap-4">
-				<div className="flex w-full flex-col gap-4 lg:w-7/11">
-					<ClassPlaceholder />
-					<MajorPerksDetails />
-				</div>
-
-				<div className="flex w-full flex-1 flex-col gap-4">
-					<PerkCount />
-					<MinorPerksDetails />
-				</div>
+		<div className="flex size-full flex-col gap-4">
+			<ClassCard />
+			<SelectedCard />
+			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
+				<PerkGroup
+					title="Major Perks"
+					perkFilter={(perk: Perk) => perk.perkType === PerkType.Major}
+					accent={true}
+				/>
+				<PerkGroup
+					title="Minor Perks"
+					perkFilter={(perk: Perk) => perk.perkType === PerkType.Minor}
+				/>
 			</div>
 		</div>
 	);
