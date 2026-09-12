@@ -25,12 +25,17 @@ export function PerkNode({ perkEntry, id }: Props) {
 	const setHoveredNode = useFreelancersCutStore(
 		(store) => store.setHoveredNode,
 	);
+	const isHighlighted = useFreelancersCutStore((store) =>
+		store.highlightedPerks.has(perkEntry.perk),
+	);
 
-	const filter = isSelected
-		? "url(#selected)"
-		: isUnlocked
-			? "url(#unlocked)"
-			: "url(#default)";
+	const filter = isHighlighted
+		? "url(#highlighted)"
+		: isSelected
+			? "url(#selected)"
+			: isUnlocked
+				? "url(#unlocked)"
+				: "url(#default)";
 
 	const size = sizeMap[perkEntry.perk.perkType] * 6;
 

@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/correctness/useUniqueElementIds: It is not using React's Id */
 export function FilterDefs() {
 	return (
 		<defs>
@@ -14,35 +13,76 @@ export function FilterDefs() {
 				</feComponentTransfer>
 			</filter>
 
-			<filter id="selected" x="-20%" y="-20%" width="140%" height="140%">
-				<feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur" />
-				<feFlood
-					floodColor="rgb(var(--primary))"
-					floodOpacity="0.8"
-					result="color"
+			<filter id="selected" colorInterpolationFilters="sRGB">
+				<feColorMatrix
+					in="SourceGraphic"
+					type="saturate"
+					values="1.5"
+					result="sat"
 				/>
-				<feComposite in="color" in2="blur" operator="in" result="glow" />
+				<feComponentTransfer in="sat" result="bright">
+					<feFuncR type="linear" slope="1.15" intercept="0.02" />
+					<feFuncG type="linear" slope="1.15" intercept="0.02" />
+					<feFuncB type="linear" slope="1.15" intercept="0.02" />
+				</feComponentTransfer>
+				<feFlood floodColor="#4765EB" floodOpacity="0.25" result="tint" />
+				<feComposite in="tint" in2="SourceAlpha" operator="in" result="tintClip" />
 				<feMerge>
-					<feMergeNode in="glow" />
-					<feMergeNode in="SourceGraphic" />
+					<feMergeNode in="bright" />
+					<feMergeNode in="tintClip" />
 				</feMerge>
 			</filter>
 
-			<filter id="unlocked" x="-20%" y="-20%" width="140%" height="140%">
-				<feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="blur" />
-				<feFlood floodColor="white" floodOpacity="0.3" result="color" />
-				<feComposite in="color" in2="blur" operator="in" result="glow" />
+			<filter id="highlighted" colorInterpolationFilters="sRGB">
+				<feColorMatrix
+					in="SourceGraphic"
+					type="saturate"
+					values="1.3"
+					result="sat"
+				/>
+				<feComponentTransfer in="sat" result="bright">
+					<feFuncR type="linear" slope="1.05" intercept="0.03" />
+					<feFuncG type="linear" slope="1.05" intercept="0.03" />
+					<feFuncB type="linear" slope="1.05" intercept="0.03" />
+				</feComponentTransfer>
+				<feFlood floodColor="#EF4444" floodOpacity="0.35" result="tint" />
+				<feComposite in="tint" in2="SourceAlpha" operator="in" result="tintClip" />
 				<feMerge>
-					<feMergeNode in="glow" />
-					<feMergeNode in="SourceGraphic" />
+					<feMergeNode in="bright" />
+					<feMergeNode in="tintClip" />
+				</feMerge>
+			</filter>
+
+			<filter id="unlocked" colorInterpolationFilters="sRGB">
+				<feColorMatrix
+					in="SourceGraphic"
+					type="saturate"
+					values="1.25"
+					result="sat"
+				/>
+				<feComponentTransfer in="sat" result="bright">
+					<feFuncR type="linear" slope="1.08" intercept="0.02" />
+					<feFuncG type="linear" slope="1.08" intercept="0.02" />
+					<feFuncB type="linear" slope="1.08" intercept="0.02" />
+				</feComponentTransfer>
+				<feFlood floodColor="#4765EB" floodOpacity="0.15" result="sheen" />
+				<feComposite
+					in="sheen"
+					in2="SourceAlpha"
+					operator="in"
+					result="sheenClip"
+				/>
+				<feMerge>
+					<feMergeNode in="bright" />
+					<feMergeNode in="sheenClip" />
 				</feMerge>
 			</filter>
 
 			<linearGradient id="unlockedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-				<stop offset="0%" stopColor="rgb(var(--primary))" stopOpacity="0.2" />
+				<stop offset="0%" stopColor="#4765EB" stopOpacity="0.2" />
 				<stop
 					offset="100%"
-					stopColor="rgb(var(--primary))"
+					stopColor="#4765EB"
 					stopOpacity="0.05"
 				/>
 			</linearGradient>

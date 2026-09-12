@@ -1,3 +1,12 @@
+import { Eye, EyeOff } from "lucide-react";
+import { useCallback } from "react";
+import { useNavigate } from "react-router";
+import {
+	Item,
+	ItemActions,
+	ItemContent,
+	ItemTitle,
+} from "@/shared/components/ui/item";
 import { cn } from "@/shared/lib/utils";
 import { Perks } from "../../config/perks";
 import { useFreelancersCutStore } from "../../store";
@@ -7,17 +16,97 @@ import { PerkIcon } from "../perk-icon";
 
 function DotLevelDisplay({ count }: { count: number }) {
 	return (
-		<div className="mt-1 flex gap-0.5">
+		<div className="flex justify-center gap-0.5">
+			{/** biome-ignore lint/style/noMagicNumbers: not really*/}
 			{[3, 2, 1].map((level) => (
 				<div
 					key={level}
 					className={cn(
 						"size-1.5 rounded-full transition-all duration-300",
-						level <= count ? "bg-destructive" : "bg-primary/50",
+						level <= count ? "bg-primary/80" : "bg-accent/20",
 					)}
 				/>
 			))}
 		</div>
+	);
+}
+
+function PerkHighlight({ perk }: { perk: Perk }) {
+	const isPerkHighlighted = useFreelancersCutStore((s) =>
+		s.highlightedPerks.has(perk),
+	);
+	const addHighlightedPerk = useFreelancersCutStore(
+		(s) => s.addHighlightedPerk,
+	);
+	const removeHighlightedPerk = useFreelancersCutStore(
+		(s) => s.removeHighlightedPerk,
+	);
+
+	const toggleHighlighted = useCallback(() => {
+		if (isPerkHighlighted) {
+			removeHighlightedPerk(perk);
+			return;
+		}
+
+		addHighlightedPerk(perk);
+	}, [addHighlightedPerk, removeHighlightedPerk, isPerkHighlighted, perk]);
+
+	if (isPerkHighlighted) {
+		return (
+			<Eye
+				size={16}
+				className="text-muted-foreground/50"
+				onClick={toggleHighlighted}
+			/>
+		);
+	}
+
+	return (
+		<EyeOff
+			size={16}
+			className="text-muted-foreground/20"
+			onClick={toggleHighlighted}
+		/>
+	);
+}
+
+function PerkItem({ perk, count }: { perk: Perk; count: number }) {
+	const owned = count > 0;
+	const setSelectetPerk = useFreelancersCutStore((s) => s.setSelectedPerk);
+
+	const navigate = useNavigate();
+
+	return (
+		<Item
+			variant="outline"
+			className={cn(
+				"flex items-center justify-center gap-2.5 rounded-lg border px-3 py-2",
+				owned
+					? "border-border/90 bg-accent/70"
+					: "border-border bg-secondary/20",
+			)}
+		>
+			<ItemContent className="flex h-7 justify-center">
+				<ItemTitle
+					className="flex min-w-0 flex-1 cursor-pointer truncate font-medium text-[13px] text-foreground"
+					// biome-ignore lint/performance/noJsxPropsBind: idc
+					onClick={(e) => {
+						setSelectetPerk(perk);
+					}}
+				>
+					<PerkIcon perk={perk} className="size-6 border-0" />
+					{perk.name}
+				</ItemTitle>
+			</ItemContent>
+			<ItemActions className={cn("flex justify-center font-mono text-[14px]")}>
+				<PerkHighlight perk={perk} />
+				{perk.perkType === PerkType.Major ? (
+					<DotLevelDisplay count={count} />
+				) : (
+					count
+				)}
+			</ItemActions>
+		</Item>
 	);
 }
 
@@ -40,7 +129,7 @@ export function PerkGroup({
 					<span
 						className={cn(
 							"h-4 w-1 rounded-full",
-							accent ? "bg-accent" : "bg-primary",
+							accent ? "bg-destructive" : "bg-primary",
 						)}
 					/>
 					<h2 className="font-semibold text-foreground text-sm">{title}</h2>
@@ -57,45 +146,7 @@ export function PerkGroup({
 					)
 					.map((perk) => {
 						const count = unlockedPerksMap.get(perk) ?? 0;
-						const owned = count > 0;
-
-						return (
-							<div
-								key={perk.name}
-								className={cn(
-									"flex items-center gap-2.5 rounded-lg border px-3 py-2",
-									owned
-										? "border-primary/40 bg-primary/10"
-										: "border-border bg-secondary/40",
-								)}
-							>
-								<span
-									className={cn(
-										"flex size-7 shrink-0 items-center justify-center rounded-md",
-										owned
-											? "bg-primary/20 text-primary"
-											: "bg-background/60 text-muted-foreground",
-									)}
-								>
-									<PerkIcon perk={perk} />
-								</span>
-								<span className="min-w-0 flex-1 truncate font-medium text-[13px] text-foreground">
-									{perk.name}
-								</span>
-								<span
-									className={cn(
-										"shrink-0 font-mono text-[12px]",
-										owned ? "text-destructive" : "text-muted-foreground/60",
-									)}
-								>
-									{perk.perkType === PerkType.Major ? (
-										<DotLevelDisplay count={count} />
-									) : (
-										count
-									)}
-								</span>
-							</div>
-						);
+						return <PerkItem count={count} key={perk.name} perk={perk} />;
 					})}
 			</div>
 		</div>

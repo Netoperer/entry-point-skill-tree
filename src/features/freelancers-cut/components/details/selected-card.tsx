@@ -1,67 +1,116 @@
-import { Check } from "lucide-react";
+import { X } from "lucide-react";
+import { useState } from "react";
+import { Badge } from "@/shared/components/ui/badge";
+import { Button } from "@/shared/components/ui/button";
+import {
+	Card,
+	CardAction,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
-import { PERK_ENTRIES } from "../../config/entries";
 import { useFreelancersCutStore } from "../../store";
-import { PerkType } from "../../types";
+import { selectUnlockedPerksMap } from "../../store/selectors/select-perks";
+import { type Perk, PerkType } from "../../types";
 import { PerkIcon } from "../perk-icon";
 
-export function SelectedCard() {
-	const selectedNode = useFreelancersCutStore((s) => s.selectedNode);
-	const isNodeUnlocked = useFreelancersCutStore(
-		(s) => selectedNode && s.unlockedNodes.has(selectedNode),
+function MajorPerkContent({ perk }: { perk: Perk }) {
+	const selectedPerkLevel = useFreelancersCutStore(
+		(s) => selectUnlockedPerksMap(s).get(perk) ?? 1,
 	);
+	const [perkLevel, setPerkLevel] = useState(selectedPerkLevel);
 
-	if (!selectedNode) {
-		return (
-			<div className="rounded-xl border border-border border-dashed bg-card/50 p-5 text-center">
-				<p className="text-muted-foreground text-sm">No perk selected.</p>
+	return (
+		<div className="space-y-2.5">
+			<div className="flex items-center gap-1.5">
+				<span className="pr-2 font-mono text-[10px] text-muted-foreground">
+					Level
+				</span>
+				{/** biome-ignore lint/style/noMagicNumbers: no */}
+				{[1, 2, 3].map((level) => (
+					<Button
+						key={level}
+						size="icon-xs"
+						variant={perkLevel === level ? "default" : "outline"}
+						// biome-ignore lint/performance/noJsxPropsBind: idc
+						onClick={() => {
+							setPerkLevel(level);
+						}}
+					>
+						{level}
+					</Button>
+				))}
 			</div>
+			<div key={perkLevel} className="text-muted-foreground leading-relaxed">
+				{perk.description(perkLevel - 1)}
+			</div>
+		</div>
+	);
+}
+
+export function SelectedCard() {
+	const selectedPerk = useFreelancersCutStore((s) => s.selectedPerk);
+	const selectedPerkLevel = useFreelancersCutStore((s) =>
+		selectedPerk ? (selectUnlockedPerksMap(s).get(selectedPerk) ?? 0) : 0,
+	);
+	const setSelectedPerk = useFreelancersCutStore((s) => s.setSelectedPerk);
+
+	if (!selectedPerk) {
+		return (
+			<Card className="border-2 border-border border-dashed bg-card/50 shadow-none">
+				<CardContent className="p-5 text-center">
+					<CardDescription>Click a perk below to select it </CardDescription>
+				</CardContent>
+			</Card>
 		);
 	}
 
-	const perk = PERK_ENTRIES[selectedNode];
-	const isMajor = perk.perk.perkType === PerkType.Major;
+	const isMajor = selectedPerk.perkType === PerkType.Major;
 
 	return (
-		<div className="rounded-xl border border-border bg-card p-4">
-			<div className="flex items-start gap-3">
-				<span
-					className={cn(
-						"flex size-11 shrink-0 items-center justify-center rounded-lg border",
-						isNodeUnlocked
-							? "border-primary/50 bg-primary/15 text-primary"
-							: "border-border bg-secondary text-muted-foreground",
-					)}
-				>
-					<PerkIcon perk={perk.perk} />
-				</span>
+		<Card size="sm" id="selected-card">
+			<CardHeader className="flex flex-row items-start gap-3">
+				<div className="rounded-lg border-2 border-card bg-primary/50 p-2">
+					<PerkIcon perk={selectedPerk} className="size-7 border-0" />
+				</div>
 				<div className="min-w-0 flex-1">
-					<h3 className="truncate font-semibold text-base text-foreground">
-						{perk.perk.name}
-					</h3>
+					<CardTitle className="truncate">{selectedPerk.name}</CardTitle>
 					<div className="mt-1 flex items-center gap-2">
-						<span
-							className={cn(
-								"rounded px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider",
-								isMajor
-									? "bg-accent/15 text-accent"
-									: "bg-secondary text-muted-foreground",
-							)}
+						<Badge
+							variant={isMajor ? "default" : "secondary"}
+							className="font-mono text-[10px] uppercase tracking-wider"
 						>
 							{isMajor ? "major" : "minor"}
-						</span>
-						{isNodeUnlocked && (
-							<span className="inline-flex items-center gap-1 font-mono text-[11px] text-primary">
-								<Check className="size-3" /> allocated
-							</span>
-						)}
+						</Badge>
+						<Badge variant="outline">{selectedPerkLevel} unlocked</Badge>
 					</div>
 				</div>
-			</div>
+				<CardAction className="flex items-center gap-1">
+					<Button
+						size="icon-xs"
+						variant="ghost"
+						className={cn("text-muted-foreground hover:text-foreground")}
+						// biome-ignore lint/performance/noJsxPropsBind: idc
+						onClick={() => {
+							setSelectedPerk(null);
+						}}
+					>
+						<X />
+					</Button>
+				</CardAction>
+			</CardHeader>
 
-			<p className="mt-3 text-muted-foreground text-sm leading-relaxed">
-				{perk.perk.description(1)}
-			</p>
-		</div>
+			<CardContent>
+				{isMajor ? (
+					<MajorPerkContent perk={selectedPerk} key={selectedPerk.name} />
+				) : (
+					<div className="text-muted-foreground leading-relaxed">
+						{selectedPerk.description(1)}
+					</div>
+				)}
+			</CardContent>
+		</Card>
 	);
 }

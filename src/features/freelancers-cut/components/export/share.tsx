@@ -12,7 +12,7 @@ import {
 
 export function ShareCard() {
 	const [copied, setCopied] = useState(false);
-	const location = useLocation();
+	useLocation();
 
 	return (
 		<Card className="border border-border">
@@ -26,13 +26,19 @@ export function ShareCard() {
 			<CardContent>
 				<div className="flex items-center gap-2">
 					<code className="flex-1 truncate rounded-md border border-border bg-background/60 px-3 py-2 font-mono text-muted-foreground text-xs">
-						{globalThis.location.href}/{location.pathname}/{location.search}
+						{globalThis.location.href}
 					</code>
 					<Button
 						size="sm"
 						// biome-ignore lint/performance/noJsxPropsBind: no
-						onClick={() => {
+						onClick={async () => {
 							setCopied(true);
+							await navigator.clipboard.write([
+								new ClipboardItem({
+									"text/plain": `${globalThis.location.href}`,
+								}),
+							]);
+
 							// biome-ignore lint/style/noMagicNumbers: no
 							setTimeout(() => setCopied(false), 1500);
 						}}

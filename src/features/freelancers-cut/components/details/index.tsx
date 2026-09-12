@@ -6,9 +6,11 @@ import { SelectedCard } from "./selected-card";
 
 export function Details() {
 	return (
-		<div className="flex size-full flex-col gap-4">
-			<ClassCard />
-			<SelectedCard />
+		<div className="flex size-full flex-col">
+			<div className="flex flex-col gap-4 bg-background pb-4">
+				<ClassCard />
+				<SelectedCard />
+			</div>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
 				<PerkGroup
 					title="Major Perks"
