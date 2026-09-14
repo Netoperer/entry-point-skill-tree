@@ -1,4 +1,4 @@
-import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
+import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
 import { type Perk, PerkType } from "@/features/freelancers-cut/types";
 
 export function getUnlockedMinors(

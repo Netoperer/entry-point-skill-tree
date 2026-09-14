@@ -1,5 +1,5 @@
-import { CONNECTIONS } from "@/features/freelancers-cut/config/connections";
-import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
+import { CONNECTIONS } from "@/features/freelancers-cut/config/perks/connections";
+import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
 import { getUnlockedMajors } from "@/features/freelancers-cut/core/get-unlocked-majors";
 import { PerkType } from "@/features/freelancers-cut/types";
 

@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { PERK_ENTRIES } from "../../config/entries";
+import { PERK_ENTRIES } from "../../config/perks/entries";
 import type { Perk } from "../../types";
 import type { StoreState } from "../index";
 

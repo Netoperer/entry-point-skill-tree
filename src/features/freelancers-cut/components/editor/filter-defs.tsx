@@ -26,7 +26,12 @@ export function FilterDefs() {
 					<feFuncB type="linear" slope="1.15" intercept="0.02" />
 				</feComponentTransfer>
 				<feFlood floodColor="#4765EB" floodOpacity="0.25" result="tint" />
-				<feComposite in="tint" in2="SourceAlpha" operator="in" result="tintClip" />
+				<feComposite
+					in="tint"
+					in2="SourceAlpha"
+					operator="in"
+					result="tintClip"
+				/>
 				<feMerge>
 					<feMergeNode in="bright" />
 					<feMergeNode in="tintClip" />
@@ -46,7 +51,12 @@ export function FilterDefs() {
 					<feFuncB type="linear" slope="1.05" intercept="0.03" />
 				</feComponentTransfer>
 				<feFlood floodColor="#EF4444" floodOpacity="0.35" result="tint" />
-				<feComposite in="tint" in2="SourceAlpha" operator="in" result="tintClip" />
+				<feComposite
+					in="tint"
+					in2="SourceAlpha"
+					operator="in"
+					result="tintClip"
+				/>
 				<feMerge>
 					<feMergeNode in="bright" />
 					<feMergeNode in="tintClip" />
@@ -80,11 +90,7 @@ export function FilterDefs() {
 
 			<linearGradient id="unlockedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
 				<stop offset="0%" stopColor="#4765EB" stopOpacity="0.2" />
-				<stop
-					offset="100%"
-					stopColor="#4765EB"
-					stopOpacity="0.05"
-				/>
+				<stop offset="100%" stopColor="#4765EB" stopOpacity="0.05" />
 			</linearGradient>
 		</defs>
 	);

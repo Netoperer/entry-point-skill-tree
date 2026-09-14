@@ -7,7 +7,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";
-import { PERK_ENTRIES } from "../../config/entries";
+import { PERK_ENTRIES } from "../../config/perks/entries";
 import { useFreelancersCutStore } from "../../store";
 import { RootNode } from "../../types";
 

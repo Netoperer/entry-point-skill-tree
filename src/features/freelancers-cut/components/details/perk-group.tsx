@@ -74,8 +74,6 @@ function PerkItem({ perk, count }: { perk: Perk; count: number }) {
 	const owned = count > 0;
 	const setSelectetPerk = useFreelancersCutStore((s) => s.setSelectedPerk);
 
-	const navigate = useNavigate();
-
 	return (
 		<Item
 			variant="outline"
@@ -90,7 +88,7 @@ function PerkItem({ perk, count }: { perk: Perk; count: number }) {
 				<ItemTitle
 					className="flex min-w-0 flex-1 cursor-pointer truncate font-medium text-[13px] text-foreground"
 					// biome-ignore lint/performance/noJsxPropsBind: idc
-					onClick={(e) => {
+					onClick={(_e) => {
 						setSelectetPerk(perk);
 					}}
 				>

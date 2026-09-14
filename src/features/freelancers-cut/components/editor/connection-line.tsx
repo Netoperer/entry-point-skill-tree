@@ -1,4 +1,4 @@
-import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
+import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
 import { useFreelancersCutStore } from "@/features/freelancers-cut/store";
 import { selectSelectedNodes } from "@/features/freelancers-cut/store/selectors/select-selected-nodes";
 
