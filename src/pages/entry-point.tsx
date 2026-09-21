@@ -2,15 +2,33 @@ import { Editor } from "@/features/entry-point/components/editor";
 import { Sidebar } from "@/features/entry-point/components/sidebar";
 import { UrlSync } from "@/features/entry-point/components/url-sync";
 import { Header } from "@/shared/components/header";
+import { cn } from "@/shared/lib/utils";
 
 function SkillTreeEditor() {
 	return (
-		<main className="mx-auto grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(360px,48svh)_minmax(0,1fr)] gap-3 px-3 py-4 md:px-6 lg:grid-cols-[minmax(0,1fr)_480px] lg:grid-rows-1 lg:gap-4 xl:grid-cols-[minmax(0,1fr)_540px] 2xl:grid-cols-[minmax(0,1fr)_600px]">
-			<div className="h-full min-h-0 lg:self-start">
+		<main
+			className={cn(
+				"mx-auto flex size-full min-h-0 flex-1 overflow-hidden",
+				"gap-3 px-3 py-4",
+				"max-w-full flex-col",
+				"md:px-6",
+				"lg:flex-row lg:gap-4",
+			)}
+		>
+			<div className="h-full min-h-0 flex-1 lg:self-start">
 				<Editor />
 			</div>
 
-			<Sidebar />
+			<div
+				className={cn(
+					"mx-auto flex h-full w-full flex-col gap-3",
+					"lg:w-120",
+					"xl:w-135",
+					"2xl:w-130",
+				)}
+			>
+				<Sidebar />
+			</div>
 		</main>
 	);
 }

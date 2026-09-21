@@ -17,7 +17,7 @@ export function ExportCard() {
 
 	return (
 		<Card className="overflow-hidden rounded-xl border border-border py-4 shadow-md transition-all md:backdrop-blur-md">
-			<CardHeader className="pb-3">
+			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Share className="size-4 text-primary" />
 					Export

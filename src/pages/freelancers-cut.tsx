@@ -3,15 +3,32 @@ import { Sidebar } from "@/features/freelancers-cut/components/sidebar";
 import { UrlSync } from "@/features/freelancers-cut/components/url-sync";
 import { Header } from "@/shared/components/header";
 import { Tabs, TabsContent } from "@/shared/components/ui/tabs";
+import { cn } from "@/shared/lib/utils";
 
 function SkillTreeEditor() {
 	return (
-		<main className="mx-auto grid min-h-0 flex-1 grid-cols-1 grid-rows-[minmax(360px,48svh)_minmax(0,1fr)] gap-3 lg:grid-cols-[minmax(0,1fr)_360px] lg:grid-rows-1 lg:gap-4 xl:grid-cols-[minmax(0,1fr)_420px] 2xl:grid-cols-[minmax(0,1fr)_460px]">
-			<div className="h-full min-h-0 lg:self-start">
+		<main
+			className={cn(
+				"mx-auto flex size-full min-h-0 flex-1 overflow-hidden",
+				"gap-3",
+				"w-full flex-col",
+				"lg:flex-row lg:gap-4",
+			)}
+		>
+			<div className="h-full min-h-0 flex-1 lg:self-start">
 				<Editor />
 			</div>
 
-			<Sidebar />
+			<div
+				className={cn(
+					"mx-auto flex h-full w-full flex-col gap-3",
+					"lg:w-100",
+					"xl:w-115",
+					"2xl:w-120",
+				)}
+			>
+				<Sidebar />
+			</div>
 		</main>
 	);
 }

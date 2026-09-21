@@ -23,7 +23,7 @@ export function ExportPreview() {
 					height="100%"
 					src={exportUrl}
 					alt="Tree Preview"
-					className="h-full w-full object-contain"
+					className="h-full w-full rounded-xl object-contain"
 				/>
 			) : (
 				<div className="flex flex-col items-center gap-2 text-muted-foreground">

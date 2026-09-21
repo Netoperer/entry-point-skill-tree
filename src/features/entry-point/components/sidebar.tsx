@@ -39,34 +39,32 @@ const TABS = [
 
 export function Sidebar() {
 	return (
-		<div className="mx-auto flex h-full w-full flex-col gap-3">
-			<Tabs
-				defaultValue="details"
-				className="flex h-full min-h-0 w-full flex-1 flex-col gap-3"
-			>
-				<TabsList className="h-10 w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md xl:h-12">
-					{TABS.map((tab) => (
-						<TabsTrigger
-							key={tab.value}
-							value={tab.value}
-							className="rounded-lg font-bold text-sm transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md"
-						>
-							{tab.icon}
-							{tab.label}
-						</TabsTrigger>
-					))}
-				</TabsList>
-
+		<Tabs
+			defaultValue="details"
+			className="flex h-full min-h-0 w-full flex-1 flex-col gap-3"
+		>
+			<TabsList className="h-10 w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md xl:h-12">
 				{TABS.map((tab) => (
-					<TabsContent
+					<TabsTrigger
 						key={tab.value}
 						value={tab.value}
-						className="scrollbar-none min-h-0 flex-1 overflow-y-auto rounded-lg outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+						className="rounded-lg font-bold text-sm transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md"
 					>
-						<div className="h-full">{tab.component}</div>
-					</TabsContent>
+						{tab.icon}
+						{tab.label}
+					</TabsTrigger>
 				))}
-			</Tabs>
-		</div>
+			</TabsList>
+
+			{TABS.map((tab) => (
+				<TabsContent
+					key={tab.value}
+					value={tab.value}
+					className="scrollbar-none min-h-0 flex-1 overflow-y-auto rounded-lg outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+				>
+					<div className="h-full">{tab.component}</div>
+				</TabsContent>
+			))}
+		</Tabs>
 	);
 }

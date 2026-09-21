@@ -9,7 +9,7 @@ import { PerkNode } from "./perk-node";
 
 export function Editor() {
 	return (
-		<Card className="relative flex h-full min-h-0 flex-1 flex-col gap-0 overflow-hidden rounded-xl border border-border bg-card py-2 lg:min-h-0">
+		<Card className="relative flex h-full flex-1 flex-col gap-0 overflow-hidden rounded-xl border border-border bg-card py-2">
 			<div className="tactical-grid absolute inset-0" aria-hidden="true" />
 
 			<TransformWrapper

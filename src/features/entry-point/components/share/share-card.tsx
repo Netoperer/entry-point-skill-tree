@@ -14,7 +14,7 @@ export function ShareCard() {
 
 	return (
 		<Card className="border border-border">
-			<CardHeader className="pb-3">
+			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Link2 className="size-4" />
 					Share build

@@ -8,7 +8,7 @@ export function Details() {
 			<div className="pb-4">
 				<ClassDetails />
 			</div>
-			<div className="flex gap-4">
+			<div className="flex flex-col gap-4 lg:flex-row">
 				<div className="min-w-0 flex-1">
 					<MinorPerksDetails />
 				</div>
