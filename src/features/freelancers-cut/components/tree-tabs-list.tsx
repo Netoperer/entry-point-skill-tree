@@ -1,15 +1,22 @@
 import { TabsList, TabsTrigger } from "@/shared/components/ui/tabs";
+import { cn } from "@/shared/lib/utils";
 
 const TABS = [
 	{
 		key: "skill",
 		imgSrc: "/freelancers-cut/skill-tree.png",
 		displayText: "Skill Tree",
+		disabled: false,
 	},
 	{
 		key: "combat",
 		imgSrc: "/freelancers-cut/combat-tree.png",
-		displayText: "Combat Tree",
+		displayText: (
+			<div className="flex items-center gap-1">
+				Combat Tree <span className="text-[10px] text-gray-50">(soon)</span>
+			</div>
+		),
+		disabled: true,
 	},
 ];
 
@@ -20,9 +27,12 @@ export function TreeTabsList() {
 				<TabsTrigger
 					key={tab.key}
 					value={tab.key}
-					className="rounded-lg font-bold text-sm transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md"
+					disabled={tab.disabled}
+					className={cn(
+						"rounded-lg font-bold text-sm transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md",
+					)}
 				>
-					<img src={tab.imgSrc} alt={tab.displayText} width={24} height={24} />
+					<img src={tab.imgSrc} alt="icon" width={24} height={24} />
 					{tab.displayText}
 				</TabsTrigger>
 			))}

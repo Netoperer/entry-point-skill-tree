@@ -1,4 +1,3 @@
-import { cn } from "cn";
 import { Route } from "lucide-react";
 import {
 	Card,
@@ -7,6 +6,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";
+import { cn } from "@/shared/lib/utils";
 import { PERK_ENTRIES } from "../../config/perks/entries";
 import { useFreelancersCutStore } from "../../store";
 import { RootNode } from "../../types";
