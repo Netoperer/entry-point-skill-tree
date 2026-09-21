@@ -8,6 +8,7 @@ import {
 import { Details } from "./details/index";
 import { Export } from "./export";
 import { Settings } from "./settings";
+import { TreeTabsList } from "./tree-tabs-list";
 
 const TABS = [
 	{
@@ -35,7 +36,9 @@ const TABS = [
 
 export function Sidebar() {
 	return (
-		<div className="mx-auto flex h-full w-full flex-col">
+		<div className="mx-auto flex h-full w-full flex-col gap-3">
+			<TreeTabsList />
+
 			<Tabs
 				defaultValue="details"
 				className="flex h-full min-h-0 w-full flex-1 flex-col gap-3"
@@ -57,7 +60,7 @@ export function Sidebar() {
 					<TabsContent
 						key={tab.key}
 						value={tab.value}
-						className="scrollbar-none min-h-0 flex-1 overflow-y-auto outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+						className="scrollbar-none min-h-0 flex-1 overflow-y-auto rounded-lg outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
 					>
 						<div className="h-full">{tab.component}</div>
 					</TabsContent>

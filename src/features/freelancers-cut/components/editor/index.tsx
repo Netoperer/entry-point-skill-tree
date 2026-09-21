@@ -5,8 +5,8 @@ import { Tree } from "./tree";
 
 export function Editor() {
 	return (
-		<Card className="relative flex h-full min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-border bg-card lg:min-h-0">
-			<div className="tactical-grid absolute inset-0" aria-hidden="true" />
+		<Card className="relative flex h-full min-h-0 flex-1 flex-col gap-0 overflow-hidden rounded-xl border border-border bg-card py-2 lg:min-h-0">
+			{/* <div className="tactical-grid absolute inset-0" aria-hidden="true" /> */}
 			<div
 				className="radial-vignette pointer-events-none absolute inset-0 z-10"
 				aria-hidden="true"
@@ -16,7 +16,7 @@ export function Editor() {
 				initialPositionY={0}
 				centerOnInit={true}
 				doubleClick={{ disabled: true }}
-				maxScale={3}
+				maxScale={4}
 				wheel={{ step: 0.001 }}
 				pinch={{ step: 0.001 }}
 				panning={{
