@@ -1,8 +1,5 @@
-/** biome-ignore-all lint/performance/noJsxPropsBind: maybe some day */
-
 import { Check, Copy, Download } from "lucide-react";
-import { useEffect, useState } from "react";
-import { initCache } from "@/features/entry-point/config/image-cache";
+import { useState } from "react";
 import { EXPORT_COPY_DEBOUNCE_MS } from "@/features/entry-point/constants";
 import { useEntryPointStore } from "@/features/entry-point/store";
 import { selectExportUrl } from "@/features/entry-point/store/selectors/select-export-url";
@@ -13,17 +10,10 @@ import { copyImageToClipboard, downloadImage } from "./utils";
 export function ExportActions() {
 	const [copied, setCopied] = useState(false);
 	const isCacheInitialized = useEntryPointStore((s) => s.isCacheInitialized);
-	const setIsCacheInitialized = useEntryPointStore(
-		(s) => s.setIsCacheInitialized,
-	);
 
 	const unlockedNodes = useEntryPointStore((s) => s.unlockedNodes);
 	const unlockedClassPerks = useEntryPointStore(selectUnlockedClassPerks);
 	const exportUrl = useEntryPointStore(selectExportUrl);
-
-	useEffect(() => {
-		initCache().then(() => setIsCacheInitialized(true));
-	}, [setIsCacheInitialized]);
 
 	const handleExport = () => {
 		downloadImage(exportUrl, unlockedClassPerks, unlockedNodes.size);
@@ -44,6 +34,7 @@ export function ExportActions() {
 				variant="outline"
 				size="sm"
 				className="h-8 font-bold text-[11px] uppercase tracking-tight"
+				// biome-ignore lint/performance/noJsxPropsBind: it's fine
 				onClick={handleExport}
 				disabled={!isCacheInitialized}
 			>
@@ -54,6 +45,7 @@ export function ExportActions() {
 				variant="outline"
 				size="sm"
 				className="h-8 font-bold text-[11px] uppercase tracking-tight"
+				// biome-ignore lint/performance/noJsxPropsBind: it's fine
 				onClick={handleCopy}
 				disabled={!isCacheInitialized}
 			>

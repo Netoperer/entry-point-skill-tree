@@ -3,11 +3,17 @@ import {
 	type StoreState,
 	useEntryPointStore,
 } from "@/features/entry-point/store";
-import { Card, CardContent } from "@/shared/components/ui/card";
-import { cn } from "@/shared/lib/utils";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+} from "@/shared/components/ui/card";
+import { Switch } from "@/shared/components/ui/switch";
 
 interface DebugOption {
 	label: string;
+	desc: string;
 	selectValue: (s: StoreState) => boolean;
 	selectSetter: (s: StoreState) => (value: boolean) => void;
 }
@@ -15,55 +21,39 @@ interface DebugOption {
 const DEBUG_OPTIONS: DebugOption[] = [
 	{
 		label: "Show Node IDs",
+		desc: "Display node identifiers on the tree",
 		selectValue: (s) => s.showNodeIds,
 		selectSetter: (s) => s.setShowNodeIds,
 	},
 ];
 
-function DebugToggle({ option }: { option: DebugOption }) {
+function ToggleRow({ option }: { option: DebugOption }) {
 	const checked = useEntryPointStore(option.selectValue);
 	const setChecked = useEntryPointStore(option.selectSetter);
 
 	return (
-		<div className="flex h-10 items-center justify-between">
-			<span className="font-bold text-[13px] text-foreground/90">
-				{option.label}
-			</span>
-			<button
-				type="button"
-				// biome-ignore lint/performance/noJsxPropsBind: It's insignificant
-				onClick={() => setChecked(!checked)}
-				className={cn(
-					"relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200",
-					checked ? "bg-primary" : "bg-input",
-				)}
-			>
-				<span
-					className={cn(
-						"pointer-events-none inline-block size-4 rounded-full bg-background shadow-sm ring-0 transition-transform duration-200",
-						checked ? "translate-x-4" : "translate-x-0",
-					)}
-				/>
-			</button>
+		<div className="flex items-center justify-between gap-4 py-3">
+			<div className="min-w-0">
+				<p className="font-medium text-sm">{option.label}</p>
+				<p className="text-muted-foreground text-xs">{option.desc}</p>
+			</div>
+			<Switch checked={checked} onCheckedChange={setChecked} />
 		</div>
 	);
 }
 
 export function DebugSettings() {
 	return (
-		<Card className="gap-0 overflow-hidden rounded-xl border-border/50 bg-card/60 py-3 shadow-md ring-1 ring-primary/5 transition-all hover:ring-primary/10 md:backdrop-blur-md">
-			<CardContent className="flex flex-col px-4 py-0">
-				<div className="flex h-8 items-center gap-2">
-					<div className="rounded bg-secondary/10 p-1">
-						<Bug className="size-4 text-primary" />
-					</div>
-					<span className="font-bold text-[13px] text-foreground/90">
-						Debug
-					</span>
-				</div>
-
+		<Card className="border border-border">
+			<CardHeader className="pb-3">
+				<CardTitle className="flex items-center gap-2">
+					<Bug className="size-4" />
+					Debug
+				</CardTitle>
+			</CardHeader>
+			<CardContent className="space-y-1">
 				{DEBUG_OPTIONS.map((option) => (
-					<DebugToggle key={option.label} option={option} />
+					<ToggleRow key={option.label} option={option} />
 				))}
 			</CardContent>
 		</Card>

@@ -1,4 +1,4 @@
-import { LayoutGrid, Settings2, Wrench } from "lucide-react";
+import { Download, LayoutGrid, Settings2, Wrench } from "lucide-react";
 import {
 	Tabs,
 	TabsContent,
@@ -8,57 +8,62 @@ import {
 import { Builder } from "./builder";
 import { Details } from "./details";
 import { Settings } from "./settings";
+import { Share } from "./share";
 
 const TABS = [
 	{
 		value: "details",
 		label: "Details",
-		icon: LayoutGrid,
-		component: Details,
+		icon: <LayoutGrid className="mr-2 size-4" />,
+		component: <Details />,
 	},
 	{
 		value: "builder",
 		label: "Builder",
-		icon: Wrench,
-		component: Builder,
+		icon: <Wrench className="mr-2 size-4" />,
+		component: <Builder />,
+	},
+	{
+		value: "share",
+		label: "Share",
+		icon: <Download className="mr-2 size-4" />,
+		component: <Share />,
 	},
 	{
 		value: "settings",
 		label: "Settings",
-		icon: Settings2,
-		component: Settings,
+		icon: <Settings2 className="mr-2 size-4" />,
+		component: <Settings />,
 	},
 ];
 
 export function Sidebar() {
 	return (
-		<div className="mx-auto flex h-full w-full flex-col">
+		<div className="mx-auto flex h-full w-full flex-col gap-3">
 			<Tabs
 				defaultValue="details"
 				className="flex h-full min-h-0 w-full flex-1 flex-col gap-3"
 			>
 				<TabsList className="h-10 w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md xl:h-12">
-					{TABS.map(({ value, label, icon: Icon }) => (
+					{TABS.map((tab) => (
 						<TabsTrigger
-							key={value}
-							value={value}
-							className="rounded-lg font-bold text-sm transition-all duration-300 data-active:bg-primary data-active:text-primary-foreground data-active:shadow-md"
+							key={tab.value}
+							value={tab.value}
+							className="rounded-lg font-bold text-sm transition-all duration-300 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md"
 						>
-							<Icon className="mr-2 size-4" />
-							{label}
+							{tab.icon}
+							{tab.label}
 						</TabsTrigger>
 					))}
 				</TabsList>
 
-				{TABS.map(({ value, component: Component }) => (
+				{TABS.map((tab) => (
 					<TabsContent
-						key={value}
-						value={value}
-						className="scrollbar-none min-h-0 flex-1 overflow-y-auto outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+						key={tab.value}
+						value={tab.value}
+						className="scrollbar-none min-h-0 flex-1 overflow-y-auto rounded-lg outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
 					>
-						<div className="h-full">
-							<Component />
-						</div>
+						<div className="h-full">{tab.component}</div>
 					</TabsContent>
 				))}
 			</Tabs>

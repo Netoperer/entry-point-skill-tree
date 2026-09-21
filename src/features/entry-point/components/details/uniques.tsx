@@ -1,16 +1,20 @@
 import { uniques } from "@/features/entry-point/config/perks/uniques";
 import { useEntryPointStore } from "@/features/entry-point/store";
 import type { Perk } from "@/features/entry-point/types";
-import { Card, CardContent, CardHeader } from "@/shared/components/ui/card";
+import {
+	Card,
+	CardContent,
+	CardHeader,
+	CardTitle,
+} from "@/shared/components/ui/card";
 import { Item, ItemContent, ItemTitle } from "@/shared/components/ui/item";
-import { cn } from "@/shared/lib/utils";
 import { selectUnlockedUniquePerks } from "../../store/selectors/select-perks";
 
 interface Props {
 	perk: Perk;
 }
 
-export function UniquePerkItem({ perk }: Props) {
+function UniquePerkItem({ perk }: Props) {
 	const isUnlocked = useEntryPointStore((store) =>
 		selectUnlockedUniquePerks(store).has(perk),
 	);
@@ -18,23 +22,16 @@ export function UniquePerkItem({ perk }: Props) {
 	return (
 		<Item
 			variant="outline"
-			className={cn(
-				"group relative w-full cursor-default overflow-hidden rounded-lg border-transparent p-1.5 transition-all duration-300",
-				"bg-muted/30 hover:bg-muted/40",
-				isUnlocked && [
-					"border-primary/10 bg-primary/10 shadow-sm",
-					"hover:border-primary/30 hover:bg-primary/15",
-				],
-			)}
+			className={
+				isUnlocked
+					? "flex items-center justify-center gap-2.5 rounded-lg border border-border/90 bg-accent/70 px-3 py-2"
+					: "flex items-center justify-center gap-2.5 rounded-lg border border-border bg-secondary/20 px-3 py-2"
+			}
 		>
-			<ItemContent className="flex flex-row items-center gap-2">
-				<div
-					className={cn(
-						"relative flex size-7 shrink-0 items-center justify-center rounded-md transition-all duration-500",
-						isUnlocked
-							? "bg-primary/20"
-							: "bg-muted/50 opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0",
-					)}
+			<ItemContent className="flex h-7 justify-center">
+				<ItemTitle
+					className="flex min-w-0 flex-1 truncate font-medium text-[13px] text-foreground"
+					title={perk.name}
 				>
 					<img
 						src={perk.icon}
@@ -42,16 +39,8 @@ export function UniquePerkItem({ perk }: Props) {
 						title={perk.description}
 						width={18}
 						height={18}
-						className="z-10"
+						className="shrink-0"
 					/>
-				</div>
-
-				<ItemTitle
-					className={cn(
-						"flex-1 truncate font-bold text-[12px] tracking-tight",
-						isUnlocked ? "text-foreground" : "text-muted-foreground/60",
-					)}
-				>
 					{perk.name}
 				</ItemTitle>
 			</ItemContent>
@@ -61,19 +50,17 @@ export function UniquePerkItem({ perk }: Props) {
 
 export function UniquePerksDetails() {
 	return (
-		<Card className="flex h-fit flex-1 shrink-0 gap-2 rounded-xl border-border/50 bg-card/60 p-3 ring-1 ring-primary/5 transition-all duration-300 hover:ring-primary/10 md:backdrop-blur-md">
-			<CardHeader className="flex select-none flex-row items-center gap-2 px-1 py-0">
-				<div className="h-5 w-1 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.3)]" />
-				<span className="font-bold text-base text-foreground/90 tracking-tight">
+		<Card className="gap-3 rounded-xl border border-border bg-card p-4">
+			<CardHeader className="flex flex-row items-center justify-between p-0">
+				<CardTitle className="flex items-center gap-2">
+					<span className="h-4 w-1 rounded-full bg-primary" />
 					Unique Perks
-				</span>
+				</CardTitle>
 			</CardHeader>
-			<CardContent className="px-0 pb-0">
-				<div className="mt-2 grid grid-cols-1 gap-1.5 md:grid-cols-2 lg:grid-cols-1">
-					{Object.values(uniques).map((perk) => (
-						<UniquePerkItem key={perk.name} perk={perk} />
-					))}
-				</div>
+			<CardContent className="grid grid-cols-1 gap-2 p-0 sm:grid-cols-2 lg:grid-cols-1">
+				{Object.values(uniques).map((perk) => (
+					<UniquePerkItem key={perk.name} perk={perk} />
+				))}
 			</CardContent>
 		</Card>
 	);
