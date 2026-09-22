@@ -1,4 +1,9 @@
-import { createParser, parseAsInteger, useQueryState } from "nuqs";
+import {
+	createParser,
+	parseAsInteger,
+	parseAsStringEnum,
+	useQueryState,
+} from "nuqs";
 import { useEffect, useRef } from "react";
 import { areSetsEqual } from "@/shared/utils/are-sets-equal";
 import { decode, encode } from "@/shared/utils/compress-url";
@@ -24,7 +29,9 @@ export function UrlSync() {
 
 	const [rootNodeQuery, setRootNodeQuery] = useQueryState(
 		"rootNode",
-		parseAsInteger.withDefault(Number(RootNode.LockArtist)),
+		parseAsStringEnum<RootNode>(Object.values(RootNode)).withDefault(
+			RootNode.LockArtist,
+		),
 	);
 
 	const [perkLimitQuery, setPerkLimitQuery] = useQueryState(
@@ -46,16 +53,14 @@ export function UrlSync() {
 
 	// 1. URL -> Store
 	useEffect(() => {
-		if (String(rootNodeQuery) !== lastSyncedClass.current) {
-			lastSyncedClass.current = String(rootNodeQuery);
+		if (rootNodeQuery !== lastSyncedClass.current) {
+			lastSyncedClass.current = rootNodeQuery;
 
-			const starterClassId = `${rootNodeQuery}`;
-
-			if (!unlockedQuery.has(starterClassId)) {
-				setUnlocked(new Set([starterClassId]));
+			if (!unlockedQuery.has(rootNodeQuery)) {
+				setUnlocked(new Set([rootNodeQuery]));
 			}
 
-			setRootNode(starterClassId as RootNode);
+			setRootNode(rootNodeQuery);
 		}
 		if (!areSetsEqual(unlockedQuery, lastSyncedNodes.current)) {
 			lastSyncedNodes.current = unlockedQuery;
@@ -78,7 +83,7 @@ export function UrlSync() {
 	useEffect(() => {
 		if (starterClass !== lastSyncedClass.current) {
 			lastSyncedClass.current = starterClass;
-			setRootNodeQuery(Number(starterClass), { shallow: true });
+			setRootNodeQuery(starterClass, { shallow: true });
 		}
 		if (!areSetsEqual(unlockedNodes, lastSyncedNodes.current)) {
 			lastSyncedNodes.current = unlockedNodes;

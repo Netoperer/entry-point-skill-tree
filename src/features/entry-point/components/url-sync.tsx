@@ -54,14 +54,14 @@ export function UrlSync() {
 
 	// 1. URL -> Store
 	useEffect(() => {
-		if (String(starterClassQuery) !== lastSyncedClass.current) {
+		if (starterClassQuery !== lastSyncedClass.current) {
 			lastSyncedClass.current = starterClassQuery;
 
 			if (!unlockedQuery.has(starterClassQuery)) {
 				setUnlocked(new Set([starterClassQuery]));
 			}
 
-			changeStarterClass(starterClassQuery as StarterClass);
+			changeStarterClass(starterClassQuery);
 		}
 		if (!areSetsEqual(unlockedQuery, lastSyncedNodes.current)) {
 			lastSyncedNodes.current = unlockedQuery;
