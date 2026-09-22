@@ -8,7 +8,7 @@ function SkillTreeEditor() {
 	return (
 		<main
 			className={cn(
-				"mx-auto flex size-full min-h-0 flex-1 overflow-hidden",
+				"mx-auto flex size-full min-h-0 flex-1 overflow-y-auto lg:overflow-hidden",
 				"gap-3 px-3 py-4",
 				"max-w-full flex-col",
 				"md:px-6",
@@ -21,7 +21,8 @@ function SkillTreeEditor() {
 
 			<div
 				className={cn(
-					"mx-auto flex h-full w-full flex-col gap-3 overflow-scroll",
+					"mx-auto flex h-full w-full flex-col gap-3 overflow-y-auto rounded-xl",
+					"scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
 					"lg:w-120",
 					"xl:w-135",
 					"2xl:w-130",

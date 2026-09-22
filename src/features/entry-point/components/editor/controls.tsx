@@ -1,6 +1,6 @@
 /** biome-ignore-all lint/style/noMagicNumbers: zoom controls */
 /** biome-ignore-all lint/security/noSecrets: easing function names */
-import { Maximize2, Minus, Plus, RotateCcw } from "lucide-react";
+import { Minus, Plus, RotateCcw } from "lucide-react";
 import { useCallback } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 

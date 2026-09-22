@@ -41,7 +41,7 @@ export function Sidebar() {
 	return (
 		<Tabs
 			defaultValue="details"
-			className="flex h-full min-h-0 w-full flex-1 flex-col gap-3"
+			className="flex h-auto w-full flex-col gap-3 lg:h-full lg:min-h-0 lg:flex-1"
 		>
 			<TabsList className="h-12! w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md">
 				{TABS.map((tab) => (
@@ -60,9 +60,9 @@ export function Sidebar() {
 				<TabsContent
 					key={tab.value}
 					value={tab.value}
-					className="scrollbar-none min-h-0 flex-1 overflow-y-auto rounded-lg outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+					className="lg:scrollbar-none rounded-lg outline-none lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden"
 				>
-					<div className="h-full">{tab.component}</div>
+					{tab.component}
 				</TabsContent>
 			))}
 		</Tabs>
