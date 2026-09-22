@@ -15,13 +15,13 @@ function SkillTreeEditor() {
 				"lg:flex-row lg:gap-4",
 			)}
 		>
-			<div className="h-full min-h-0 flex-1 lg:self-start">
+			<div className="aspect-square flex-1 lg:h-full lg:w-auto lg:self-start">
 				<Editor />
 			</div>
 
 			<div
 				className={cn(
-					"mx-auto flex h-full w-full flex-col gap-3",
+					"mx-auto flex h-full w-full flex-col gap-3 overflow-scroll",
 					"lg:w-120",
 					"xl:w-135",
 					"2xl:w-130",

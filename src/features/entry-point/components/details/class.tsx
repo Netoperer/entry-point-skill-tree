@@ -6,7 +6,6 @@ import {
 	selectUnlockedClassPerks,
 	selectUnlockedWeaponMasteries,
 } from "../../store/selectors/select-perks";
-import { WeaponMasteryItem } from "./weapon-masteries";
 
 export function ClassDetails() {
 	const classesUnlocked = useEntryPointStore(selectUnlockedClassPerks);
@@ -18,7 +17,7 @@ export function ClassDetails() {
 	const percentage = Math.min(100, (unlockedPerkCount / perkLimit) * 100);
 
 	return (
-		<Card className="rounded-xl border border-border bg-card p-4 pb-0">
+		<Card className="rounded-xl border border-border bg-card p-4">
 			<CardHeader className="flex flex-row items-center justify-between p-0">
 				<div className="flex items-center gap-2.5">
 					<span className="inline-flex size-1.5 rounded-full bg-primary" />
@@ -31,7 +30,7 @@ export function ClassDetails() {
 						</p>
 					</div>
 					<div className="flex -space-x-3">
-						{[...classesUnlocked].map((perk) => (
+						{[...classesUnlocked, ...masteriesUnlocked].map((perk) => (
 							<div key={perk.name} className="group relative">
 								<img
 									src={perk.icon}
@@ -75,11 +74,6 @@ export function ClassDetails() {
 					)}
 					style={{ width: `${percentage}%` }}
 				/>
-			</div>
-			<div className="grid grid-cols-1 gap-2">
-				{[...masteriesUnlocked].map((mastery) => (
-					<WeaponMasteryItem key={mastery.name} mastery={mastery} />
-				))}
 			</div>
 		</Card>
 	);

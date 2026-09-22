@@ -18,7 +18,7 @@ export function Builder() {
 				</CardHeader>
 			</Card>
 
-			<Card className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-border">
+			<Card className="flex flex-1 flex-col overflow-hidden rounded-xl border border-border">
 				<CardContent className="flex flex-1 flex-col items-center justify-center gap-4 px-4 py-12 text-center">
 					<div className="rounded-full bg-muted p-3">
 						<Wrench className="size-5 text-muted-foreground" />

@@ -13,11 +13,9 @@ export function Editor() {
 			<div className="tactical-grid absolute inset-0" aria-hidden="true" />
 
 			<TransformWrapper
-				initialPositionX={0}
-				initialPositionY={0}
 				centerOnInit={true}
 				doubleClick={{ disabled: true }}
-				maxScale={1.75}
+				maxScale={4}
 				wheel={{ step: 0.001 }}
 				pinch={{ step: 0.001 }}
 				panning={{
