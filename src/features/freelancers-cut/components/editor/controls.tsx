@@ -1,8 +1,10 @@
-/** biome-ignore-all lint/style/noMagicNumbers: TODO: fix it */
-/** biome-ignore-all lint/security/noSecrets: those're not secret's, fix it later tho ^^ */
-import { Minus, Plus, RotateCcw } from "lucide-react";
+/** biome-ignore-all lint/style/noMagicNumbers: zoom controls */
+/** biome-ignore-all lint/performance/noJsxPropsBind: shut up */
+/** biome-ignore-all lint/security/noSecrets: easing function names */
+import { Minus, Plus, Redo, RotateCcw, Undo } from "lucide-react";
 import { useCallback } from "react";
 import { useControls } from "react-zoom-pan-pinch";
+import { useFreelancersCutStore } from "../../store";
 
 function ToolButton({
 	children,
@@ -27,6 +29,7 @@ function ToolButton({
 
 export function Controls() {
 	const { resetTransform, zoomIn, zoomOut } = useControls();
+	const { undo, redo } = useFreelancersCutStore.temporal.getState();
 
 	const handleZoomIn = useCallback(() => {
 		zoomIn(0.2, 100, "easeInOutQuart");
@@ -41,8 +44,8 @@ export function Controls() {
 	}, [resetTransform]);
 
 	return (
-		<div>
-			<div className="absolute top-2 right-2 z-20 flex items-center gap-1.5 lg:top-4 lg:right-4">
+		<>
+			<div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 lg:top-4 lg:left-4">
 				<ToolButton label="Zoom in" onClick={handleZoomIn}>
 					<Plus className="size-4" />
 				</ToolButton>
@@ -56,15 +59,25 @@ export function Controls() {
 				</ToolButton>
 			</div>
 
-			{/* <div className="relative z-10 flex flex-wrap items-center gap-x-5 gap-y-2 border-border border-t px-4 py-3 font-mono text-[11px] text-muted-foreground sm:px-6">
-				<span className="hidden items-center gap-1.5 sm:inline-flex">
-					<span className="inline-block size-2.5 rounded-full border-2 border-accent" />{" "}
-					Major perk
-				</span>
-				<span className="ml-auto hidden md:inline">
-					Drag to pan · scroll buttons to zoom
-				</span>
-			</div> */}
-		</div>
+			<div className="absolute top-2 right-2 z-20 flex items-center gap-1.5 lg:top-4 lg:right-4">
+				<ToolButton
+					label="Undo"
+					onClick={() => {
+						undo();
+					}}
+				>
+					<Undo className="size-4" />
+				</ToolButton>
+
+				<ToolButton
+					label="Redo"
+					onClick={() => {
+						redo();
+					}}
+				>
+					<Redo className="size-4" />
+				</ToolButton>
+			</div>
+		</>
 	);
 }
