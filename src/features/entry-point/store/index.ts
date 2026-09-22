@@ -1,5 +1,7 @@
+import { temporal } from "zundo";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { areSetsEqual } from "@/shared/utils/are-sets-equal";
 import { type BuilderSlice, createBuilderSlice } from "./builder-slice";
 import {
 	createPersistentSlice,
@@ -16,11 +18,38 @@ export type StoreState = PersistentSlice &
 	SettingsSlice;
 
 export const useEntryPointStore = create<StoreState>()(
-	immer((...args) => ({
-		...createPersistentSlice(...args),
-		...createSelectionSlice(...args),
-		...createShareSlice(...args),
-		...createBuilderSlice(...args),
-		...createSettingsSlice(...args),
-	})),
+	temporal(
+		immer((...args) => ({
+			...createPersistentSlice(...args),
+			...createSelectionSlice(...args),
+			...createShareSlice(...args),
+			...createBuilderSlice(...args),
+			...createSettingsSlice(...args),
+		})),
+		{
+			partialize: ({ starterClass, perkLimit, unlockedNodes }) => ({
+				starterClass,
+				perkLimit,
+				unlockedNodes,
+			}),
+			limit: 10,
+			equality: (pastState, currentState) => {
+				if (pastState.starterClass !== currentState.starterClass) {
+					return false;
+				}
+
+				if (pastState.perkLimit !== currentState.perkLimit) {
+					return false;
+				}
+
+				if (
+					!areSetsEqual(pastState.unlockedNodes, currentState.unlockedNodes)
+				) {
+					return false;
+				}
+
+				return true;
+			},
+		},
+	),
 );
