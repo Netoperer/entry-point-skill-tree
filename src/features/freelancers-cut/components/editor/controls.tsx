@@ -45,20 +45,6 @@ export function Controls() {
 
 	return (
 		<>
-			<div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 lg:top-4 lg:left-4">
-				<ToolButton label="Zoom in" onClick={handleZoomIn}>
-					<Plus className="size-4" />
-				</ToolButton>
-
-				<ToolButton label="Zoom out" onClick={handleZoomOut}>
-					<Minus className="size-4" />
-				</ToolButton>
-
-				<ToolButton label="Reset build" onClick={handleResetTransform}>
-					<RotateCcw className="size-4" />
-				</ToolButton>
-			</div>
-
 			<div className="absolute top-2 right-2 z-20 flex items-center gap-1.5 lg:top-4 lg:right-4">
 				<ToolButton
 					label="Undo"
@@ -76,6 +62,20 @@ export function Controls() {
 					}}
 				>
 					<Redo className="size-4" />
+				</ToolButton>
+			</div>
+
+			<div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 lg:top-4 lg:left-4">
+				<ToolButton label="Zoom in" onClick={handleZoomIn}>
+					<Plus className="size-4" />
+				</ToolButton>
+
+				<ToolButton label="Zoom out" onClick={handleZoomOut}>
+					<Minus className="size-4" />
+				</ToolButton>
+
+				<ToolButton label="Reset build" onClick={handleResetTransform}>
+					<RotateCcw className="size-4" />
 				</ToolButton>
 			</div>
 		</>
