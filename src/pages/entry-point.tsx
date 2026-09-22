@@ -1,14 +1,18 @@
 import { Editor } from "@/features/entry-point/components/editor";
 import { Sidebar } from "@/features/entry-point/components/sidebar";
 import { UrlSync } from "@/features/entry-point/components/url-sync";
+import { useEntryPointStore } from "@/features/entry-point/store";
 import { Header } from "@/shared/components/header";
 import { cn } from "@/shared/lib/utils";
 
 function SkillTreeEditor() {
+	const editorPinned = useEntryPointStore((s) => s.editorPinned);
+
 	return (
 		<main
 			className={cn(
-				"mx-auto flex size-full min-h-0 flex-1 overflow-y-auto lg:overflow-hidden",
+				"mx-auto flex size-full min-h-0 flex-1",
+				editorPinned ? "overflow-hidden" : "overflow-y-auto lg:overflow-hidden",
 				"gap-3 px-3 py-4",
 				"max-w-full flex-col",
 				"md:px-6",
@@ -21,9 +25,11 @@ function SkillTreeEditor() {
 
 			<div
 				className={cn(
-					"mx-auto flex h-full w-full flex-col gap-3 overflow-y-auto rounded-xl",
-					"scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
-					"lg:w-120",
+					"mx-auto flex h-full w-full flex-col gap-3 rounded-xl",
+					editorPinned
+						? "scrollbar-none overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+						: "",
+					"lg:scrollbar-none lg:w-120 lg:overflow-y-auto lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden",
 					"xl:w-135",
 					"2xl:w-130",
 				)}
