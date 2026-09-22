@@ -15,9 +15,9 @@ export function Editor() {
 			<TransformWrapper
 				centerOnInit={true}
 				doubleClick={{ disabled: true }}
-				maxScale={4}
+				maxScale={5}
 				wheel={{ step: 0.001 }}
-				pinch={{ step: 0.001 }}
+				pinch={{ step: 0.1 }}
 				panning={{
 					excluded: ["image"],
 				}}
@@ -33,6 +33,7 @@ export function Editor() {
 						height: "100%",
 					}}
 				>
+					{/** biome-ignore lint/a11y/noNoninteractiveElementInteractions: Shut up */}
 					<svg
 						aria-label="Tree"
 						viewBox="-40 -40 780 780"
@@ -40,6 +41,8 @@ export function Editor() {
 						preserveAspectRatio="xMidYMid meet"
 						width="100%"
 						height="100%"
+						// biome-ignore lint/performance/noJsxPropsBind: shut up
+						onContextMenu={(e) => e.preventDefault()}
 					>
 						<FilterDefs />
 

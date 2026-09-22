@@ -6,13 +6,16 @@ import { PerkNode } from "./perk-node";
 
 export function Tree() {
 	return (
+		// biome-ignore lint/a11y/noNoninteractiveElementInteractions: I need it
 		<svg
 			aria-label="Tree"
 			viewBox="0 -20 640 690"
-			className="h-full w-full select-none"
+			className="h-full w-full select-none [-webkit-touch-callout:none] [-webkit-user-select:none]"
 			preserveAspectRatio="xMidYMid meet"
 			width="100%"
 			height="100%"
+			// biome-ignore lint/performance/noJsxPropsBind: shut up
+			onContextMenu={(e) => e.preventDefault()}
 		>
 			<FilterDefs />
 
