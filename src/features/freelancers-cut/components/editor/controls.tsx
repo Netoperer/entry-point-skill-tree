@@ -45,7 +45,7 @@ export function Controls() {
 
 	return (
 		<>
-			<div className="absolute top-2 right-2 z-20 flex items-center gap-1.5 lg:top-4 lg:right-4">
+			<div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 lg:top-4 lg:left-4">
 				<ToolButton
 					label="Undo"
 					onClick={() => {
@@ -65,7 +65,7 @@ export function Controls() {
 				</ToolButton>
 			</div>
 
-			<div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 lg:top-4 lg:left-4">
+			<div className="absolute top-2 right-2 z-20 flex items-center gap-1.5 lg:top-4 lg:right-4">
 				<ToolButton label="Zoom in" onClick={handleZoomIn}>
 					<Plus className="size-4" />
 				</ToolButton>
