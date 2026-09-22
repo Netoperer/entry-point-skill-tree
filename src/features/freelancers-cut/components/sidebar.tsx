@@ -14,21 +14,21 @@ const TABS = [
 	{
 		key: "details",
 		value: "details",
-		icon: <LayoutGrid className="mr-2 size-4" />,
+		icon: <LayoutGrid className="mr-2 hidden size-4 md:inline" />,
 		displayText: "Details",
 		component: <Details />,
 	},
 	{
 		key: "export",
 		value: "export",
-		icon: <Download className="mr-2 size-4" />,
+		icon: <Download className="mr-2 hidden size-4 md:inline" />,
 		displayText: "Export",
 		component: <Export />,
 	},
 	{
 		key: "settings",
 		value: "settings",
-		icon: <Settings2 className="mr-2 size-4" />,
+		icon: <Settings2 className="mr-2 hidden size-4 md:inline" />,
 		displayText: "Settings",
 		component: <Settings />,
 	},
@@ -43,7 +43,7 @@ export function Sidebar() {
 				defaultValue="details"
 				className="flex h-full min-h-0 w-full flex-1 flex-col gap-3"
 			>
-				<TabsList className="h-10 w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md xl:h-12">
+				<TabsList className="h-12! w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md">
 					{TABS.map((tab) => (
 						<TabsTrigger
 							key={tab.key}

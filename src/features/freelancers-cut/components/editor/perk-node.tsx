@@ -50,10 +50,10 @@ export function PerkNode({ perkEntry, id }: Props) {
 			onClick={() => {
 				handleClick(id);
 			}}
-			onMouseEnter={() => {
+			onPointerEnter={() => {
 				setHoveredNode(id);
 			}}
-			onMouseLeave={() => {
+			onPointerLeave={() => {
 				setHoveredNode(null);
 			}}
 		>

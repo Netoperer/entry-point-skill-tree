@@ -13,8 +13,6 @@ export function Editor() {
 			{/* /> */}
 
 			<TransformWrapper
-				initialPositionX={0}
-				initialPositionY={0}
 				centerOnInit={true}
 				doubleClick={{ disabled: true }}
 				maxScale={4}

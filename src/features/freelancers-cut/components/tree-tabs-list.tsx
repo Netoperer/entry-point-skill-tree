@@ -22,7 +22,7 @@ const TABS = [
 
 export function TreeTabsList() {
 	return (
-		<TabsList className="h-10 w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md xl:h-12">
+		<TabsList className="h-12! w-full shrink-0 gap-1 rounded-xl border border-border/50 bg-muted/40 p-1 shadow-inner md:backdrop-blur-md xl:h-12">
 			{...TABS.map((tab) => (
 				<TabsTrigger
 					key={tab.key}
