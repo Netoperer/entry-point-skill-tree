@@ -7,6 +7,7 @@ import {
 	CardTitle,
 } from "@/shared/components/ui/card";
 import { Switch } from "@/shared/components/ui/switch";
+import { useFreelancersCutStore } from "../../store";
 
 function ToggleRow({
 	label,
@@ -30,7 +31,8 @@ function ToggleRow({
 	);
 }
 export function DebugCard() {
-	const [labels, setLabels] = useState(false);
+	const showNodeIds = useFreelancersCutStore((s) => s.showNodeIds);
+	const setShowNodeIds = useFreelancersCutStore((s) => s.setShowNodeIds);
 
 	return (
 		<Card className="border border-border">
@@ -43,10 +45,10 @@ export function DebugCard() {
 			<CardContent className="space-y-1">
 				<ToggleRow
 					label="Show perk ids"
-					desc="Not implemented yet"
-					on={labels}
+					desc="Display ids on the tree"
+					on={showNodeIds}
 					// biome-ignore lint/performance/noJsxPropsBind: no
-					onToggle={() => setLabels((v) => !v)}
+					onToggle={() => setShowNodeIds(!showNodeIds)}
 				/>
 				{/* <ItemSeparator /> */}
 			</CardContent>
