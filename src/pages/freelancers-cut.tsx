@@ -49,7 +49,10 @@ export function FreelancersCut() {
 				defaultValue="skill"
 				className="mx-auto flex h-full min-h-0 w-full max-w-500 flex-1 flex-col px-3 py-2 md:px-6 md:py-4"
 			>
-				<TabsContent value="skill" className="flex h-full min-h-0 w-full overflow-hidden">
+				<TabsContent
+					value="skill"
+					className="flex h-full min-h-0 w-full overflow-hidden"
+				>
 					<SkillTreeEditor />
 				</TabsContent>
 			</Tabs>

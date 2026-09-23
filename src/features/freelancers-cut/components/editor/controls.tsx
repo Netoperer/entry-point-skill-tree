@@ -1,15 +1,7 @@
 /** biome-ignore-all lint/style/noMagicNumbers: zoom controls */
 /** biome-ignore-all lint/performance/noJsxPropsBind: shut up */
 /** biome-ignore-all lint/security/noSecrets: easing function names */
-import {
-	Minus,
-	Pin,
-	PinOff,
-	Plus,
-	Redo,
-	RotateCcw,
-	Undo,
-} from "lucide-react";
+import { Minus, Pin, PinOff, Plus, Redo, RotateCcw, Undo } from "lucide-react";
 import { useCallback } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 import { useFreelancersCutStore } from "../../store";
