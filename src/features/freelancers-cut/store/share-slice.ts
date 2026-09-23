@@ -21,7 +21,7 @@ export const createShareSlice: StateCreator<
 > = (set): ShareSlice => ({
 	withBackground: true,
 	withMajorPerks: false,
-	showPreview: false,
+	showPreview: true,
 	isCacheInitialized: false,
 
 	setWithBackground: (value) =>

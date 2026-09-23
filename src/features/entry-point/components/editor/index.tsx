@@ -1,53 +1,61 @@
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 import { CONNECTIONS } from "@/features/entry-point/config/connections";
 import { PERK_ENTRIES } from "@/features/entry-point/config/entries";
+import { Card } from "@/shared/components/ui/card";
 import { ConnectionLine } from "./connection-line";
+import { Controls } from "./controls";
 import { FilterDefs } from "./filter-defs";
 import { PerkNode } from "./perk-node";
 
 export function Editor() {
 	return (
-		<TransformWrapper
-			initialPositionX={0}
-			initialPositionY={0}
-			centerOnInit={true}
-			doubleClick={{ disabled: true }}
-			maxScale={1.75}
-			wheel={{ step: 0.001 }}
-			pinch={{ step: 0.001 }}
-			panning={{
-				excluded: ["image"],
-			}}
-		>
-			<TransformComponent
-				wrapperStyle={{
-					width: "100%",
-					height: "100%",
-				}}
-				contentStyle={{
-					width: "100%",
-					height: "100%",
+		<Card className="relative flex h-full flex-1 flex-col gap-0 overflow-hidden rounded-xl border border-border bg-card py-2">
+			<div className="tactical-grid absolute inset-0" aria-hidden="true" />
+
+			<TransformWrapper
+				centerOnInit={true}
+				doubleClick={{ disabled: true }}
+				maxScale={5}
+				wheel={{ step: 0.001 }}
+				pinch={{ step: 0.1 }}
+				panning={{
+					excluded: ["image"],
 				}}
 			>
-				<svg
-					aria-label="Tree"
-					viewBox="0 0 700 700"
-					className="h-full w-full select-none"
-					preserveAspectRatio="xMidYMid meet"
-					width="100%"
-					height="100%"
+				<Controls />
+				<TransformComponent
+					wrapperStyle={{
+						width: "100%",
+						height: "100%",
+					}}
+					contentStyle={{
+						width: "100%",
+						height: "100%",
+					}}
 				>
-					<FilterDefs />
+					{/** biome-ignore lint/a11y/noNoninteractiveElementInteractions: Shut up */}
+					<svg
+						aria-label="Tree"
+						viewBox="-40 -40 780 780"
+						className="h-full w-full select-none"
+						preserveAspectRatio="xMidYMid meet"
+						width="100%"
+						height="100%"
+						// biome-ignore lint/performance/noJsxPropsBind: shut up
+						onContextMenu={(e) => e.preventDefault()}
+					>
+						<FilterDefs />
 
-					{...CONNECTIONS.map((entries) => (
-						<ConnectionLine entries={entries} key={entries.join("-")} />
-					))}
+						{...CONNECTIONS.map((entries) => (
+							<ConnectionLine entries={entries} key={entries.join("-")} />
+						))}
 
-					{...Object.entries(PERK_ENTRIES).map(([id, perk]) => (
-						<PerkNode perkEntry={perk} id={id} key={`Perk_${id}`} />
-					))}
-				</svg>
-			</TransformComponent>
-		</TransformWrapper>
+						{...Object.entries(PERK_ENTRIES).map(([id, perk]) => (
+							<PerkNode perkEntry={perk} id={id} key={`Perk_${id}`} />
+						))}
+					</svg>
+				</TransformComponent>
+			</TransformWrapper>
+		</Card>
 	);
 }

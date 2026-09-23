@@ -59,7 +59,7 @@ const BruteStrength: Perk = {
 	icon: BruteStrengthIcon,
 	description: setAbility([
 		"Pickup bodies faster and move faster while encumbered.",
-		"some objects can be moved, opening new router or blocking enemies.",
+		"Some objects can be moved, opening new router or blocking enemies.",
 		"Certain doors can be kicked open and you can perform unarmed takedowns.",
 	]),
 } as const;

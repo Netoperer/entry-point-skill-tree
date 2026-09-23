@@ -3,7 +3,7 @@ import { Card, CardHeader, CardTitle } from "@/shared/components/ui/card";
 
 export function BuilderHeader() {
 	return (
-		<Card className="shrink-0 overflow-hidden rounded-xl border-border/50 bg-card/60 shadow-md ring-1 ring-primary/5 md:backdrop-blur-md">
+		<Card className="shrink-0 rounded-xl border-border/50 bg-card/60 shadow-md ring-1 ring-primary/5 md:backdrop-blur-md">
 			<CardHeader className="flex select-none flex-row items-center justify-between gap-3 px-4 py-0">
 				<div className="flex min-w-0 items-center gap-2">
 					<div className="shrink-0 rounded bg-primary/10 p-1">

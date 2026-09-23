@@ -1,4 +1,9 @@
-import { createParser, parseAsInteger, useQueryState } from "nuqs";
+import {
+	createParser,
+	parseAsInteger,
+	parseAsStringEnum,
+	useQueryState,
+} from "nuqs";
 import { useEffect, useRef } from "react";
 import { useEntryPointStore } from "@/features/entry-point/store";
 import { StarterClass } from "@/features/entry-point/types";
@@ -25,7 +30,9 @@ export function UrlSync() {
 
 	const [starterClassQuery, setStarterClassQuery] = useQueryState(
 		"starterClass",
-		parseAsInteger.withDefault(Number(StarterClass.TheArtOfTheSteal)),
+		parseAsStringEnum<StarterClass>(Object.values(StarterClass)).withDefault(
+			StarterClass.TheArtOfTheSteal,
+		),
 	);
 
 	const [perkLimitQuery, setPerkLimitQuery] = useQueryState(
@@ -42,21 +49,19 @@ export function UrlSync() {
 
 	// Track the state that we last successfully synced to both URL and Store
 	const lastSyncedNodes = useRef<Set<string>>(unlockedNodes);
-	const lastSyncedClass = useRef<string>(starterClass);
+	const lastSyncedClass = useRef<StarterClass>(starterClass);
 	const lastSyncedLimit = useRef<number>(perkLimit);
 
 	// 1. URL -> Store
 	useEffect(() => {
-		if (String(starterClassQuery) !== lastSyncedClass.current) {
-			lastSyncedClass.current = String(starterClassQuery);
+		if (starterClassQuery !== lastSyncedClass.current) {
+			lastSyncedClass.current = starterClassQuery;
 
-			const starterClassId = `${starterClassQuery}`;
-
-			if (!unlockedQuery.has(starterClassId)) {
-				setUnlocked(new Set([starterClassId]));
+			if (!unlockedQuery.has(starterClassQuery)) {
+				setUnlocked(new Set([starterClassQuery]));
 			}
 
-			changeStarterClass(starterClassId as StarterClass);
+			changeStarterClass(starterClassQuery);
 		}
 		if (!areSetsEqual(unlockedQuery, lastSyncedNodes.current)) {
 			lastSyncedNodes.current = unlockedQuery;
@@ -79,7 +84,7 @@ export function UrlSync() {
 	useEffect(() => {
 		if (starterClass !== lastSyncedClass.current) {
 			lastSyncedClass.current = starterClass;
-			setStarterClassQuery(Number(starterClass), { shallow: true });
+			setStarterClassQuery(starterClass, { shallow: true });
 		}
 		if (!areSetsEqual(unlockedNodes, lastSyncedNodes.current)) {
 			lastSyncedNodes.current = unlockedNodes;

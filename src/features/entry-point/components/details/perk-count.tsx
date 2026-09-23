@@ -1,5 +1,4 @@
 import { useEntryPointStore } from "@/features/entry-point/store";
-import { Card, CardHeader } from "@/shared/components/ui/card";
 import { cn } from "@/shared/lib/utils";
 
 export function PerkCount() {
@@ -7,22 +6,29 @@ export function PerkCount() {
 	const unlockedPerkCount = useEntryPointStore((s) => s.unlockedNodes.size);
 
 	return (
-		<Card className="w-full rounded-xl border-border/50 bg-card/60 p-3 ring-1 ring-primary/5 transition-all duration-300 hover:ring-primary/10 md:backdrop-blur-md">
-			<CardHeader className="flex select-none flex-row items-center justify-between gap-2 px-1 py-0">
-				<div className="font-bold text-[15px] text-foreground/90 tracking-tight">
-					Perks:
+		<div className="rounded-xl border border-border bg-card p-4">
+			<div className="flex items-center justify-between">
+				<div className="flex items-center gap-2.5">
+					<span className="inline-flex size-1.5 rounded-full bg-primary" />
+					<div>
+						<p className="font-mono text-[10px] text-muted-foreground uppercase tracking-[0.24em]">
+							Perks
+						</p>
+						<p className="font-mono font-semibold text-sm">
+							<span
+								className={cn(
+									unlockedPerkCount >= perkLimit
+										? "text-destructive"
+										: "text-primary",
+								)}
+							>
+								{unlockedPerkCount}
+							</span>
+							<span className="text-muted-foreground"> / {perkLimit}</span>
+						</p>
+					</div>
 				</div>
-				<div
-					className={cn(
-						"font-bold text-[14px]",
-						unlockedPerkCount >= perkLimit
-							? "text-destructive"
-							: "text-primary",
-					)}
-				>
-					{unlockedPerkCount}/{perkLimit}
-				</div>
-			</CardHeader>
-		</Card>
+			</div>
+		</div>
 	);
 }

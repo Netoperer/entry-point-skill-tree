@@ -32,7 +32,8 @@
 			"correctness": {
 				"useImportExtensions": "off",
 				"useQwikValidLexicalScope": "off",
-				"noSolidDestructuredProps": "off"
+				"noSolidDestructuredProps": "off",
+				"useUniqueElementIds": "off"
 			},
 			"performance": {
 				"noImgElement": "off",

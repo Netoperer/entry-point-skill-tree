@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { renderTreeToCanvas } from "@/features/freelancers-cut/components/settings/export/utils";
+import { renderTreeToCanvas } from "@/features/freelancers-cut/components/export/utils";
 import { imageCache } from "@/features/freelancers-cut/config/image-cache";
 import type { StoreState } from "../index";
 

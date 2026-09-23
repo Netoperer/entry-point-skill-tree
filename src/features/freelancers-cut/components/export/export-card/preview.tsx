@@ -20,20 +20,13 @@ export function ExportPreview() {
 	return (
 		<div className="group/preview fade-in zoom-in-95 relative flex aspect-square w-full animate-in items-center justify-center overflow-hidden rounded-lg border border-border/50 bg-muted/20 duration-200">
 			{isCacheInitialized && exportUrl ? (
-				<>
-					<img
-						width="100%"
-						height="100%"
-						src={exportUrl}
-						alt="Tree Preview"
-						className="h-full w-full object-contain"
-					/>
-					<div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover/preview:opacity-100">
-						<span className="font-bold text-[10px] text-white uppercase tracking-widest">
-							Preview
-						</span>
-					</div>
-				</>
+				<img
+					width="100%"
+					height="100%"
+					src={exportUrl}
+					alt="Tree Preview"
+					className="h-full w-full object-contain"
+				/>
 			) : (
 				<div className="flex flex-col items-center gap-2 text-muted-foreground">
 					<Loader2 className="size-6 animate-spin opacity-50" />

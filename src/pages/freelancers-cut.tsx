@@ -1,28 +1,58 @@
 import { Editor } from "@/features/freelancers-cut/components/editor";
 import { Sidebar } from "@/features/freelancers-cut/components/sidebar";
 import { UrlSync } from "@/features/freelancers-cut/components/url-sync";
+import { useFreelancersCutStore } from "@/features/freelancers-cut/store";
 import { Header } from "@/shared/components/header";
-import { Card } from "@/shared/components/ui/card";
+import { Tabs, TabsContent } from "@/shared/components/ui/tabs";
+import { cn } from "@/shared/lib/utils";
+
+function SkillTreeEditor() {
+	const editorPinned = useFreelancersCutStore((s) => s.editorPinned);
+
+	return (
+		<main
+			className={cn(
+				"mx-auto flex size-full min-h-0 flex-1",
+				editorPinned ? "overflow-hidden" : "overflow-y-auto lg:overflow-hidden",
+				"gap-3",
+				"w-full flex-col",
+				"lg:flex-row lg:gap-4",
+			)}
+		>
+			<div className="aspect-square flex-1 lg:h-full lg:w-auto lg:self-start">
+				<Editor />
+			</div>
+
+			<div
+				className={cn(
+					"mx-auto flex h-full w-full flex-col gap-3 rounded-xl",
+					editorPinned
+						? "scrollbar-none overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+						: "",
+					"lg:scrollbar-none lg:w-100 lg:overflow-y-auto lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden",
+					"xl:w-115",
+					"2xl:w-120",
+				)}
+			>
+				<Sidebar />
+			</div>
+		</main>
+	);
+}
 
 export function FreelancersCut() {
 	return (
-		<div className="flex flex-col items-center justify-center overflow-hidden bg-background selection:bg-primary/30 xl:h-screen xl:w-screen">
-			<div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_50%)]" />
+		<div className="flex h-svh flex-col overflow-hidden bg-background">
+			<Header title="Freelancer's Cut" />
 			<UrlSync />
-
-			<Header title="Entry Point: Freelancer's Cut Skill Tree Editor" />
-
-			<main className="relative z-10 mx-auto flex min-h-0 w-full flex-1 flex-col items-center justify-center gap-10 overflow-hidden p-4 xl:flex-row xl:p-10">
-				<Card className="group flex aspect-square max-h-full w-full overflow-hidden rounded-2xl bg-card/60 ring-1 ring-primary/10 transition-all duration-500 hover:ring-primary/20 md:backdrop-blur-md lg:w-1/2">
-					<Editor />
-				</Card>
-
-				<div className="flex h-full w-full min-w-0 flex-1 flex-col overflow-hidden lg:max-w-220">
-					<Sidebar />
-				</div>
-			</main>
-
-			<footer className="z-50 flex h-[4vh] w-full shrink-0 items-center justify-between border-border/40 border-t bg-muted/10 px-8" />
+			<Tabs
+				defaultValue="skill"
+				className="mx-auto flex h-full min-h-0 w-full max-w-500 flex-1 flex-col px-3 py-2 md:px-6 md:py-4"
+			>
+				<TabsContent value="skill" className="flex h-full min-h-0 w-full overflow-hidden">
+					<SkillTreeEditor />
+				</TabsContent>
+			</Tabs>
 		</div>
 	);
 }

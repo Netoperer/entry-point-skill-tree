@@ -1,4 +1,4 @@
-import { preloadImages } from "@/features/freelancers-cut/components/settings/export/utils";
+import { preloadImages } from "@/features/freelancers-cut/components/export/utils";
 
 export let imageCache: Map<string, HTMLImageElement> | null = null;
 

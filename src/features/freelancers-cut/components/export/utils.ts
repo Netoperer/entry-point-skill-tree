@@ -1,5 +1,5 @@
-import { CONNECTIONS } from "@/features/freelancers-cut/config/connections";
-import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
+import { CONNECTIONS } from "@/features/freelancers-cut/config/perks/connections";
+import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
 import { getUnlockedMajors } from "@/features/freelancers-cut/core/get-unlocked-majors";
 import { PerkType } from "@/features/freelancers-cut/types";
 
@@ -166,10 +166,9 @@ export function renderTreeToCanvas(
 	ctx.restore(); // Restore from scale/setTransform
 }
 
-export function downloadImage(dataUrl: string, unlockedCount: number) {
-	const fileName = `freelancer-tree-${unlockedCount}.png`;
+export function downloadImage(dataUrl: string, filename: string) {
 	const link = document.createElement("a");
-	link.download = fileName;
+	link.download = filename;
 	link.href = dataUrl;
 	link.click();
 }

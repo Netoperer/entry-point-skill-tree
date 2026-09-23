@@ -1,4 +1,4 @@
-import { CONNECTIONS } from "@/features/freelancers-cut/config/connections";
+import { CONNECTIONS } from "@/features/freelancers-cut/config/perks/connections";
 import {
 	buildAdjacencyList,
 	getDisconnectedNodes as graphGetDisconnectedNodes,

@@ -15,28 +15,49 @@ const sizeMap: Record<PerkType, number> = {
 	[PerkType.Major]: 5,
 };
 
-export function PerkNode({ perkEntry, id }: Props) {
-	const isUnlocked = useFreelancersCutStore((store) =>
-		store.unlockedNodes.has(id),
-	);
-	const isSelected = useFreelancersCutStore((store) =>
-		selectSelectedNodes(store).has(id),
-	);
-	const setHoveredNode = useFreelancersCutStore(
-		(store) => store.setHoveredNode,
-	);
+function getFilter(
+	isHighlighted: boolean,
+	isSelected: boolean,
+	isUnlocked: boolean,
+): string {
+	if (isHighlighted) {
+		return "url(#highlighted)";
+	}
 
-	const filter = isSelected
-		? "url(#selected)"
-		: isUnlocked
-			? "url(#unlocked)"
-			: "url(#default)";
+	if (isSelected) {
+		return "url(#selected)";
+	}
 
+	if (isUnlocked) {
+		return "url(#unlocked)";
+	}
+
+	return "url(#default)";
+}
+
+function getDimensions(perkEntry: PerkEntry) {
 	const size = sizeMap[perkEntry.perk.perkType] * 6;
 
 	const centerX = perkEntry.position.x;
 	const centerY = perkEntry.position.y;
 	const radius = size / 2;
+
+	return { centerX, centerY, radius, size };
+}
+
+export function PerkNode({ perkEntry, id }: Props) {
+	const isUnlocked = useFreelancersCutStore((s) => s.unlockedNodes.has(id));
+	const isSelected = useFreelancersCutStore((s) =>
+		selectSelectedNodes(s).has(id),
+	);
+	const setHoveredNode = useFreelancersCutStore((s) => s.setHoveredNode);
+	const isHighlighted = useFreelancersCutStore((s) =>
+		s.highlightedPerks.has(perkEntry.perk),
+	);
+	const showNodeIds = useFreelancersCutStore((s) => s.showNodeIds);
+
+	const filter = getFilter(isHighlighted, isSelected, isUnlocked);
+	const { centerX, centerY, radius, size } = getDimensions(perkEntry);
 
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: SVG graph node is intentionally interactive
@@ -45,10 +66,10 @@ export function PerkNode({ perkEntry, id }: Props) {
 			onClick={() => {
 				handleClick(id);
 			}}
-			onMouseEnter={() => {
+			onPointerEnter={() => {
 				setHoveredNode(id);
 			}}
-			onMouseLeave={() => {
+			onPointerLeave={() => {
 				setHoveredNode(null);
 			}}
 		>
@@ -72,14 +93,16 @@ export function PerkNode({ perkEntry, id }: Props) {
 					</title>
 				</image>
 			</g>
-			{/* <text
-        x={perkEntry.position.x - size / 2}
-        y={perkEntry.position.y - size / 2}
-        font-size="24"
-        fill="blue"
-      >
-        {id}
-      </text>{" "} */}
+			{showNodeIds && (
+				<text
+					x={perkEntry.position.x - radius / 2}
+					y={perkEntry.position.y + radius / 2}
+					fontSize="12"
+					fill="red"
+				>
+					{id}
+				</text>
+			)}
 		</g>
 	);
 }

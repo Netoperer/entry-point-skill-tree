@@ -1,5 +1,5 @@
 import type { PerkEntry } from "@/features/freelancers-cut/types";
-import { Perks } from "./perks";
+import { Perks } from ".";
 
 export const PERK_ENTRIES: { [key: string]: PerkEntry } = {
 	"0": { perk: Perks.AdvancedProtocols, position: { x: 420, y: 355 } },

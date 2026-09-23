@@ -32,11 +32,12 @@ export function PerkNode({ perkEntry, id }: Props) {
 		setHoveredNode(null);
 	}, [setHoveredNode]);
 
-	const filter = isSelected
-		? "url(#selected)"
-		: isUnlocked
-			? "url(#unlocked)"
-			: "url(#default)";
+	const filter =
+		isSelected && !isUnlocked
+			? "url(#selected)"
+			: isUnlocked
+				? "url(#unlocked)"
+				: "url(#default)";
 
 	return (
 		<>
@@ -50,8 +51,8 @@ export function PerkNode({ perkEntry, id }: Props) {
 				filter={filter}
 				style={{ cursor: "pointer", pointerEvents: "auto" }}
 				onClick={clickCallback}
-				onMouseEnter={mouseEnterCallback}
-				onMouseLeave={mouseLeaveCallback}
+				onPointerEnter={mouseEnterCallback}
+				onPointerLeave={mouseLeaveCallback}
 			>
 				<title>{perkEntry.perk.description}</title>
 			</image>
