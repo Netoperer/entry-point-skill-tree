@@ -7,9 +7,13 @@ import {
 	type PersistentSlice,
 } from "./persistent-slice";
 import { createSelectionSlice, type SelectionSlice } from "./selection-slice";
+import {
+	createSettingsSlice,
+	type SettingsSlice,
+} from "./settings-slice";
 import { createShareSlice, type ShareSlice } from "./share-slice";
 
-export type StoreState = PersistentSlice & SelectionSlice & ShareSlice;
+export type StoreState = PersistentSlice & SelectionSlice & ShareSlice & SettingsSlice;
 
 export const useFreelancersCutStore = create<StoreState>()(
 	temporal(
@@ -17,6 +21,7 @@ export const useFreelancersCutStore = create<StoreState>()(
 			...createPersistentSlice(...args),
 			...createSelectionSlice(...args),
 			...createShareSlice(...args),
+			...createSettingsSlice(...args),
 		})),
 		{
 			partialize: ({ rootNode, perkLimit, unlockedNodes }) => ({

@@ -14,25 +14,25 @@ const TABS = [
 	{
 		value: "details",
 		label: "Details",
-		icon: <LayoutGrid className="mr-2 hidden size-4 md:inline" />,
+		icon: <LayoutGrid className="mr-2 hidden size-4 sm:inline" />,
 		component: <Details />,
 	},
 	{
 		value: "builder",
 		label: "Builder",
-		icon: <Wrench className="mr-2 hidden size-4 md:inline" />,
+		icon: <Wrench className="mr-2 hidden size-4 sm:inline" />,
 		component: <Builder />,
 	},
 	{
 		value: "share",
 		label: "Share",
-		icon: <Download className="mr-2 hidden size-4 md:inline" />,
+		icon: <Download className="mr-2 hidden size-4 sm:inline" />,
 		component: <Share />,
 	},
 	{
 		value: "settings",
 		label: "Settings",
-		icon: <Settings2 className="mr-2 hidden size-4 md:inline" />,
+		icon: <Settings2 className="mr-2 hidden size-4 sm:inline" />,
 		component: <Settings />,
 	},
 ];

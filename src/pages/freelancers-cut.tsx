@@ -1,15 +1,19 @@
 import { Editor } from "@/features/freelancers-cut/components/editor";
 import { Sidebar } from "@/features/freelancers-cut/components/sidebar";
 import { UrlSync } from "@/features/freelancers-cut/components/url-sync";
+import { useFreelancersCutStore } from "@/features/freelancers-cut/store";
 import { Header } from "@/shared/components/header";
 import { Tabs, TabsContent } from "@/shared/components/ui/tabs";
 import { cn } from "@/shared/lib/utils";
 
 function SkillTreeEditor() {
+	const editorPinned = useFreelancersCutStore((s) => s.editorPinned);
+
 	return (
 		<main
 			className={cn(
-				"mx-auto flex size-full min-h-0 flex-1 overflow-y-auto lg:overflow-hidden",
+				"mx-auto flex size-full min-h-0 flex-1",
+				editorPinned ? "overflow-hidden" : "overflow-y-auto lg:overflow-hidden",
 				"gap-3",
 				"w-full flex-col",
 				"lg:flex-row lg:gap-4",
@@ -21,9 +25,11 @@ function SkillTreeEditor() {
 
 			<div
 				className={cn(
-					"mx-auto flex h-full w-full flex-col gap-3 overflow-y-auto rounded-xl",
-					"scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
-					"lg:w-100",
+					"mx-auto flex h-full w-full flex-col gap-3 rounded-xl",
+					editorPinned
+						? "scrollbar-none overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+						: "",
+					"lg:scrollbar-none lg:w-100 lg:overflow-y-auto lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden",
 					"xl:w-115",
 					"2xl:w-120",
 				)}
@@ -43,7 +49,7 @@ export function FreelancersCut() {
 				defaultValue="skill"
 				className="mx-auto flex h-full min-h-0 w-full max-w-500 flex-1 flex-col px-3 py-2 md:px-6 md:py-4"
 			>
-				<TabsContent value="skill" className="flex h-full min-h-0 w-full">
+				<TabsContent value="skill" className="flex h-full min-h-0 w-full overflow-hidden">
 					<SkillTreeEditor />
 				</TabsContent>
 			</Tabs>

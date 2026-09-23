@@ -1,6 +1,5 @@
 import { Eye, EyeOff } from "lucide-react";
 import { useCallback } from "react";
-import { useNavigate } from "react-router";
 import {
 	Item,
 	ItemActions,

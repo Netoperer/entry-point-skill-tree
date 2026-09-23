@@ -1,7 +1,15 @@
 /** biome-ignore-all lint/style/noMagicNumbers: zoom controls */
 /** biome-ignore-all lint/performance/noJsxPropsBind: shut up */
 /** biome-ignore-all lint/security/noSecrets: easing function names */
-import { Minus, Plus, Redo, RotateCcw, Undo } from "lucide-react";
+import {
+	Minus,
+	Pin,
+	PinOff,
+	Plus,
+	Redo,
+	RotateCcw,
+	Undo,
+} from "lucide-react";
 import { useCallback } from "react";
 import { useControls } from "react-zoom-pan-pinch";
 import { useFreelancersCutStore } from "../../store";
@@ -30,6 +38,8 @@ function ToolButton({
 export function Controls() {
 	const { resetTransform, zoomIn, zoomOut } = useControls();
 	const { undo, redo } = useFreelancersCutStore.temporal.getState();
+	const editorPinned = useFreelancersCutStore((s) => s.editorPinned);
+	const setEditorPinned = useFreelancersCutStore((s) => s.setEditorPinned);
 
 	const handleZoomIn = useCallback(() => {
 		zoomIn(0.2, 100, "easeInOutQuart");
@@ -78,6 +88,19 @@ export function Controls() {
 					<RotateCcw className="size-4" />
 				</ToolButton>
 			</div>
+
+			<button
+				type="button"
+				aria-label={editorPinned ? "Unpin editor" : "Pin editor"}
+				onClick={() => setEditorPinned(!editorPinned)}
+				className="absolute right-2 bottom-2 z-20 inline-flex size-8 items-center justify-center rounded-md border border-border bg-background/70 text-muted-foreground backdrop-blur transition-colors hover:border-primary/50 hover:text-foreground lg:hidden"
+			>
+				{editorPinned ? (
+					<Pin className="size-4" />
+				) : (
+					<PinOff className="size-4" />
+				)}
+			</button>
 		</>
 	);
 }

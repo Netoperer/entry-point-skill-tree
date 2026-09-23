@@ -5,6 +5,8 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "@/shared/components/ui/tabs";
+import { cn } from "@/shared/lib/utils";
+import { useFreelancersCutStore } from "../store";
 import { Details } from "./details/index";
 import { Export } from "./export";
 import { Settings } from "./settings";
@@ -35,8 +37,18 @@ const TABS = [
 ];
 
 export function Sidebar() {
+	const editorPinned = useFreelancersCutStore((s) => s.editorPinned);
+
 	return (
-		<div className="mx-auto flex h-full w-full flex-col gap-3 overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+		<div
+			className={cn(
+				"mx-auto flex h-full w-full flex-col gap-3",
+				editorPinned
+					? "scrollbar-none overflow-y-auto [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+					: "",
+				"lg:scrollbar-none lg:overflow-y-auto lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden",
+			)}
+		>
 			<TreeTabsList />
 
 			<Tabs
@@ -60,7 +72,7 @@ export function Sidebar() {
 					<TabsContent
 						key={tab.key}
 						value={tab.value}
-						className="rounded-lg outline-none lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:[-ms-overflow-style:none] lg:scrollbar-none lg:[&::-webkit-scrollbar]:hidden"
+						className="lg:scrollbar-none rounded-lg outline-none lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:[-ms-overflow-style:none] lg:[&::-webkit-scrollbar]:hidden"
 					>
 						{tab.component}
 					</TabsContent>

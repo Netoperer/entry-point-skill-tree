@@ -11,7 +11,7 @@ export function Details() {
 				<ClassCard />
 				<SelectedCard />
 			</div>
-			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-1">
+			<div className="grid grid-cols-1 gap-4 lg:grid-cols-1">
 				<PerkGroup
 					title="Major Perks"
 					perkFilter={(perk: Perk) => perk.perkType === PerkType.Major}
