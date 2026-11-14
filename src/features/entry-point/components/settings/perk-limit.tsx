@@ -18,7 +18,7 @@ export function PerkLimit() {
 
 	return (
 		<Card className="border border-border">
-			<CardHeader className="pb-3">
+			<CardHeader>
 				<CardTitle className="flex items-center justify-between gap-3">
 					<span className="flex items-center gap-2">
 						<StopCircle className="size-4" />
@@ -28,7 +28,6 @@ export function PerkLimit() {
 						{perkLimit}
 					</Badge>
 				</CardTitle>
-				<CardDescription>Set the perk limit.</CardDescription>
 			</CardHeader>
 			<CardContent className="space-y-2">
 				<input
