@@ -1,7 +1,115 @@
 import { CONNECTIONS } from "@/features/freelancers-cut/config/perks/connections";
 import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
 import { getUnlockedMajors } from "@/features/freelancers-cut/core/get-unlocked-majors";
-import { PerkType } from "@/features/freelancers-cut/types";
+import { getUnlockedMinors } from "@/features/freelancers-cut/core/get-unlocked-minors";
+import { type Perk, PerkType } from "@/features/freelancers-cut/types";
+
+const LABEL_FONT_FAMILY = "'Inter', system-ui, sans-serif";
+const LABEL_TITLE_FONT = `700 13px ${LABEL_FONT_FAMILY}`;
+const LABEL_ENTRY_FONT = `500 12px ${LABEL_FONT_FAMILY}`;
+const LABEL_LINE_HEIGHT = 16;
+const LABEL_TITLE_GAP = 20;
+const LABEL_GROUP_GAP = 30;
+const LABEL_RIGHT_PADDING = 18;
+const LABEL_GAP = 28;
+const ICON_SIZE = 12;
+const ICON_GAP = 7;
+const MAJOR_PERK_SIZE = 15;
+const MINOR_PERK_SIZE = 9;
+
+function sortedPerkEntries(perks: Map<Perk, number>) {
+	return Array.from(perks.entries()).sort(
+		(a, b) => b[1] - a[1] || a[0].name.localeCompare(b[0].name),
+	);
+}
+
+function getPerkCount(perks: Map<Perk, number>) {
+	let count = 0;
+	for (const value of perks.values()) {
+		count += value;
+	}
+	return count;
+}
+
+function getPerkNamesWidth(
+	ctx: CanvasRenderingContext2D,
+	groups: { title: string; perks: Map<Perk, number> }[],
+) {
+	let maxWidth = 0;
+
+	for (const group of groups) {
+		ctx.font = LABEL_TITLE_FONT;
+		const title = `${group.title} (${getPerkCount(group.perks)})`;
+		maxWidth = Math.max(maxWidth, ctx.measureText(title).width);
+
+		ctx.font = LABEL_ENTRY_FONT;
+		for (const [perk, count] of sortedPerkEntries(group.perks)) {
+			const entryWidth = ctx.measureText(`${perk.name} ${count}`).width;
+			maxWidth = Math.max(maxWidth, ICON_SIZE + ICON_GAP + entryWidth);
+		}
+	}
+
+	return Math.ceil(maxWidth) + LABEL_RIGHT_PADDING;
+}
+
+function getPerkNamesHeight(
+	groups: { title: string; perks: Map<Perk, number> }[],
+) {
+	let height = 0;
+
+	for (const [index, group] of groups.entries()) {
+		height += LABEL_TITLE_GAP + group.perks.size * LABEL_LINE_HEIGHT;
+		if (index < groups.length - 1) {
+			height += LABEL_GROUP_GAP;
+		}
+	}
+
+	return height;
+}
+
+function drawPerkGroup({
+	ctx,
+	title,
+	perks,
+	x,
+	startY,
+	imageCache,
+}: {
+	ctx: CanvasRenderingContext2D;
+	title: string;
+	perks: Map<Perk, number>;
+	x: number;
+	startY: number;
+	imageCache: Map<string, HTMLImageElement>;
+}) {
+	let y = startY;
+
+	ctx.textAlign = "start";
+	ctx.textBaseline = "middle";
+	ctx.font = LABEL_TITLE_FONT;
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fillText(`${title} (${getPerkCount(perks)})`, x, y);
+	y += LABEL_TITLE_GAP;
+
+	ctx.font = LABEL_ENTRY_FONT;
+	ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+	for (const [perk, count] of sortedPerkEntries(perks)) {
+		const icon = imageCache.get(perk.icon);
+		if (icon) {
+			ctx.save();
+			ctx.beginPath();
+			ctx.arc(x + ICON_SIZE / 2, y, ICON_SIZE / 2, 0, Math.PI * 2);
+			ctx.clip();
+			ctx.drawImage(icon, x, y - ICON_SIZE / 2, ICON_SIZE, ICON_SIZE);
+			ctx.restore();
+		}
+
+		ctx.fillText(`${perk.name} ${count}`, x + ICON_SIZE + ICON_GAP, y);
+		y += LABEL_LINE_HEIGHT;
+	}
+
+	return y;
+}
 
 export async function preloadImages() {
 	const imageCache = new Map<string, HTMLImageElement>();
@@ -37,7 +145,7 @@ export function renderTreeToCanvas(
 	canvas: HTMLCanvasElement,
 	unlockedNodes: Set<string>,
 	withBackground: boolean,
-	withMajorPerks: boolean,
+	withPerkNames: boolean,
 	imageCache: Map<string, HTMLImageElement>,
 ) {
 	const scale = 2;
@@ -48,27 +156,49 @@ export function renderTreeToCanvas(
 	let minY = Number.POSITIVE_INFINITY;
 	let maxX = Number.NEGATIVE_INFINITY;
 	let maxY = Number.NEGATIVE_INFINITY;
+	let maxNodeRight = Number.NEGATIVE_INFINITY;
 
 	for (const entry of Object.values(PERK_ENTRIES)) {
+		const size =
+			entry.perk.perkType === PerkType.Major
+				? MAJOR_PERK_SIZE
+				: MINOR_PERK_SIZE;
+
 		minX = Math.min(minX, entry.position.x);
 		minY = Math.min(minY, entry.position.y);
 		maxX = Math.max(maxX, entry.position.x);
 		maxY = Math.max(maxY, entry.position.y);
+		maxNodeRight = Math.max(maxNodeRight, entry.position.x + size);
 	}
 
 	const treeWidth = maxX - minX;
 	const treeHeight = maxY - minY;
 
-	canvas.width = (treeWidth + padding) * scale;
-	canvas.height = (treeHeight + padding) * scale;
-
-	const offsetX = padding / 2 - minX;
-	const offsetY = padding / 2 - minY;
-
 	const ctx = canvas.getContext("2d");
 	if (!ctx) {
 		return;
 	}
+
+	const unlockedMajors = getUnlockedMajors(unlockedNodes);
+	const unlockedMinors = getUnlockedMinors(unlockedNodes);
+	const groups = [
+		{ title: "Major Perks", perks: unlockedMajors },
+		...(unlockedMinors.size > 0
+			? [{ title: "Minor Perks", perks: unlockedMinors }]
+			: []),
+	];
+	const labelsWidth = withPerkNames ? getPerkNamesWidth(ctx, groups) : 0;
+	const treeRight = maxNodeRight + padding / 2 - minX;
+	const labelX = treeRight + LABEL_GAP;
+	const canvasWidth = withPerkNames
+		? Math.max(treeWidth + padding, labelX + labelsWidth)
+		: treeWidth + padding;
+
+	canvas.width = canvasWidth * scale;
+	canvas.height = (treeHeight + padding) * scale;
+
+	const offsetX = padding / 2 - minX;
+	const offsetY = padding / 2 - minY;
 
 	ctx.save();
 	ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -83,7 +213,6 @@ export function renderTreeToCanvas(
 	ctx.save();
 	ctx.translate(offsetX, offsetY);
 
-	// Draw connections
 	for (const [id1, id2] of CONNECTIONS) {
 		const entry1 = PERK_ENTRIES[id1];
 		const entry2 = PERK_ENTRIES[id2];
@@ -101,7 +230,6 @@ export function renderTreeToCanvas(
 		ctx.stroke();
 	}
 
-	// Draw perks using cache
 	const entries = Object.entries(PERK_ENTRIES);
 	for (const [id, entry] of entries) {
 		const image = imageCache.get(entry.perk.icon);
@@ -114,9 +242,8 @@ export function renderTreeToCanvas(
 		ctx.filter = isUnlocked ? "none" : "brightness(30%) saturate(30%)";
 
 		const isMajor = entry.perk.perkType === PerkType.Major;
-		const size = isMajor ? 15 : 9;
-		const x = entry.position.x;
-		const y = entry.position.y;
+		const size = isMajor ? MAJOR_PERK_SIZE : MINOR_PERK_SIZE;
+		const { x, y } = entry.position;
 
 		ctx.save();
 		ctx.beginPath();
@@ -125,45 +252,32 @@ export function renderTreeToCanvas(
 		ctx.drawImage(image, x - size, y - size, size * 2, size * 2);
 		ctx.restore();
 	}
-	ctx.restore(); // Restore from translate(offsetX, offsetY)
+	ctx.restore();
 
 	ctx.filter = "none";
 
-	// Draw major perks list in the middle
-	if (withMajorPerks) {
-		const unlockedMajors = getUnlockedMajors(unlockedNodes);
-
-		const centerX = (treeWidth + padding) / 2;
-		const centerY = (treeHeight + padding) / 2;
+	// Draw unlocked perk names to the right of the tree
+	if (withPerkNames) {
+		let y =
+			(treeHeight + padding - getPerkNamesHeight(groups)) / 2 +
+			LABEL_LINE_HEIGHT / 2;
 
 		ctx.save();
-		ctx.translate(centerX, centerY + 10);
-
-		const sortedMajors = Array.from(unlockedMajors.entries()).sort(
-			(a, b) => b[1] - a[1] || a[0].name.localeCompare(b[0].name),
-		);
-
-		const lineHeight = 9;
-		const totalHeight = sortedMajors.length * lineHeight;
-		let currentY = -totalHeight / 2;
-
-		for (const [perk, count] of sortedMajors) {
-			ctx.textAlign = "center";
-			ctx.textBaseline = "middle";
-
-			const text = `${perk.name} ${count}`;
-
-			ctx.font = "600 8px 'Inter', system-ui, sans-serif";
-			ctx.fillStyle = "#FFFFFF";
-			ctx.fillText(text, 0, currentY);
-
-			currentY += lineHeight;
+		for (const group of groups) {
+			y = drawPerkGroup({
+				ctx,
+				title: group.title,
+				perks: group.perks,
+				x: labelX,
+				startY: y,
+				imageCache,
+			});
+			y += LABEL_GROUP_GAP;
 		}
-
 		ctx.restore();
 	}
 
-	ctx.restore(); // Restore from scale/setTransform
+	ctx.restore();
 }
 
 export function downloadImage(dataUrl: string, filename: string) {

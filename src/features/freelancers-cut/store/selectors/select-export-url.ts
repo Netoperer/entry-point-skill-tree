@@ -5,17 +5,17 @@ import type { StoreState } from "../index";
 
 const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
 const getWithBackground = (state: StoreState) => state.withBackground;
-const getWithMajorPerks = (state: StoreState) => state.withMajorPerks;
+const getWithPerkNames = (state: StoreState) => state.withPerkNames;
 const getIsCacheInitialized = (state: StoreState) => state.isCacheInitialized;
 
 export const selectExportUrl = createSelector(
 	[
 		getUnlockedNodes,
 		getWithBackground,
-		getWithMajorPerks,
+		getWithPerkNames,
 		getIsCacheInitialized,
 	],
-	(unlockedNodes, withBackground, withMajorPerks, isCacheInitialized) => {
+	(unlockedNodes, withBackground, withPerkNames, isCacheInitialized) => {
 		if (!(isCacheInitialized && imageCache)) {
 			return "";
 		}
@@ -25,7 +25,7 @@ export const selectExportUrl = createSelector(
 			canvas,
 			unlockedNodes,
 			withBackground,
-			withMajorPerks,
+			withPerkNames,
 			imageCache,
 		);
 		return canvas.toDataURL("image/png");
