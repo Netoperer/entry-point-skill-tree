@@ -5,7 +5,6 @@ import { StarterClass } from "@/features/entry-point/types";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";

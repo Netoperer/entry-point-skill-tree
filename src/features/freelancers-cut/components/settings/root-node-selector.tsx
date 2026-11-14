@@ -2,7 +2,6 @@ import { Route } from "lucide-react";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";
