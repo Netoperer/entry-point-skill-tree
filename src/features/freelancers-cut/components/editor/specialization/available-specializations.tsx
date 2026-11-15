@@ -2,7 +2,6 @@ import { CENTER_X, CENTER_Y } from "@/features/freelancers-cut/constants";
 import { SpecializationNode } from "./specialization-node";
 
 const RING_RADIUS = 40;
-const NODE_RADIUS = 16;
 
 export function AvailableSpecializations({ ids }: { ids: string[] }) {
 	if (ids.length === 1) {

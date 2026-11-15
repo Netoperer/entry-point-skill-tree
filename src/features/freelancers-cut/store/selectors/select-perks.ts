@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { getUnlockedPerksMap } from "../../core/specializations";
+import { getUnlockedPerksMap } from "../../core/utils";
 import type { StoreState } from "../index";
 
 const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
