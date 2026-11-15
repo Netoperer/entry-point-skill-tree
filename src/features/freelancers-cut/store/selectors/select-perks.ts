@@ -1,20 +1,12 @@
 import { createSelector } from "reselect";
-import { PERK_ENTRIES } from "../../config/perks/entries";
-import type { Perk } from "../../types";
+import { getUnlockedPerksMap } from "../../core/specializations";
 import type { StoreState } from "../index";
 
 const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
 
 export const selectUnlockedPerksMap = createSelector(
 	[getUnlockedNodes],
-	(unlockedNodes) => {
-		const map = new Map<Perk, number>();
-		for (const node of unlockedNodes) {
-			const entry = PERK_ENTRIES[node];
-			map.set(entry.perk, (map.get(entry.perk) ?? 0) + 1);
-		}
-		return map;
-	},
+	getUnlockedPerksMap,
 );
 
 export const selectPerkCount = createSelector(

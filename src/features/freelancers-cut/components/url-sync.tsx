@@ -1,6 +1,7 @@
 import {
 	createParser,
 	parseAsInteger,
+	parseAsString,
 	parseAsStringEnum,
 	useQueryState,
 } from "nuqs";
@@ -39,17 +40,25 @@ export function UrlSync() {
 		parseAsInteger.withDefault(50),
 	);
 
+	const [specializationQuery, setSpecializationQuery] = useQueryState(
+		"specialization",
+		parseAsString,
+	);
+
 	const unlockedNodes = useFreelancersCutStore((s) => s.unlockedNodes);
 	const starterClass = useFreelancersCutStore((s) => s.rootNode);
 	const perkLimit = useFreelancersCutStore((s) => s.perkLimit);
+	const specialization = useFreelancersCutStore((s) => s.specialization);
 	const setUnlocked = useFreelancersCutStore((s) => s.setUnlocked);
 	const setRootNode = useFreelancersCutStore((s) => s.setRootNode);
 	const setPerkLimit = useFreelancersCutStore((s) => s.setPerkLimit);
+	const setSpecialization = useFreelancersCutStore((s) => s.setSpecialization);
 
 	// Track the state that we last successfully synced to both URL and Store
 	const lastSyncedNodes = useRef<Set<string>>(unlockedNodes);
 	const lastSyncedClass = useRef<string>(starterClass);
 	const lastSyncedLimit = useRef<number>(perkLimit);
+	const lastSyncedSpecialization = useRef<string | null>(specialization);
 
 	// 1. URL -> Store
 	useEffect(() => {
@@ -70,13 +79,19 @@ export function UrlSync() {
 			lastSyncedLimit.current = perkLimitQuery;
 			setPerkLimit(perkLimitQuery);
 		}
+		if (specializationQuery !== lastSyncedSpecialization.current) {
+			lastSyncedSpecialization.current = specializationQuery;
+			setSpecialization(specializationQuery);
+		}
 	}, [
 		unlockedQuery,
 		rootNodeQuery,
 		perkLimitQuery,
+		specializationQuery,
 		setUnlocked,
 		setRootNode,
 		setPerkLimit,
+		setSpecialization,
 	]);
 
 	// 2. Store -> URL
@@ -93,13 +108,19 @@ export function UrlSync() {
 			lastSyncedLimit.current = perkLimit;
 			setPerkLimitQuery(perkLimit, { shallow: true });
 		}
+		if (specialization !== lastSyncedSpecialization.current) {
+			lastSyncedSpecialization.current = specialization;
+			setSpecializationQuery(specialization, { shallow: true });
+		}
 	}, [
 		unlockedNodes,
 		starterClass,
 		perkLimit,
+		specialization,
 		setUnlockedQuery,
 		setRootNodeQuery,
 		setPerkLimitQuery,
+		setSpecializationQuery,
 	]);
 
 	return null;
