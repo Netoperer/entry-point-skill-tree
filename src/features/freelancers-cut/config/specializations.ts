@@ -1,12 +1,12 @@
 import type { Specialization } from "../types";
 import { Perks } from "./perks";
 
-const NetworkTechIcon = "/freelancers-cut/specializations/NetworkTech.webp";
-const ChameleonIcon = "/freelancers-cut/specializations/Chameleon.webp";
-const EnforcerIcon = "/freelancers-cut/specializations/Enforcer.webp";
-const SentinelIcon = "/freelancers-cut/specializations/Sentinel.webp";
-const BlackHatIcon = "/freelancers-cut/specializations/BlackHat.webp";
-const ElectricianIcon = "/freelancers-cut/specializations/Electrician.webp";
+const NetworkTechIcon = "/freelancers-cut/specializations/NetworkTech.png";
+const ChameleonIcon = "/freelancers-cut/specializations/Chameleon.png";
+const EnforcerIcon = "/freelancers-cut/specializations/Enforcer.png";
+const SentinelIcon = "/freelancers-cut/specializations/Sentinel.png";
+const BlackHatIcon = "/freelancers-cut/specializations/BlackHat.png";
+const ElectricianIcon = "/freelancers-cut/specializations/Electrician.png";
 
 export const SPECIALIZATION_ENTRIES: { [key: string]: Specialization } = {
 	"0": {
