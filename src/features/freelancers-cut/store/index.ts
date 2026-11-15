@@ -1,5 +1,6 @@
 import { temporal } from "zundo";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { areSetsEqual } from "@/shared/utils/are-sets-equal";
 import {
@@ -16,37 +17,45 @@ export type StoreState = PersistentSlice &
 	SettingsSlice;
 
 export const useFreelancersCutStore = create<StoreState>()(
-	temporal(
-		immer((...args) => ({
-			...createPersistentSlice(...args),
-			...createSelectionSlice(...args),
-			...createShareSlice(...args),
-			...createSettingsSlice(...args),
-		})),
-		{
-			partialize: ({ rootNode, perkLimit, unlockedNodes }) => ({
-				rootNode,
-				perkLimit,
-				unlockedNodes,
-			}),
-			limit: 10,
-			equality: (pastState, currentState) => {
-				if (pastState.rootNode !== currentState.rootNode) {
-					return false;
-				}
+	persist(
+		temporal(
+			immer((...args) => ({
+				...createPersistentSlice(...args),
+				...createSelectionSlice(...args),
+				...createShareSlice(...args),
+				...createSettingsSlice(...args),
+			})),
+			{
+				partialize: ({ rootNode, perkLimit, unlockedNodes }) => ({
+					rootNode,
+					perkLimit,
+					unlockedNodes,
+				}),
+				limit: 10,
+				equality: (pastState, currentState) => {
+					if (pastState.rootNode !== currentState.rootNode) {
+						return false;
+					}
 
-				if (pastState.perkLimit !== currentState.perkLimit) {
-					return false;
-				}
+					if (pastState.perkLimit !== currentState.perkLimit) {
+						return false;
+					}
 
-				if (
-					!areSetsEqual(pastState.unlockedNodes, currentState.unlockedNodes)
-				) {
-					return false;
-				}
+					if (
+						!areSetsEqual(pastState.unlockedNodes, currentState.unlockedNodes)
+					) {
+						return false;
+					}
 
-				return true;
+					return true;
+				},
 			},
+		),
+		{
+			name: "settings-storage",
+			partialize: (state) => ({
+				disconnectInduvidually: state.disconnectInduvidually,
+			}),
 		},
 	),
 );
