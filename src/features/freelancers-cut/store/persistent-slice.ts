@@ -7,6 +7,7 @@ export interface PersistentSlice {
 	unlockedNodes: Set<string>;
 	rootNode: RootNode;
 	perkLimit: number;
+	specialization: string | null;
 
 	setRootNode: (id: RootNode) => void;
 
@@ -17,6 +18,8 @@ export interface PersistentSlice {
 	setUnlocked: (unlockedSet: Set<string>) => void;
 
 	setPerkLimit: (amout: number) => void;
+
+	setSpecialization: (id: string | null) => void;
 }
 
 // persistent between reloads via url not local storage
@@ -29,6 +32,7 @@ export const createPersistentSlice: StateCreator<
 	unlockedNodes: new Set<string>([RootNode.LockArtist]),
 	rootNode: RootNode.LockArtist,
 	perkLimit: 50,
+	specialization: null,
 
 	unlockNode: (id) =>
 		set((state: PersistentSlice) => {
@@ -71,5 +75,10 @@ export const createPersistentSlice: StateCreator<
 	setPerkLimit: (amount) =>
 		set((state) => {
 			state.perkLimit = amount;
+		}),
+
+	setSpecialization: (id) =>
+		set((state) => {
+			state.specialization = id;
 		}),
 });
