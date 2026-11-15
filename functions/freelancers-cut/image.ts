@@ -16,6 +16,7 @@ export const onRequest: PagesFunction = (async (context: any) => {
 
 	const url = new URL(context.request.url);
 	const unlockedPerksQuery = url.searchParams.get("unlocked");
+	const specialization = url.searchParams.get("specialization");
 
 	if (!unlockedPerksQuery) {
 		return new Response("Missing 'unlocked' parameter", { status: 400 });
@@ -24,7 +25,7 @@ export const onRequest: PagesFunction = (async (context: any) => {
 	try {
 		const unlockedNodes = decode(unlockedPerksQuery);
 		const imageCache = await loadServerImages(url.origin);
-		const svg = renderTreeToSvg(unlockedNodes, imageCache);
+		const svg = renderTreeToSvg(unlockedNodes, imageCache, specialization);
 
 		const png = await svgToPng(svg, resvgWasm, 1200);
 

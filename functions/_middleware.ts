@@ -1,6 +1,7 @@
 // functions/_middleware.ts
 
 import type { PagesFunction } from "@cloudflare/workers-types";
+import { SPECIALIZATION_ENTRIES } from "@/features/freelancers-cut/config/specializations";
 import { getUnlockedMajors } from "@/features/freelancers-cut/core/get-unlocked-majors";
 import { decode } from "@/shared/utils/compress-url";
 
@@ -35,14 +36,24 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
 
 	const unlockedPerks = decode(unlockedPerksQuery);
 	const unlockedMajorPerks = getUnlockedMajors(unlockedPerks);
+	const specializationQuery = params.get("specialization");
+	const specialization = specializationQuery
+		? SPECIALIZATION_ENTRIES[specializationQuery]
+		: undefined;
 
 	const title = "Entry Point: Freelancer's Cut Skill Tree";
-	const description = Array.from(unlockedMajorPerks.entries())
-		.map(([perk, level]) => `${perk.name} ${level}`)
-		.join("\n");
+	const description = [
+		...(specialization ? [`${specialization.name} Specialization`] : []),
+		...Array.from(unlockedMajorPerks.entries()).map(
+			([perk, level]) => `${perk.name} ${level}`,
+		),
+	].join("\n");
 
 	const imageUrl = new URL("/freelancers-cut/image", url.origin);
 	imageUrl.searchParams.set("unlocked", unlockedPerksQuery);
+	if (specializationQuery) {
+		imageUrl.searchParams.set("specialization", specializationQuery);
+	}
 	const image = imageUrl.toString();
 	const canonicalUrl = url.origin + url.pathname + url.search;
 

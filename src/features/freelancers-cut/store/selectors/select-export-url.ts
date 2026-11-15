@@ -7,6 +7,7 @@ const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
 const getWithBackground = (state: StoreState) => state.withBackground;
 const getWithPerkNames = (state: StoreState) => state.withPerkNames;
 const getIsCacheInitialized = (state: StoreState) => state.isCacheInitialized;
+const getSpecialization = (state: StoreState) => state.specialization;
 
 export const selectExportUrl = createSelector(
 	[
@@ -14,8 +15,16 @@ export const selectExportUrl = createSelector(
 		getWithBackground,
 		getWithPerkNames,
 		getIsCacheInitialized,
+		getSpecialization,
 	],
-	(unlockedNodes, withBackground, withPerkNames, isCacheInitialized) => {
+	// biome-ignore lint/complexity/useMaxParams: keeps selector inputs granular
+	(
+		unlockedNodes,
+		withBackground,
+		withPerkNames,
+		isCacheInitialized,
+		specialization,
+	) => {
 		if (!(isCacheInitialized && imageCache)) {
 			return "";
 		}
@@ -27,6 +36,7 @@ export const selectExportUrl = createSelector(
 			withBackground,
 			withPerkNames,
 			imageCache,
+			specialization,
 		);
 		return canvas.toDataURL("image/png");
 	},

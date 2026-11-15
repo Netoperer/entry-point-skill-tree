@@ -1,11 +1,51 @@
 /** biome-ignore-all lint/security/noSecrets: those are not secrets */
 import { CONNECTIONS } from "@/features/freelancers-cut/config/perks/connections";
 import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
+import { SPECIALIZATION_ENTRIES } from "@/features/freelancers-cut/config/specializations";
+import {
+	CENTER_X,
+	CENTER_Y,
+	SELECTED_SPECIALIZATION_NODE_RADIUS,
+} from "@/features/freelancers-cut/constants";
 import { PerkType } from "@/features/freelancers-cut/types";
+
+const SPECIALIZATION_STROKE_WIDTH = 1.5;
+
+function renderSpecializationToSvg(
+	specializationId: string | null | undefined,
+	imageCache: Map<string, string>,
+) {
+	const specialization = specializationId
+		? SPECIALIZATION_ENTRIES[specializationId]
+		: undefined;
+	if (!specialization) {
+		return "";
+	}
+
+	const radius = SELECTED_SPECIALIZATION_NODE_RADIUS;
+	const icon = imageCache.get(specialization.icon);
+	const imageElement = icon
+		? `<image href="${icon}" x="${CENTER_X - radius}" y="${CENTER_Y - radius}" width="${radius * 2}" height="${radius * 2}" clip-path="url(#clip-specialization)" preserveAspectRatio="xMidYMid slice" />`
+		: "";
+
+	return `
+      <g>
+        <defs>
+          <clipPath id="clip-specialization">
+            <circle cx="${CENTER_X}" cy="${CENTER_Y}" r="${radius}" />
+          </clipPath>
+        </defs>
+        <circle cx="${CENTER_X}" cy="${CENTER_Y}" r="${radius}" fill="white" fill-opacity="0.1" />
+        ${imageElement}
+        <circle cx="${CENTER_X}" cy="${CENTER_Y}" r="${radius}" fill="none" stroke="white" stroke-width="${SPECIALIZATION_STROKE_WIDTH}" />
+      </g>
+    `;
+}
 
 export function renderTreeToSvg(
 	unlockedNodes: Set<string>,
 	imageCache: Map<string, string>, // base64 images
+	specializationId?: string | null,
 ): string {
 	const padding = 40;
 	const originalWidth = 640;
@@ -80,6 +120,11 @@ export function renderTreeToSvg(
 		})
 		.join("\n");
 
+	const specializationElement = renderSpecializationToSvg(
+		specializationId,
+		imageCache,
+	);
+
 	return `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" width="${width}" height="${height}" style="background: #1a1a1a;">
       <defs>
@@ -89,6 +134,7 @@ export function renderTreeToSvg(
       <g transform="translate(${padding}, ${padding + 20})">
         ${connections}
         ${nodes}
+        ${specializationElement}
       </g>
     </svg>
   `;
