@@ -7,6 +7,9 @@ export interface SettingsSlice {
 
 	showNodeIds: boolean;
 	setShowNodeIds: (value: boolean) => void;
+
+	disconnectInduvidually: boolean;
+	setDisconnectInduvidually: (value: boolean) => void;
 }
 
 export const createSettingsSlice: StateCreator<
@@ -17,6 +20,7 @@ export const createSettingsSlice: StateCreator<
 > = (set): SettingsSlice => ({
 	editorPinned: true,
 	showNodeIds: false,
+	disconnectInduvidually: false,
 
 	setShowNodeIds: (value) =>
 		set((state) => {
@@ -26,5 +30,10 @@ export const createSettingsSlice: StateCreator<
 	setEditorPinned: (value) =>
 		set((state) => {
 			state.editorPinned = value;
+		}),
+
+	setDisconnectInduvidually: (value) =>
+		set((state) => {
+			state.disconnectInduvidually = value;
 		}),
 });
