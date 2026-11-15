@@ -5,6 +5,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";
+import { ItemSeparator } from "@/shared/components/ui/item";
 import { Switch } from "@/shared/components/ui/switch";
 import { useFreelancersCutStore } from "../../store";
 
@@ -29,16 +30,24 @@ function ToggleRow({
 		</div>
 	);
 }
-export function DebugCard() {
+
+export function OtherSettingsCard() {
 	const showNodeIds = useFreelancersCutStore((s) => s.showNodeIds);
 	const setShowNodeIds = useFreelancersCutStore((s) => s.setShowNodeIds);
+
+	const disconnectInduvidually = useFreelancersCutStore(
+		(s) => s.disconnectInduvidually,
+	);
+	const setDisconnectInduvidually = useFreelancersCutStore(
+		(s) => s.setDisconnectInduvidually,
+	);
 
 	return (
 		<Card className="gap-2 border border-border">
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Bug className="size-4" />
-					Debug
+					Other
 				</CardTitle>
 			</CardHeader>
 			<CardContent className="space-y-1">
@@ -50,6 +59,13 @@ export function DebugCard() {
 					onToggle={() => setShowNodeIds(!showNodeIds)}
 				/>
 				{/* <ItemSeparator /> */}
+				<ToggleRow
+					label="Allow perks to be disconnected induvidually"
+					desc=""
+					on={disconnectInduvidually}
+					// biome-ignore lint/performance/noJsxPropsBind: no
+					onToggle={() => setDisconnectInduvidually(!disconnectInduvidually)}
+				/>
 			</CardContent>
 		</Card>
 	);

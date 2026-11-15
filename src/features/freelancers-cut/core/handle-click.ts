@@ -34,17 +34,25 @@ export function handleClick(id: string) {
 		unlockedNodes,
 		rootNode,
 		specialization,
+		perkLimit,
+
 		unlockNode,
 		unlockNodes,
 		lockNodes,
 		setSpecialization,
-		perkLimit,
+
+		disconnectInduvidually,
 	} = useFreelancersCutStore.getState();
 
 	const isUnlocked = unlockedNodes.has(id);
 
 	if (isUnlocked) {
 		if (rootNode === id) {
+			return;
+		}
+
+		if (disconnectInduvidually) {
+			lockNodes([id]);
 			return;
 		}
 
