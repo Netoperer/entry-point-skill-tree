@@ -20,6 +20,18 @@ export interface Perk {
 	description: Description;
 }
 
+export interface Prerequisite {
+	perk: Perk;
+	count: number;
+}
+
+export interface Specialization {
+	name: string;
+	prerequisites: Prerequisite[];
+	description: string;
+	icon: string;
+}
+
 export enum RootNode {
 	AdvancedProtocols = "0",
 	ElectricalEngineering = "65",

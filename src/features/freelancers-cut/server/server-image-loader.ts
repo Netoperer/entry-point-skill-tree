@@ -1,4 +1,5 @@
 import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
+import { SPECIALIZATION_ENTRIES } from "@/features/freelancers-cut/config/specializations";
 
 const SERVER_IMAGE_CACHE = new Map<string, string>();
 
@@ -10,7 +11,12 @@ export async function loadServerImages(
 	}
 
 	const entries = Object.values(PERK_ENTRIES);
-	const uniqueIcons = Array.from(new Set(entries.map((e) => e.perk.icon)));
+	const uniqueIcons = Array.from(
+		new Set([
+			...entries.map((e) => e.perk.icon),
+			...Object.values(SPECIALIZATION_ENTRIES).map((e) => e.icon),
+		]),
+	);
 
 	const promises = uniqueIcons.map(async (iconPath) => {
 		// Ensure iconPath is a full URL or relative to origin

@@ -1,7 +1,31 @@
+import { areSpecializationPrerequisitesMet } from "@/features/freelancers-cut/core/specializations";
 import { useFreelancersCutStore } from "@/features/freelancers-cut/store";
 import { canUnlockNode, getUnlockableNodes } from "./can-unlock-node";
 import { getNodesToRemove } from "./get-nodes-to-remove";
 import { FreelancersCutGraph } from "./graph";
+
+function clearSpecializationIfInvalid(
+	specialization: string | null,
+	unlockedNodes: Set<string>,
+	nodesToLock: Set<string>,
+	setSpecialization: (id: string | null) => void,
+) {
+	if (!specialization) {
+		return;
+	}
+
+	const remainingUnlockedNodes = new Set(unlockedNodes);
+
+	for (const node of nodesToLock) {
+		remainingUnlockedNodes.delete(node);
+	}
+
+	if (
+		!areSpecializationPrerequisitesMet(specialization, remainingUnlockedNodes)
+	) {
+		setSpecialization(null);
+	}
+}
 
 export function handleClick(id: string) {
 	const { isAdjacentToUnlocked } = FreelancersCutGraph;
@@ -9,9 +33,11 @@ export function handleClick(id: string) {
 	const {
 		unlockedNodes,
 		rootNode,
+		specialization,
 		unlockNode,
 		unlockNodes,
 		lockNodes,
+		setSpecialization,
 		perkLimit,
 	} = useFreelancersCutStore.getState();
 
@@ -23,7 +49,14 @@ export function handleClick(id: string) {
 		}
 
 		const nodesToLock = getNodesToRemove(id, unlockedNodes, rootNode);
+
 		lockNodes(Array.from(nodesToLock));
+		clearSpecializationIfInvalid(
+			specialization,
+			unlockedNodes,
+			nodesToLock,
+			setSpecialization,
+		);
 	} else if (isAdjacentToUnlocked(unlockedNodes, id)) {
 		if (!canUnlockNode(unlockedNodes, perkLimit, id)) {
 			return;

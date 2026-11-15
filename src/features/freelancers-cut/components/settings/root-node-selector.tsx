@@ -2,7 +2,6 @@ import { Route } from "lucide-react";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";
@@ -22,13 +21,12 @@ export function RootNodeSelector() {
 	}));
 
 	return (
-		<Card className="border border-border">
-			<CardHeader className="pb-3">
+		<Card className="gap-3 border border-border">
+			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Route className="size-4" />
 					Root Node
 				</CardTitle>
-				<CardDescription>Choose the root node.</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<div className="grid grid-cols-2 gap-1.5">

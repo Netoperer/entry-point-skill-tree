@@ -5,7 +5,6 @@ import { StarterClass } from "@/features/entry-point/types";
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardHeader,
 	CardTitle,
 } from "@/shared/components/ui/card";
@@ -24,13 +23,12 @@ export function StarterClassSettings() {
 	const changeStarterClass = useEntryPointStore((s) => s.changeStarterClass);
 
 	return (
-		<Card className="border border-border">
-			<CardHeader className="pb-3">
+		<Card className="gap-4 border border-border">
+			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Route className="size-4" />
 					Starter Class
 				</CardTitle>
-				<CardDescription>Choose your starting class.</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<div className="grid grid-cols-2 gap-1.5">

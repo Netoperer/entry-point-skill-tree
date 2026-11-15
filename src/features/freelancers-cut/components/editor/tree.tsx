@@ -3,6 +3,7 @@ import { PERK_ENTRIES } from "@/features/freelancers-cut/config/perks/entries";
 import { ConnectionLine } from "./connection-line";
 import { FilterDefs } from "./filter-defs";
 import { PerkNode } from "./perk-node";
+import { Specialization } from "./specialization/index";
 
 export function Tree() {
 	return (
@@ -26,6 +27,8 @@ export function Tree() {
 			{...Object.entries(PERK_ENTRIES).map(([id, perk]) => (
 				<PerkNode perkEntry={perk} id={id} key={`Perk_${id}`} />
 			))}
+
+			<Specialization />
 		</svg>
 	);
 }
